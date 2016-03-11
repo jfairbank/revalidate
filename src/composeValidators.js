@@ -1,22 +1,28 @@
-import { isValueValidator } from './configureValueValidator';
+import assign from 'object-assign';
+import omit from 'lodash.omit';
+import createValidatorWithMultipleErrors from './createValidatorWithMultipleErrors';
+import createValidatorWithSingleError from './createValidatorWithSingleError';
 
 export default function composeValidators(...validators) {
   return function configurableValidators(sharedConfig) {
-    return function composedValidator(value) {
-      for (let i = 0, l = validators.length; i < l; i++) {
-        const validator = validators[i];
-        let errorMessage;
+    let config;
 
-        if (isValueValidator(validator)) {
-          errorMessage = validator(value);
-        } else {
-          errorMessage = validator(sharedConfig, value);
-        }
+    if (typeof sharedConfig === 'string') {
+      config = { field: sharedConfig };
+    } else {
+      config = assign({}, sharedConfig);
+    }
 
-        if (errorMessage) {
-          return errorMessage;
-        }
-      }
-    };
+    if (config.multiple === true) {
+      return createValidatorWithMultipleErrors(
+        validators.slice(0),
+        omit(config, 'multiple')
+      );
+    }
+
+    return createValidatorWithSingleError(
+      validators.slice(0),
+      config
+    );
   };
 }

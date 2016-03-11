@@ -45,7 +45,9 @@
   "dependencies": {
     "invariant": "^2.2.0",
     "lodash.findindex": "^4.2.0",
-    "lodash.isplainobject": "^4.0.3"
+    "lodash.isplainobject": "^4.0.3",
+    "lodash.omit": "^4.1.0",
+    "object-assign": "^4.0.1"
   },
   "babel": {
     "presets": [

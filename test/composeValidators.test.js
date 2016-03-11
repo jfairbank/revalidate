@@ -85,3 +85,28 @@ test('allows overriding field per validator', t => {
     'My C Field must end with C'
   );
 });
+
+test('allows returning multiple errors', t => {
+  const validator = composeValidators(
+    startsWithA,
+    endsWithC
+  )({ field: 'My Field', multiple: true });
+
+  t.same(
+    validator('BBB'),
+
+    [
+      'My Field must start with A',
+      'My Field must end with C'
+    ]
+  );
+});
+
+test('returns an empty array if valid with multiple set to true', t => {
+  const validator = composeValidators(
+    startsWithA,
+    endsWithC
+  )({ field: 'My Field', multiple: true });
+
+  t.same(validator('ABC'), []);
+});

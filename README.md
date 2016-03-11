@@ -108,6 +108,42 @@ validator('123'); // 'Can only contain letters'
 validator('abc'); // undefined
 ```
 
+You can supply an additional `multiple: true` option to return all potential
+errors from your composed validators.
+
+```js
+import { createValidator, composeValidators } from 'revalidate';
+
+const startsWithA = createValidator(
+  message => value => {
+    if (value && !/^A/.test(value)) {
+      return message;
+    }
+  },
+  field => `${field} must start with A`
+);
+
+const endsWithC = createValidator(
+  message => value => {
+    if (value && !/C$/.test(value)) {
+      return message;
+    }
+  },
+  field => `${field} must end with C`
+);
+
+const validator = composeValidators(
+  startsWithA,
+  endsWithC
+)({ field: 'My Field', multiple: true });
+
+validator('BBB');
+// [
+//   'My Field must start with A',
+//   'My Field must end with C'
+// ]
+```
+
 ### `combineValidators`
 
 `combineValidators` is analogous to a function like `combineReducers` from
