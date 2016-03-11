@@ -66,12 +66,12 @@ isRequired({ message: 'Error' })(); // 'Error'
 
 ### `composeValidators`
 
-`composeValidators` is the function that makes revalidate start to be really
-useful. As the name suggests, it allows you to compose validators into one. The
-composed validator will check each validator and return the first error message
-it encounters. Validators are checked in a left-to-right fashion to make them
-more readable. (**Note:** this is opposite most functional implementations of the
-compose function.)
+Revalidate becomes really useful when you use the `composeValidators` function.
+As the name suggests, it allows you to compose validators into one. By default
+the composed validator will check each validator and return the first error
+message it encounters. Validators are checked in a left-to-right fashion to
+make them more readable. (**Note:** this is opposite most functional
+implementations of the compose function.)
 
 The composed validator is also curried and takes the same arguments as an
 individual validator made with `createValidator`.
@@ -323,7 +323,7 @@ if it's `null`, `undefined` or the empty string `''`.
 
 ```js
 isRequired('My Field')();     // 'My Field is required'
-isRequired('My Field')(null);     // 'My Field is required'
+isRequired('My Field')(null); // 'My Field is required'
 isRequired('My Field')('');   // 'My Field is required'
 isRequired('My Field')('42'); // undefined, therefore assume valid
 ```
@@ -393,7 +393,7 @@ isNumeric('My Field')('a');
 
 ### `isOneOf`
 
-`isOneOf` tests that the value is contained a predefined array of values. It
+`isOneOf` tests that the value is contained in a predefined array of values. It
 wraps a call to `createValidator`, so you must first call it with the array of
 allowed values.
 
