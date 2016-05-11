@@ -97,3 +97,32 @@ test('uses the overriding message for an invalid value', t => {
     message
   );
 });
+
+
+const matchingValidatorDefinition = message => (value, allValues) => {
+  if (!allValues || value !== allValues['matchedValue']) {
+    return message;
+  }
+};
+
+const doesMatch = createValidator(
+  matchingValidatorDefinition,
+  field => `${field} must match the 'matchedValue'`
+);
+
+test('can create multi-value validators', t => {
+  t.same(
+    doesMatch('My Field')('My Value', {matchedValue: 'My Value'}),
+    undefined
+  );
+
+  t.same(
+    doesMatch('My Field')('My Value'),
+    `My Field must match the 'matchedValue'`
+  );
+
+  t.same(
+    doesMatch('My Field')('My Value', {matchedValue: 'Not My Value'}),
+    `My Field must match the 'matchedValue'`
+  );
+});

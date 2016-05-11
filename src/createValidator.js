@@ -11,7 +11,7 @@ export default function createValidator(curriedDefinition, defaultMessageCreator
     'Please provide a message string or message creator function'
   );
 
-  return function validator(config, value) {
+  return function validator(config, value, allValues) {
     const configIsObject = isPlainObject(config);
 
     if (!messageCreatorIsString) {
@@ -46,6 +46,6 @@ export default function createValidator(curriedDefinition, defaultMessageCreator
       return markAsValueValidator(valueValidator);
     }
 
-    return valueValidator(value);
+    return valueValidator(value, allValues);
   };
 }

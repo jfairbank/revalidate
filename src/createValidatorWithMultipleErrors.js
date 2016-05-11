@@ -1,14 +1,14 @@
 import { isValueValidator } from './configureValueValidator';
 
 export default function createValidatorWithMultipleErrors(validators, sharedConfig) {
-  return function composedValidator(value) {
+  return function composedValidator(value, allValues) {
     return validators.reduce((errors, validator) => {
       let errorMessage;
 
       if (isValueValidator(validator)) {
-        errorMessage = validator(value);
+        errorMessage = validator(value, allValues);
       } else {
-        errorMessage = validator(sharedConfig, value);
+        errorMessage = validator(sharedConfig, value, allValues);
       }
 
       if (errorMessage) {
