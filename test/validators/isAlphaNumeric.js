@@ -8,7 +8,7 @@ test('allows alphanumeric characters', t => {
   const validCharacters =
     '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
-  t.same(
+  t.deepEqual(
     isAlphaNumeric(validCharacters),
     undefined
   );

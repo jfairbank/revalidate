@@ -10,7 +10,7 @@ const hasLengthBetween = unconfigured(MIN, MAX)({ message });
 
 test('allows lengths between min and max inclusively', t => {
   range(MIN, MAX + 1).forEach(n => {
-    t.same(
+    t.deepEqual(
       hasLengthBetween(repeat('a', n)),
       undefined
     );

@@ -21,6 +21,6 @@ test('allows other values', t => {
   const values = [true, false, 0, 42, 'foo', {}, [], { foo: 'bar' }, [42]];
 
   values.forEach(value => {
-    t.same(isRequired(value), undefined);
+    t.deepEqual(isRequired(value), undefined);
   });
 });

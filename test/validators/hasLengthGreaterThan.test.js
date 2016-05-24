@@ -7,7 +7,7 @@ const message = 'Invalid';
 const hasLengthGreaterThan = unconfigured(MIN)({ message });
 
 test('allows lengths greater than min', t => {
-  t.same(
+  t.deepEqual(
     hasLengthGreaterThan(repeat('a', MIN + 1)),
     undefined
   );

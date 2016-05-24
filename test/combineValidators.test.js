@@ -19,7 +19,7 @@ const validatePerson = combineValidators({
 });
 
 test('returns an empty object for valid fields', t => {
-  t.same(
+  t.deepEqual(
     validatePerson({ name: 'Jeremy', confirmName: 'Jeremy', age: '29' }),
     {}
   );
@@ -30,7 +30,7 @@ test('returns non empty object with error message for invalid age', t => {
 
   t.is(Object.keys(errorMessages).length, 1);
   t.is(typeof errorMessages.age, 'string');
-  t.ok(errorMessages.age.length > 1);
+  t.true(errorMessages.age.length > 1);
 });
 
 test('returns non empty object with error message for missing name', t => {
@@ -38,7 +38,7 @@ test('returns non empty object with error message for missing name', t => {
 
   t.is(Object.keys(errorMessages).length, 1);
   t.is(typeof errorMessages.name, 'string');
-  t.ok(errorMessages.name.length > 1);
+  t.true(errorMessages.name.length > 1);
 });
 
 test('returns non empty object with error message for invalid name', t => {
@@ -46,7 +46,7 @@ test('returns non empty object with error message for invalid name', t => {
 
   t.is(Object.keys(errorMessages).length, 2);
   t.is(typeof errorMessages.name, 'string');
-  t.ok(errorMessages.name.length > 1);
+  t.true(errorMessages.name.length > 1);
 });
 
 test('returns non empty object with error messages for invalid fields', t => {
@@ -58,7 +58,7 @@ test('returns non empty object with error messages for invalid fields', t => {
   t.is(typeof errorMessages.confirmName, 'string');
   t.is(typeof errorMessages.age, 'string');
 
-  t.ok(errorMessages.name.length > 1);
-  t.ok(errorMessages.confirmName.length > 1);
-  t.ok(errorMessages.age.length > 1);
+  t.true(errorMessages.name.length > 1);
+  t.true(errorMessages.confirmName.length > 1);
+  t.true(errorMessages.age.length > 1);
 });

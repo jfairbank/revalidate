@@ -42,7 +42,7 @@ test('stops on the next failure', t => {
 });
 
 test('validates a value that satisifes all validators', t => {
-  t.same(
+  t.deepEqual(
     validator('ABC'),
     undefined
   );
@@ -92,7 +92,7 @@ test('allows returning multiple errors', t => {
     endsWithC
   )({ field: 'My Field', multiple: true });
 
-  t.same(
+  t.deepEqual(
     validator('BBB'),
 
     [
@@ -108,5 +108,5 @@ test('returns an empty array if valid with multiple set to true', t => {
     endsWithC
   )({ field: 'My Field', multiple: true });
 
-  t.same(validator('ABC'), []);
+  t.deepEqual(validator('ABC'), []);
 });

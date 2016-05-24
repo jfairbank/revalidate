@@ -8,7 +8,7 @@ test('allows alphabetic characters', t => {
   const validCharacters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
-  t.same(
+  t.deepEqual(
     isAlphabetic(validCharacters),
     undefined
   );

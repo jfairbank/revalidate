@@ -7,7 +7,7 @@ const isOneOf = unconfigured(validValues)({ message });
 
 test('allows valid values', t => {
   validValues.forEach(value => {
-    t.same(
+    t.deepEqual(
       isOneOf(value),
       undefined
     );
@@ -37,7 +37,7 @@ test('allows a custom comparer function', t => {
   )({ message });
 
   validValues.forEach(value => {
-    t.same(
+    t.deepEqual(
       customIsOneOf(value.toUpperCase()),
       undefined
     );

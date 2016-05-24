@@ -1,6 +1,5 @@
 import test from 'ava';
 import createValidator from '../src/createValidator';
-import composeValidators from '../src/composeValidators';
 
 const validatorDefinition = message => value => {
   if (typeof value !== 'number') {
@@ -73,12 +72,12 @@ test('returns the message with the field as config option for an invalid value',
 });
 
 test('returns undefined for a valid value', t => {
-  t.same(
+  t.deepEqual(
     isNumber('My Field')(42),
     undefined
   );
 
-  t.same(
+  t.deepEqual(
     isNumber('My Field', 42),
     undefined
   );
@@ -111,18 +110,18 @@ const doesMatch = createValidator(
 );
 
 test('can create multi-value validators', t => {
-  t.same(
-    doesMatch('My Field')('My Value', {matchedValue: 'My Value'}),
+  t.deepEqual(
+    doesMatch('My Field')('My Value', { matchedValue: 'My Value' }),
     undefined
   );
 
-  t.same(
+  t.deepEqual(
     doesMatch('My Field')('My Value'),
-    `My Field must match the 'matchedValue'`
+    'My Field must match the \'matchedValue\''
   );
 
-  t.same(
-    doesMatch('My Field')('My Value', {matchedValue: 'Not My Value'}),
-    `My Field must match the 'matchedValue'`
+  t.deepEqual(
+    doesMatch('My Field')('My Value', { matchedValue: 'Not My Value' }),
+    'My Field must match the \'matchedValue\''
   );
 });

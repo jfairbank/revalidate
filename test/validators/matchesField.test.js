@@ -6,14 +6,14 @@ const message = 'Passwords do not match';
 const matchesField = unconfigured(otherField)({ message });
 
 test('allows matching values', t => {
-  t.same(
+  t.deepEqual(
     matchesField('secret', { password: 'secret' }),
     undefined
   );
 });
 
 test('fails if allValues are not provided', t => {
-  t.same(
+  t.deepEqual(
     matchesField('secret'),
     message
   );

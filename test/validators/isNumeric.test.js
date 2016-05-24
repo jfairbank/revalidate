@@ -7,7 +7,7 @@ const isNumeric = unconfigured({ message });
 test('allows numeric digits', t => {
   const digits = '0123456789';
 
-  t.same(
+  t.deepEqual(
     isNumeric(digits),
     undefined
   );
