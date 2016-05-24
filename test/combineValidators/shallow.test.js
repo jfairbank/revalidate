@@ -1,10 +1,13 @@
 import test from 'ava';
-import composeValidators from '../src/composeValidators';
-import combineValidators from '../src/combineValidators';
-import isRequired from '../src/validators/isRequired';
-import isAlphabetic from '../src/validators/isAlphabetic';
-import isNumeric from '../src/validators/isNumeric';
-import matchesField from '../src/validators/matchesField';
+
+import {
+  composeValidators,
+  combineValidators,
+  isRequired,
+  isAlphabetic,
+  isNumeric,
+  matchesField,
+} from '../../src';
 
 const validatePerson = combineValidators({
   name: composeValidators(
@@ -33,6 +36,14 @@ test('returns non empty object with error message for invalid age', t => {
 
 test('returns non empty object with error message for missing name', t => {
   const errorMessages = validatePerson({});
+
+  t.is(Object.keys(errorMessages).length, 1);
+  t.is(typeof errorMessages.name, 'string');
+  t.true(errorMessages.name.length > 1);
+});
+
+test('handles validating missing object', t => {
+  const errorMessages = validatePerson();
 
   t.is(Object.keys(errorMessages).length, 1);
   t.is(typeof errorMessages.name, 'string');

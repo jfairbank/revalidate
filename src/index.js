@@ -9,6 +9,7 @@ import isAlphaNumeric from './validators/isAlphaNumeric';
 import isNumeric from './validators/isNumeric';
 import isOneOf from './validators/isOneOf';
 import isRequired from './validators/isRequired';
+import matchesField from './validators/matchesField';
 
 export {
   createValidator,
@@ -22,4 +23,5 @@ export {
   isNumeric,
   isOneOf,
   isRequired,
+  matchesField,
 };

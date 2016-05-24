@@ -13,7 +13,8 @@
     "dev": "nodemon --exec 'clear; npm test' -w src -w test",
     "lint": "eslint {src,test}",
     "prepublish": "npm run clean && npm run build",
-    "test": "ava"
+    "test": "ava",
+    "test:watch": "ava -w"
   },
   "repository": {
     "type": "git",
@@ -59,6 +60,7 @@
     "babel-runtime": "^6.9.0",
     "invariant": "^2.2.1",
     "lodash.findindex": "^4.4.0",
+    "lodash.get": "^4.3.0",
     "lodash.isplainobject": "^4.0.4",
     "lodash.omit": "^4.3.0"
   },
@@ -122,6 +124,10 @@
           "args": "after-used",
           "argsIgnorePattern": "^_"
         }
+      ],
+      "quote-props": [
+        "error",
+        "consistent"
       ],
       "prefer-rest-params": 0
     }
