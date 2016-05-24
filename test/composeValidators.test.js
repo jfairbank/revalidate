@@ -22,28 +22,28 @@ const endsWithC = createValidator(
   field => `${field} must end with C`
 );
 
-const validator = composeValidators(
+const sharedValidator = composeValidators(
   startsWithA,
   endsWithC
 )('My Field');
 
 test('stops on the first failure', t => {
   t.is(
-    validator('BBB'),
+    sharedValidator('BBB'),
     'My Field must start with A'
   );
 });
 
 test('stops on the next failure', t => {
   t.is(
-    validator('ABB'),
+    sharedValidator('ABB'),
     'My Field must end with C'
   );
 });
 
 test('validates a value that satisifes all validators', t => {
   t.deepEqual(
-    validator('ABC'),
+    sharedValidator('ABC'),
     undefined
   );
 });
@@ -97,7 +97,7 @@ test('allows returning multiple errors', t => {
 
     [
       'My Field must start with A',
-      'My Field must end with C'
+      'My Field must end with C',
     ]
   );
 });

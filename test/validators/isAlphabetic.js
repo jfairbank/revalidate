@@ -25,7 +25,7 @@ test('does not allow digits', t => {
     );
 
     t.is(
-      isAlphabetic(digit + 'a'),
+      isAlphabetic(`${digit}a`),
       message,
       'with letter'
     );
@@ -43,7 +43,7 @@ test('does not allow other common characters', t => {
     );
 
     t.is(
-      isAlphabetic(c + 'a'),
+      isAlphabetic(`${c}a`),
       message,
       'with letter'
     );

@@ -13,9 +13,7 @@ const validatePerson = combineValidators({
   )('Name'),
 
   confirmName: matchesField('name')({ message: 'Confirm Your Name' }),
-
-  age: isNumeric('Age')
-
+  age: isNumeric('Age'),
 });
 
 test('returns an empty object for valid fields', t => {

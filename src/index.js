@@ -21,5 +21,5 @@ export {
   isAlphaNumeric,
   isNumeric,
   isOneOf,
-  isRequired
+  isRequired,
 };

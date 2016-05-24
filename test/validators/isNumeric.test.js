@@ -26,7 +26,7 @@ test('does not allow letters', t => {
     );
 
     t.is(
-      isNumeric(letter + '1'),
+      isNumeric(`${letter}1`),
       message,
       'with digit included'
     );
@@ -44,7 +44,7 @@ test('does not allow other characters', t => {
     );
 
     t.is(
-      isNumeric(c + '1'),
+      isNumeric(`${c}1`),
       message,
       'with digit included'
     );

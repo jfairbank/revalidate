@@ -1,5 +1,3 @@
-import composeValidators from './composeValidators.js';
-
 export default function combineValidators(validators) {
   return function valuesValidator(values) {
     return Object.keys(validators).reduce((errors, fieldName) => {

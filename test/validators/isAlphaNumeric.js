@@ -25,13 +25,13 @@ test('does not allow other common characters', t => {
     );
 
     t.is(
-      isAlphaNumeric(c + 'a'),
+      isAlphaNumeric(`${c}a`),
       message,
       'with letter'
     );
 
     t.is(
-      isAlphaNumeric(c + '1'),
+      isAlphaNumeric(`${c}1`),
       message,
       'with digit'
     );

@@ -99,7 +99,7 @@ test('uses the overriding message for an invalid value', t => {
 
 
 const matchingValidatorDefinition = message => (value, allValues) => {
-  if (!allValues || value !== allValues['matchedValue']) {
+  if (!allValues || value !== allValues.matchedValue) {
     return message;
   }
 };

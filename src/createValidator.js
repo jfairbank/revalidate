@@ -1,4 +1,3 @@
-/* eslint semi:0 */
 import invariant from 'invariant';
 import isPlainObject from 'lodash.isplainobject';
 import { markAsValueValidator } from './configureValueValidator';
@@ -29,16 +28,17 @@ export default function createValidator(curriedDefinition, defaultMessageCreator
       }
     }
 
-    const message = do {
-      if (configIsObject && 'message' in config)
-        config.message
-      else if (messageCreatorIsString)
-        defaultMessageCreator
-      else if (configIsObject)
-        defaultMessageCreator(config.field)
-      else
-        defaultMessageCreator(config)
-    };
+    let message;
+
+    if (configIsObject && 'message' in config) {
+      message = config.message;
+    } else if (messageCreatorIsString) {
+      message = defaultMessageCreator;
+    } else if (configIsObject) {
+      message = defaultMessageCreator(config.field);
+    } else {
+      message = defaultMessageCreator(config);
+    }
 
     const valueValidator = curriedDefinition(message);
 
