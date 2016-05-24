@@ -1,4 +1,4 @@
-import { isValueValidator } from './configureValueValidator';
+import isValueValidator from './isValueValidator';
 
 export default function createValidatorWithSingleError(validators, sharedConfig) {
   return function composedValidator(value, allValues) {

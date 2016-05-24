@@ -1,6 +1,6 @@
 import invariant from 'invariant';
 import isPlainObject from 'lodash.isplainobject';
-import { markAsValueValidator } from './configureValueValidator';
+import markAsValueValidator from './internal/markAsValueValidator';
 
 export default function createValidator(curriedDefinition, defaultMessageCreator) {
   const messageCreatorIsString = typeof defaultMessageCreator === 'string';

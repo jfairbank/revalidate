@@ -1,7 +1,7 @@
 import assign from 'object-assign';
 import omit from 'lodash.omit';
-import createValidatorWithMultipleErrors from './createValidatorWithMultipleErrors';
-import createValidatorWithSingleError from './createValidatorWithSingleError';
+import createValidatorWithMultipleErrors from './internal/createValidatorWithMultipleErrors';
+import createValidatorWithSingleError from './internal/createValidatorWithSingleError';
 
 export default function composeValidators(...validators) {
   return function configurableValidators(sharedConfig) {
