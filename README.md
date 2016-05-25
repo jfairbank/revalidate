@@ -44,6 +44,7 @@ useful when we want to compose validators.
 Here is an implementation of an `isRequired` validator with `createValidator`:
 
 ```js
+// ES2015 - import and define validator
 import { createValidator } from 'revalidate';
 
 const isRequired = createValidator(
@@ -56,6 +57,24 @@ const isRequired = createValidator(
   field => `${field} is required`
 );
 
+// Or ES5 - require and define validator
+var createValidator = require('revalidate').createValidator;
+
+var isRequired = createValidator(
+  function(message) {
+    return function(value) {
+      if (value == null || value === '') {
+        return message;
+      }
+    };
+  },
+
+  function(field) {
+    field + ' is required'
+  }
+);
+
+// Using validator
 isRequired('My Field')();     // 'My Field is required'
 isRequired('My Field')('');   // 'My Field is required'
 isRequired('My Field')('42'); // undefined, therefore assume valid
@@ -117,12 +136,20 @@ The composed validator is also curried and takes the same arguments as an
 individual validator made with `createValidator`.
 
 ```js
+// ES2015
 import {
   createValidator,
   composeValidators,
   isRequired
 } from 'revalidate';
 
+// Or ES5
+var r = require('revalidate');
+var createValidator = r.createValidator;
+var composeValidators = r.composeValidators;
+var isRequired = r.isRequired;
+
+// Usage
 const isAlphabetic = createValidator(
   message => value => {
     if (value && !/^[A-Za-z]+$/.test(value)) {
@@ -152,8 +179,15 @@ You can supply an additional `multiple: true` option to return all potential
 errors from your composed validators.
 
 ```js
+// ES2015
 import { createValidator, composeValidators } from 'revalidate';
 
+// Or ES5
+var r = require('revalidate');
+var createValidator = r.createValidator;
+var composeValidators = r.composeValidators;
+
+// Usage
 const startsWithA = createValidator(
   message => value => {
     if (value && !/^A/.test(value)) {
@@ -197,6 +231,7 @@ messages for each field value. An empty object return value implies no field
 values were invalid.
 
 ```js
+// ES2015
 import {
   createValidator,
   composeValidators,
@@ -206,6 +241,16 @@ import {
   isNumeric
 } from 'revalidate';
 
+// Or ES5
+var r = require('revalidate');
+var createValidator = r.createValidator;
+var composeValidators = r.composeValidators;
+var combineValidators = r.combineValidators;
+var isRequired = r.isRequired;
+var isAlphabetic = r.isAlphabetic;
+var isNumeric = r.isNumeric;
+
+// Usage
 const dogValidator = combineValidators({
   // Use composeValidators too!
   name: composeValidators(
