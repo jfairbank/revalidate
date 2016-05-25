@@ -64,11 +64,16 @@ isRequired('My Field')('42'); // undefined, therefore assume valid
 isRequired({ message: 'Error' })(); // 'Error'
 ```
 
-Validation functions can optionally accept a second parameter including all of the current values.
-This allows comparing one value to another as part of validation.  For example:
+Validation functions can optionally accept a second parameter including all of
+the current values. This allows comparing one value to another as part of
+validation. For example:
 
 ```js
-import createValidator from '../createValidator';
+// ES2015
+import { createValidator } from 'revalidate';
+
+// Or ES5
+var createValidator = require('revalidate').createValidator;
 
 export default function matchesField(otherField, otherFieldLabel) {
   return createValidator(
@@ -82,13 +87,22 @@ export default function matchesField(otherField, otherFieldLabel) {
   );
 }
 
-matchesField('password')('My Field')();                            // 'My Field does not match'
-matchesField('password')('My Field')('yes', { password: 'no' });   // 'My Field does not match'
-matchesField('password')('My Field')('yes', { password: 'yes' });  // undefined, therefore assume valid
+matchesField('password')('My Field')();
+// 'My Field does not match'
+
+matchesField('password')('My Field')('yes', { password: 'no' });
+// 'My Field does not match'
+
+matchesField('password')('My Field')('yes', { password: 'yes' });
+// undefined, therefore assume valid
 
 // With a custom message
-matchesValue('password')({ message: 'Passwords must match' })('yes', {'password': 'no'});   // 'Passwords must match'
+matchesValue('password')({
+  message: 'Passwords must match',
+})('yes', { password: 'no' }); // 'Passwords must match'
 ```
+
+---
 
 ### `composeValidators`
 
@@ -170,6 +184,8 @@ validator('BBB');
 // ]
 ```
 
+---
+
 ### `combineValidators`
 
 `combineValidators` is analogous to a function like `combineReducers` from
@@ -210,9 +226,107 @@ dogValidator({ name: '123', age: 'abc' });
 dogValidator({ name: 'Tucker', age: '10' }); // {}
 ```
 
-For an example of comparing values in a combined validator, see [test/combineValidators.test.js].
+---
 
-## redux-form
+### Nested Fields
+
+`combineValidators` also works with deeply nested fields in objects and arrays.
+
+To specify nested fields, just supply the path to the field with dots:
+`'contact.firstName'`.
+
+For arrays of values you can use brace syntax: `'phones[]'`.
+
+For nested fields of objects in arrays you can combine dots and braces:
+`'cars[].make'`.
+
+You can combine and traverse as deep as you want:
+`'deeply.nested.list[].of.cats[].name'`!
+
+```js
+// ES2015
+import {
+  composeValidators,
+  combineValidators,
+  isRequired,
+  isAlphabetic,
+  isNumeric,
+  isOneOf,
+  matchesField,
+} from 'revalidate';
+
+// Or ES5
+var r = require('revalidate');
+var composeValidators = r.composeValidators;
+var combineValidators = r.combineValidators;
+var isRequired = r.isRequired;
+var isAlphabetic = r.isAlphabetic;
+var isNumeric = r.isNumeric;
+var isOneOf = r.isOneOf;
+var matchesField = r.matchesField;
+
+// Usage
+const validate = combineValidators({
+  // Shallow fields work with nested fields still
+  'favoriteMeme': isAlphabetic('Favorite Meme'),
+
+  // Specify fields of nested object
+  'contact.name': composeValidators(
+    isRequired,
+    isAlphabetic
+  )('Contact Name'),
+
+  'contact.age': isNumeric('Contact Age'),
+
+  // Specify array of string values
+  'phones[]': isNumeric('Phone'),
+
+  // Specify nested fields of arrays of objects
+  'cars[].make': composeValidators(
+    isRequired,
+    isOneOf(['Honda', 'Toyota', 'Ford'])
+  )('Car Make'),
+
+  // Match other nested field values
+  'otherContact.name': matchesField(
+    'contact.name',
+    'Contact Name'
+  )('Other Name'),
+});
+
+// Empty values
+validate({});
+
+// Empty arrays for phones and cars because no nested fields or values
+// to be invalid. Message for required name on contact still shows up.
+//
+// { contact: { name: 'Contact Name is required' },
+//   phones: [],
+//   cars: [],
+//   otherContact: {} }
+
+// Invalid/missing values
+validate({
+  contact: { name: 'Joe', age: 'thirty' }, // Invalid age
+  phones: ['abc', '123'],                 // First phone invalid
+  cars: [{ make: 'Toyota' }, {}],         // Second car missing make
+  otherContact: { name: 'Jeremy' },       // Names don't match
+});
+
+// Notice that array error messages match by index. For valid
+// nested objects in arrays, you get get back an empty object
+// for the index. For valid string values in arrays, you get
+// back undefined for the index.
+//
+// { contact: { age: 'Contact Age must be numeric' },
+//   phones: ['Phone must be numeric', undefined],
+//   cars: [{}, { make: 'Car Make is required' }],
+//   otherContact: { name: 'Other Name must match Contact Name' } }
+```
+
+---
+
+### redux-form
 
 As mentioned, even though revalidate is pretty agnostic about how you use it, it
 does work out of the box for redux-form. The `validate` function you might write
@@ -450,4 +564,71 @@ const validator = isOneOf(
 );
 
 validator('My Field')('FOO'); // undefined, so valid
+```
+
+### `matchesField`
+
+`matchesField` checks that a field matches another field's value. This is
+perfect for password confirmation fields.
+
+`matchesField` takes the name of the other field as the first argument and an
+optional second argument for the other field's label. The returned functions are
+like the other validation functions.
+
+```js
+// Example 1
+// =========
+matchesField(
+  'password', // other field name
+  'Password'  // other field label - optional
+)('Password Confirmation')('yes', { password: 'no' });
+//         ▲                 ▲                 ▲
+//         |                 |                 |
+//         |                 |                 |
+//  this field name     this field value   other field value
+
+// returns 'Password Confirmation does not match Password'
+
+// ---------------------------------------------------------------------------
+
+// Example 2
+// =========
+matchesField('password')('Password Confirmation')('yes', { password: 'yes' });
+// undefined, so valid
+```
+
+With `combineValidators`:
+
+```js
+// ES2015
+import {
+  combineValidators,
+  isRequired,
+  matchesField,
+} from 'revalidate';
+
+// Or ES5
+var r = require('revalidate');
+var combineValidators = r.combineValidators;
+var isRequired = r.isRequired;
+var matchesField = r.matchesField;
+
+// Usage
+const validate = combineValidators({
+  password: isRequired('Password'),
+
+  confirmPassword: matchesField('password')({
+    message: 'Passwords do not match',
+  }),
+});
+
+validate({
+  password: 'helloworld',
+  confirmPassword: 'helloworld',
+}); // {}, so valid
+
+validate({
+  password: 'helloworld',
+  confirmPassword: 'holamundo',
+}); // { confirmPassword: 'Passwords do not match' }
 ```
