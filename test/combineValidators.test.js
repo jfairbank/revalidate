@@ -4,7 +4,7 @@ import combineValidators from '../src/combineValidators';
 import isRequired from '../src/validators/isRequired';
 import isAlphabetic from '../src/validators/isAlphabetic';
 import isNumeric from '../src/validators/isNumeric';
-import matchesValue from '../src/validators/matchesValue';
+import matchesField from '../src/validators/matchesField';
 
 const validatePerson = combineValidators({
   name: composeValidators(
@@ -12,7 +12,7 @@ const validatePerson = combineValidators({
     isAlphabetic
   )('Name'),
 
-  confirmName: matchesValue('name', 'Name')('Confirm Your Name'),
+  confirmName: matchesField('name')({ message: 'Confirm Your Name' }),
 
   age: isNumeric('Age')
 

@@ -68,21 +68,23 @@ Validation functions can optionally accept a second parameter including all of t
 This allows comparing one value to another as part of validation.  For example:
 
 ```js
-import { createValidator } from 'revalidate';
+import createValidator from '../createValidator';
 
-const matchesValue = function(matchKey) {
-  return createValidator(message => (value, allValues) => {
-    if (value !== allValues['matchKey']) {
-      return message;
-    }
-  },
+export default function matchesField(otherField, otherFieldLabel) {
+  return createValidator(
+    message => (value, allValues) => {
+      if (!allValues || value !== allValues[otherField]) {
+        return message;
+      }
+    },
 
-  field => `${field} does not match`
-);
+    field => `${field} must match ${otherFieldLabel}`
+  );
+}
 
-matchesValue('password')('My Field')();                            // 'My Field does not match'
-matchesValue('password')('My Field')('yes', {'password': 'no'});   // 'My Field does not match'
-matchesValue('password')('My Field')('yes', {'password': 'yes'});  // undefined, therefore assume valid
+matchesField('password')('My Field')();                            // 'My Field does not match'
+matchesField('password')('My Field')('yes', { password: 'no' });   // 'My Field does not match'
+matchesField('password')('My Field')('yes', { password: 'yes' });  // undefined, therefore assume valid
 
 // With a custom message
 matchesValue('password')({ message: 'Passwords must match' })('yes', {'password': 'no'});   // 'Passwords must match'
