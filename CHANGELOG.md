@@ -1,3 +1,7 @@
+## v0.2.1
+
+* Fix import bug in `matchesField` validator.
+
 ## v0.2.0
 
 ### Match all values
