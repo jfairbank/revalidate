@@ -1,27 +1,12 @@
-import createValidator from './createValidator';
-import composeValidators from './composeValidators';
-import combineValidators from './combineValidators';
-import hasLengthBetween from './validators/hasLengthBetween';
-import hasLengthGreaterThan from './validators/hasLengthGreaterThan';
-import hasLengthLessThan from './validators/hasLengthLessThan';
-import isAlphabetic from './validators/isAlphabetic';
-import isAlphaNumeric from './validators/isAlphaNumeric';
-import isNumeric from './validators/isNumeric';
-import isOneOf from './validators/isOneOf';
-import isRequired from './validators/isRequired';
-import matchesField from './validators/matchesField';
-
-export {
-  createValidator,
-  composeValidators,
-  combineValidators,
-  hasLengthBetween,
-  hasLengthGreaterThan,
-  hasLengthLessThan,
-  isAlphabetic,
-  isAlphaNumeric,
-  isNumeric,
-  isOneOf,
-  isRequired,
-  matchesField,
-};
+export { default as createValidator } from './createValidator';
+export { default as composeValidators } from './composeValidators';
+export { default as combineValidators } from './combineValidators';
+export { default as hasLengthBetween } from './validators/hasLengthBetween';
+export { default as hasLengthGreaterThan } from './validators/hasLengthGreaterThan';
+export { default as hasLengthLessThan } from './validators/hasLengthLessThan';
+export { default as isAlphabetic } from './validators/isAlphabetic';
+export { default as isAlphaNumeric } from './validators/isAlphaNumeric';
+export { default as isNumeric } from './validators/isNumeric';
+export { default as isOneOf } from './validators/isOneOf';
+export { default as isRequired } from './validators/isRequired';
+export { default as matchesField } from './validators/matchesField';

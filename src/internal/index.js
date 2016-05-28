@@ -1,7 +1,2 @@
-import fillObjectFromPath from './fillObjectFromPath';
-import parseFieldName from './parseFieldName';
-
-export {
-  fillObjectFromPath,
-  parseFieldName,
-};
+export { default as fillObjectFromPath } from './fillObjectFromPath';
+export { default as parseFieldName } from './parseFieldName';
