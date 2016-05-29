@@ -46,6 +46,7 @@
     "babel-plugin-transform-es2015-parameters": "^6.9.0",
     "babel-plugin-transform-es2015-shorthand-properties": "^6.8.0",
     "babel-plugin-transform-es2015-template-literals": "^6.8.0",
+    "babel-plugin-transform-export-extensions": "^6.8.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-plugin-transform-runtime": "^6.9.0",
     "eslint": "^2.10.2",
@@ -97,7 +98,8 @@
           "polyfill": false,
           "regenerator": false
         }
-      ]
+      ],
+      "transform-export-extensions"
     ]
   },
   "eslintConfig": {
