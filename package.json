@@ -53,6 +53,7 @@
     "eslint-config-airbnb-base": "^3.0.1",
     "eslint-import-resolver-node": "^0.2.0",
     "eslint-plugin-import": "^1.8.0",
+    "immutable": "^3.8.1",
     "lodash.range": "^3.1.5",
     "lodash.repeat": "^4.0.3",
     "nodemon": "^1.9.2"

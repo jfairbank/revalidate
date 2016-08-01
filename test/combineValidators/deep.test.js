@@ -1,6 +1,7 @@
 import test from 'ava';
 import omit from 'lodash.omit';
 import isPlainObject from 'lodash.isplainobject';
+import { fromJS } from 'immutable';
 
 import {
   composeValidators,
@@ -12,56 +13,69 @@ import {
   matchesField,
 } from '../../src';
 
-const validate = combineValidators({
-  'shallow': isAlphabetic('Shallow Prop'),
+function validate(isImmutable = false) {
+  const validateData = combineValidators({
+   'shallow': isAlphabetic('Shallow Prop'),
 
-  'contact.name': composeValidators(
-    isRequired,
-    isAlphabetic
-  )('Contact Name'),
+    'contact.name': composeValidators(
+        isRequired,
+        isAlphabetic
+    )('Contact Name'),
 
-  'contact.age': isNumeric('Contact Age'),
+    'contact.age': isNumeric('Contact Age'),
 
-  'cars[].make': composeValidators(
-    isRequired,
-    isOneOf(['Honda', 'Toyota', 'Ford'])
-  )('Car Make'),
+    'cars[].make': composeValidators(
+        isRequired,
+        isOneOf(['Honda', 'Toyota', 'Ford'])
+    )('Car Make'),
 
-  'deeply.nested[].list.cats[].name': isRequired('Cat Name'),
+    'deeply.nested[].list.cats[].name': isRequired('Cat Name'),
 
-  'phones[]': isNumeric('Phone'),
+    'phones[]': isNumeric('Phone'),
 
-  'otherContact.name': matchesField('contact.name')('Other Name'),
-});
+    'otherContact.name': matchesField('contact.name')('Other Name'),
+  }, isImmutable);
+  return validateData;
+}
 
-const validValues = {
-  shallow: 'hello',
 
-  contact: {
-    name: 'Jeremy',
-    age: '29',
-  },
+function validValues(isImmutable = false, extendData) {
+  let validData = {
+    shallow: 'hello',
 
-  cars: [
-    { make: 'Toyota' },
-  ],
+    contact: {
+      name: 'Jeremy',
+      age: '29',
+    },
 
-  deeply: {
-    nested: [
+    cars: [
+      { make: 'Toyota' },
+    ],
+
+    deeply: {
+      nested: [
       {
         list: {
-          cats: [
+        cats: [
             { name: 'Gorby' },
-          ],
+        ],
         },
       },
-    ],
-  },
+      ],
+    },
 
-  phones: ['123'],
+    phones: ['123'],
 
-  otherContact: { name: 'Jeremy' },
-};
+    otherContact: { name: 'Jeremy' },
+  };
+  if (extendData) {
+    validData = { ...validData, ...extendData }
+  }
+  if (isImmutable) {
+    return fromJS(validData);
+  }
+  return validData;
+}
 
 const validResult = {
   contact: {},
@@ -79,12 +93,16 @@ const validResult = {
   otherContact: {},
 };
 
+for (const testType of [{ isImmutable: false }, { isImmutable: true }]) {
+const isImmutable = testType.isImmutable;
+
 test('returns empty objects for valid fields', t => {
-  t.deepEqual(validate(validValues), validResult);
+  t.deepEqual(validate(isImmutable)(validValues(isImmutable)), validResult);
 });
 
+
 test('returns error value for shallow prop if invalid', t => {
-  const allErrors = validate({ ...validValues, shallow: '123' });
+  const allErrors = validate(isImmutable)(validValues(isImmutable, { shallow: '123' }));
 
   t.is(typeof allErrors.shallow, 'string');
   t.true(allErrors.shallow.length > 1);
@@ -96,14 +114,14 @@ test('returns error value for shallow prop if invalid', t => {
 });
 
 test('returns non empty object with error message for invalid contact age', t => {
-  const allErrors = validate({
-    ...validValues,
-
-    contact: {
-      name: 'Jeremy',
-      age: 'abc',
-    },
-  });
+  const allErrors = validate(isImmutable)(
+    validValues(isImmutable, {
+      contact: {
+        name: 'Jeremy',
+        age: 'abc',
+      },
+    })
+  );
 
   const contactErrors = allErrors.contact;
 
@@ -118,11 +136,12 @@ test('returns non empty object with error message for invalid contact age', t =>
 });
 
 test('returns non empty object with error message for missing contact name', t => {
-  const allErrors = validate({
-    ...validValues,
-    contact: {},
-    otherContact: {},
-  });
+  const allErrors = validate(isImmutable)(
+    validValues(isImmutable, {
+      contact: {},
+      otherContact: {}
+    })
+  );
 
   const contactErrors = allErrors.contact;
 
@@ -137,11 +156,12 @@ test('returns non empty object with error message for missing contact name', t =
 });
 
 test('returns non empty object with error message for invalid contact name', t => {
-  const allErrors = validate({
-    ...validValues,
-    contact: { name: '123' },
-    otherContact: { name: '123' },
-  });
+  const allErrors = validate(isImmutable)(
+    validValues(isImmutable, {
+      contact: { name: '123' },
+      otherContact: { name: '123' }
+    })
+  );
 
   const contactErrors = allErrors.contact;
 
@@ -156,18 +176,18 @@ test('returns non empty object with error message for invalid contact name', t =
 });
 
 test('returns non empty object with error messages for invalid contact fields', t => {
-  const allErrors = validate({
-    ...validValues,
+  const allErrors = validate(isImmutable)(
+    validValues(isImmutable, {
+      contact: {
+        name: '1234',
+        age: 'abc',
+      },
 
-    contact: {
-      name: '1234',
-      age: 'abc',
-    },
-
-    otherContact: {
-      name: '1234',
-    },
-  });
+      otherContact: {
+        name: '1234',
+      }
+    })
+  );
 
   const contactErrors = allErrors.contact;
 
@@ -186,13 +206,13 @@ test('returns non empty object with error messages for invalid contact fields', 
 });
 
 test('returns non empty objects for missing/invalid car makes', t => {
-  const allErrors = validate({
-    ...validValues,
-
-    cars: [
-      {}, { make: 'Lexus' },
-    ],
-  });
+  const allErrors = validate(isImmutable)(
+    validValues(isImmutable, {
+      cars: [
+        {}, { make: 'Lexus' },
+      ],
+    })
+  );
 
   const [carOneErrors, carTwoErrors] = allErrors.cars;
 
@@ -211,21 +231,21 @@ test('returns non empty objects for missing/invalid car makes', t => {
 });
 
 test('returns non empty objects for missing cat names', t => {
-  const allErrors = validate({
-    ...validValues,
-
-    deeply: {
-      nested: [
-        {
-          list: {
-            cats: [
-              {}, { name: '' },
-            ],
+  const allErrors = validate(isImmutable)(
+    validValues(isImmutable, {
+      deeply: {
+        nested: [
+          {
+            list: {
+              cats: [
+                {}, { name: '' },
+              ],
+            },
           },
-        },
-      ],
-    },
-  });
+        ],
+      }
+    })
+  );
 
   const [catOneErrors, catTwoErrors] = allErrors.deeply.nested[0].list.cats;
 
@@ -244,10 +264,11 @@ test('returns non empty objects for missing cat names', t => {
 });
 
 test('validates array of values', t => {
-  const allErrors = validate({
-    ...validValues,
-    phones: ['123', 'abc'],
-  });
+  const allErrors = validate(isImmutable)(
+    validValues(isImmutable, {
+      phones: ['123', 'abc'],
+    })
+  );
 
   const [phoneOneError, phoneTwoError] = allErrors.phones;
 
@@ -258,11 +279,12 @@ test('validates array of values', t => {
 });
 
 test('validates otherContact name not matching contact name', t => {
-  const allErrors = validate({
-    ...validValues,
-    contact: { name: 'Jeremy' },
-    otherContact: { name: 'John' },
-  });
+  const allErrors = validate(isImmutable)(
+    validValues(isImmutable, {
+      contact: { name: 'Jeremy' },
+      otherContact: { name: 'John' }
+    })
+  );
 
   const otherContactErrors = allErrors.otherContact;
 
@@ -277,7 +299,7 @@ test('validates otherContact name not matching contact name', t => {
 });
 
 test('handles validating empty object', t => {
-  const allErrors = validate({});
+  const allErrors = validate(isImmutable)({});
 
   const {
     contact: contactErrors,
@@ -298,7 +320,7 @@ test('handles validating empty object', t => {
 });
 
 test('handles validating missing object', t => {
-  const allErrors = validate();
+  const allErrors = validate(isImmutable)();
 
   const {
     contact: contactErrors,
@@ -317,3 +339,4 @@ test('handles validating missing object', t => {
 
   t.deepEqual(deeplyErrors, { nested: [] });
 });
+}

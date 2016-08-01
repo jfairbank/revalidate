@@ -381,6 +381,10 @@ can also be automatically generated with `combineValidators`. The function it
 returns will work perfectly for the `validate` option for your form components
 for React and redux-form.
 
+redux-form support [immutable.js](https://github.com/erikras/redux-form/blob/master/docs/faq/ImmutableJs.md),
+if you use it send `combineValidators` function second argument `true` and it will
+work with immutable.js data.
+
 Here is that example from redux-form rewritten to generate a `validate` function
 with revalidate.
 
