@@ -3,7 +3,7 @@
 [![Travis branch](https://img.shields.io/travis/jfairbank/revalidate/master.svg?style=flat-square)](https://travis-ci.org/jfairbank/revalidate)
 [![npm](https://img.shields.io/npm/v/revalidate.svg?style=flat-square)](https://www.npmjs.com/package/revalidate)
 
-Composable form value validations for JavaScript.
+Elegant and composable validations.
 
 Revalidate was originally created as a helper library for composing and reusing
 common validations to generate validate functions for
