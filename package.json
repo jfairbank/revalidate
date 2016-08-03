@@ -136,6 +136,10 @@
     }
   },
   "ava": {
-    "require": "babel-core/register"
+    "require": "babel-core/register",
+    "source": [
+      "**/*.js",
+      "!**/*.swp"
+    ]
   }
 }
