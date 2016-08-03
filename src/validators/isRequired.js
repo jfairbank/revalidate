@@ -1,12 +1,9 @@
 import createValidator from '../createValidator';
+import valueMissing from '../internal/valueMissing';
 
 export default createValidator(
   message => value => {
-    if (value == null) {
-      return message;
-    }
-
-    if (typeof value === 'string' && value.trim() === '') {
+    if (valueMissing(value)) {
       return message;
     }
   },

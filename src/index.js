@@ -10,3 +10,4 @@ export isNumeric from './validators/isNumeric';
 export isOneOf from './validators/isOneOf';
 export isRequired from './validators/isRequired';
 export matchesField from './validators/matchesField';
+export isRequiredIf from './validators/isRequiredIf';
