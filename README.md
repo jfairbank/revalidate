@@ -175,8 +175,11 @@ validator('123'); // 'Can only contain letters'
 validator('abc'); // undefined
 ```
 
-You can supply an additional `multiple: true` option to return all potential
-errors from your composed validators.
+#### Multiple Errors as an Array
+
+You can supply an additional `multiple: true` option to return all errors as an
+array from your composed validators. This will run all composed validations
+instead of stopping at the first one that fails.
 
 ```js
 // ES2015
@@ -216,6 +219,28 @@ validator('BBB');
 //   'My Field must start with A',
 //   'My Field must end with C'
 // ]
+```
+
+#### Multiple Errors as an Object
+
+Alternatively, if you want to be able to reference specific errors, you can
+return multiple errors as an object, thereby allowing you to name the errors. To
+return multiple errors as an object, pass in your validators as an object to
+`composeValidators` instead of a variadic number of arguments. The keys you use
+in your object will be the keys in the returned errors object. Don't forget to
+still supply the `multiple: true` option!
+
+```js
+const validator = composeValidators({
+  A: startsWithA,
+  C: endsWithC
+})({ field: 'My Field', multiple: true });
+
+validator('BBB');
+// {
+//   A: 'My Field must start with A',
+//   C: 'My Field must end with C'
+// }
 ```
 
 ---
