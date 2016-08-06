@@ -1,6 +1,6 @@
 {
   "name": "revalidate",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Composable form value validations",
   "main": "lib/index.js",
   "files": [
