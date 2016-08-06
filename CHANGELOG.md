@@ -1,3 +1,107 @@
+## v0.3.0
+
+### New Common Validators
+
+#### `isRequiredIf`
+
+`isRequiredIf` allows you to conditionally require a value based on the result
+of a predicate function. As long as your predicate function returns a truthy
+value, the field value will be required.
+
+This is perfect if you want to require a field if another field value is
+present:
+
+```js
+import { isRequiredIf } from 'revalidate';
+
+const validator = combineValidators({
+  username: isRequiredIf(
+    values => values && !values.useEmailAsUsername
+  )('Username'),
+});
+
+validator(); // { username: 'Username is required' }
+
+validator({
+  useEmailAsUsername: false,
+}); // { username: 'Username is required' }
+
+validator({
+  username: 'jfairbank',
+  useEmailAsUsername: false,
+}); // {}
+
+validator({
+  useEmailAsUsername: true,
+}); // {}, so valid
+```
+
+#### `matchesPattern`
+
+`matchesPattern` is a general purpose validator for validating values against
+arbitrary regex patterns.
+
+```js
+import { matchesPattern } from 'revalidate';
+
+const isAlphabetic = matchesPattern(/^[A-Za-z]+$/)('Username');
+
+isAlphabetic('abc'); // undefined, so valid
+isAlphabetic('123'); // 'Username must match pattern /^[A-Za-z]+$/'
+```
+
+**Note:** `matchesPattern` does not require a value, so falsy values will pass.
+
+```js
+isAlphabetic();      // undefined because not required, so valid
+isAlphabetic(null);  // undefined because not required, so valid
+isAlphabetic('');    // undefined because not required, so valid
+```
+
+---
+
+### Return multiple errors as an object
+
+In addition to returning multiple errors as an array with `composeValidators`,
+you can also return multiple errors as an object now. This is useful if you want
+to name your errors and react accordingly based on the type of error. Instead of
+passing in validators as a variadic number of arguments, pass in all validators
+inside an object. The keys of your object will the keys used in the error
+object. Don't forget to still supply the `multiple: true` option!
+
+```js
+import { createValidator, composeValidators } from 'revalidate';
+
+const startsWithA = createValidator(
+  message => value => {
+    if (value && !/^A/.test(value)) {
+      return message;
+    }
+  },
+  field => `${field} must start with A`
+);
+
+const endsWithC = createValidator(
+  message => value => {
+    if (value && !/C$/.test(value)) {
+      return message;
+    }
+  },
+  field => `${field} must end with C`
+);
+
+const validator = composeValidators({
+  A: startsWithA,
+  C: endsWithC
+})({ field: 'My Field', multiple: true });
+
+validator('BBB');
+// {
+//   A: 'My Field must start with A',
+//   C: 'My Field must end with C'
+// }
+```
+
 ## v0.2.1
 
 * Fix import bug in `matchesField` validator.
