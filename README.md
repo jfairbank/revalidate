@@ -528,6 +528,18 @@ Revalidate exports some common validations for your convenience. If you need
 something more complex, then you'll need to create your own validators with
 `createValidator`.
 
+- [`isRequired`](#isrequired)
+- [`hasLengthBetween`](#haslengthbetween)
+- [`hasLengthGreaterThan`](#haslengthgreaterthan)
+- [`hasLengthLessThan`](#haslengthlessthan)
+- [`isAlphabetic`](#isalphabetic)
+- [`isAlphaNumeric`](#isalphanumeric)
+- [`isNumeric`](#isnumeric)
+- [`isOneOf`](#isoneof)
+- [`matchesField`](#matchesfield)
+- [`isRequiredIf`](#isrequiredif)
+- [`matchesPattern`](#matchespattern)
+
 ### `isRequired`
 
 `isRequired` is pretty self explanatory. It determines that a value isn't valid
