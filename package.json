@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/jfairbank/revalidate#readme",
   "devDependencies": {
-    "ava": "^0.15.2",
+    "ava": "^0.16.0",
     "babel-cli": "^6.9.0",
     "babel-core": "^6.9.0",
     "babel-eslint": "^6.0.4",
@@ -132,7 +132,12 @@
         "consistent"
       ],
       "prefer-rest-params": 0,
-      "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": true
+        }
+      ]
     }
   },
   "ava": {
