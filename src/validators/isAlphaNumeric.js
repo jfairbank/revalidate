@@ -1,13 +1,6 @@
-import createValidator from '../createValidator';
+import internalMatchesPattern from '../internal/validators/internalMatchesPattern';
 
-const regex = /^[0-9A-Za-z]+$/;
-
-export default createValidator(
-  message => value => {
-    if (value && !regex.test(value)) {
-      return message;
-    }
-  },
-
+export default internalMatchesPattern(
+  /^[0-9A-Za-z]+$/,
   field => `${field} must be alphanumeric`
 );

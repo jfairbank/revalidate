@@ -1,13 +1,6 @@
-import createValidator from '../createValidator';
+import internalMatchesPattern from '../internal/validators/internalMatchesPattern';
 
-const regex = /^\d+$/;
-
-export default createValidator(
-  message => value => {
-    if (value && !regex.test(value)) {
-      return message;
-    }
-  },
-
+export default internalMatchesPattern(
+  /^\d+$/,
   field => `${field} must be numeric`
 );
