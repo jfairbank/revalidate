@@ -1,4 +1,5 @@
 import omit from 'lodash/omit';
+import assign from 'object-assign';
 import createValidatorWithMultipleErrors from './internal/createValidatorWithMultipleErrors';
 import createValidatorWithSingleError from './internal/createValidatorWithSingleError';
 
@@ -9,7 +10,7 @@ export default function composeValidators(...validators) {
     if (typeof sharedConfig === 'string') {
       config = { field: sharedConfig };
     } else {
-      config = { ...sharedConfig };
+      config = assign({}, sharedConfig);
     }
 
     if (config.multiple === true) {
