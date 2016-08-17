@@ -16,7 +16,7 @@ test('adds other values', t => {
       20
     ),
 
-    { foo: { bar: { baz: 42, quux: 20 } } },
+    { foo: { bar: { baz: 42, quux: 20 } } }
   );
 });
 
