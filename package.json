@@ -1,7 +1,7 @@
 {
   "name": "revalidate",
   "version": "0.3.0",
-  "description": "Composable form value validations",
+  "description": "Elegant and composable validations",
   "main": "lib/index.js",
   "files": [
     "src",
