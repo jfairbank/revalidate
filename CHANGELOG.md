@@ -1,3 +1,177 @@
+## v0.4.0
+
+### Test Helpers
+
+Revalidate now includes some test helpers to make testing your validation
+functions easier. You can import the helpers from `revalidate/assertions`. All
+helpers return booleans.
+
+#### `hasError`
+
+Use `hasError` to assert that a validation result has at least one error. Negate
+to assert there are no errors. The only argument is the validation result from
+your validate function.
+
+#### `hasErrorAt`
+
+Use `hasErrorAt` with combined validators to assert a specific field has an
+error. It takes two arguments, the validation result and the field key to check.
+(**Note:** `hasErrorAt` only works with validators created from
+`combineValidators`.)
+
+#### `hasErrorOnlyAt`
+
+Use `hasErrorOnlyAt` with combined validators to assert a specific field is the
+**ONLY** error in the validation result. It takes two arguments, the validation
+result and the field key to check.  (**Note:** `hasErrorOnlyAt` only works with
+validators created from `combineValidators`.)
+
+```js
+// ES2015
+import {
+  hasError,
+  hasErrorAt,
+  hasErrorOnlyAt,
+} from 'revalidate/assertions';
+
+// ES5
+var assertions = require('revalidate/assertions');
+var hasError = assertions.hasError;
+var hasErrorAt = assertions.hasErrorAt;
+var hasErrorOnlyAt = assertions.hasErrorOnlyAt;
+
+// Single validators
+// =================
+const validateName = isRequired('Name');
+
+hasError(validateName(''));       // true
+hasError(validateName('Tucker')); // false
+
+// Composed validators
+// ===================
+const validateAge = composeValidators(
+  isRequired,
+  isNumeric
+)('Age');
+
+hasError(validateAge(''));    // true
+hasError(validateAge('abc')); // true
+hasError(validateAge('10'));  // false
+
+// Composed validators with multiple errors
+// ========================================
+const validateAge = composeValidators(
+  isRequired,
+  isNumeric,
+  hasLengthLessThan(3)
+)('Age');
+
+hasError(validateAge(''));            // true
+hasError(validateAge('abc'));         // true
+hasError(validateAge('100'));         // true
+hasError(validateAge('one hundred')); // true
+hasError(validateAge('10'));          // false
+
+// Combined validators
+// ===================
+const validateDog = combineValidators({
+  'name:' isRequired('Name'),
+
+  'age:' composeValidators(
+    isRequired,
+    isNumeric
+  )('Age'),
+
+  'favorite.meme': isRequired('Favorite Meme'),
+});
+
+// Missing name
+const result = validateDog({
+  age: '10',
+  favorite: { meme: 'Doge' },
+});
+
+hasError(result);// true
+
+hasErrorAt(result, 'name');           // true
+hasErrorAt(result, 'age');            // false
+hasErrorAt(result, 'favorite.meme');  // false
+
+hasErrorOnlyAt(result, 'name');           // true
+hasErrorOnlyAt(result, 'age');            // false
+hasErrorOnlyAt(result, 'favorite.meme');  // false
+
+// Error with age
+const result = validateDog({
+  name: 'Tucker',
+  age: 'abc',
+  favorite: { meme: 'Doge' },
+});
+
+hasError(result); // true
+
+hasErrorAt(result, 'name');           // false
+hasErrorAt(result, 'age');            // true
+hasErrorAt(result, 'favorite.meme');  // false
+
+hasErrorOnlyAt(result, 'name');           // false
+hasErrorOnlyAt(result, 'age');            // true
+hasErrorOnlyAt(result, 'favorite.meme');  // false
+
+// Missing name and age
+const result = validateDog({
+  favorite: { meme: 'Doge' },
+});
+
+hasError(result); // true
+
+hasErrorAt(result, 'name');           // true
+hasErrorAt(result, 'age');            // true
+hasErrorAt(result, 'favorite.meme');  // false
+
+hasErrorOnlyAt(result, 'name');           // false
+hasErrorOnlyAt(result, 'age');            // false
+hasErrorOnlyAt(result, 'favorite.meme');  // false
+
+// Missing nested field 'favorite.meme'
+const result = validateDog({
+  name: 'Tucker',
+  age: '10',
+});
+
+hasError(result); // true
+
+hasErrorAt(result, 'name');           // false
+hasErrorAt(result, 'age');            // false
+hasErrorAt(result, 'favorite.meme');  // true
+
+hasErrorOnlyAt(result, 'name');           // false
+hasErrorOnlyAt(result, 'age');            // false
+hasErrorOnlyAt(result, 'favorite.meme');  // true
+
+// All fields valid
+const result = validateDog({
+  name: 'Tucker',
+  age: '10',
+  favorite: { meme: 'Doge' },
+});
+
+hasError(result); // false
+
+hasErrorAt(result, 'name');           // false
+hasErrorAt(result, 'age');            // false
+hasErrorAt(result, 'favorite.meme');  // false
+
+hasErrorOnlyAt(result, 'name');           // false
+hasErrorOnlyAt(result, 'age');            // false
+hasErrorOnlyAt(result, 'favorite.meme');  // false
+```
+
+### Dependency Tweaks
+
+- Use lodash instead of individual lodash function packages.
+- Remove object rest/spread in src to eliminate babel-runtime dependency.
+
 ## v0.3.0
 
 ### New Common Validators

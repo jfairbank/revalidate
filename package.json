@@ -1,6 +1,6 @@
 {
   "name": "revalidate",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Elegant and composable validations",
   "main": "lib/index.js",
   "files": [
