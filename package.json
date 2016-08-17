@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "files": [
     "src",
-    "lib"
+    "lib",
+    "assertions.js"
   ],
   "scripts": {
     "build": "babel src --out-dir lib",
@@ -60,10 +61,12 @@
   "dependencies": {
     "babel-runtime": "^6.9.0",
     "invariant": "^2.2.1",
+    "lodash.clonedeep": "^4.5.0",
     "lodash.findindex": "^4.4.0",
     "lodash.get": "^4.3.0",
     "lodash.isplainobject": "^4.0.4",
-    "lodash.omit": "^4.3.0"
+    "lodash.omit": "^4.3.0",
+    "lodash.unset": "^4.5.2"
   },
   "babel": {
     "plugins": [

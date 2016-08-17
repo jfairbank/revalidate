@@ -790,3 +790,237 @@ isAlphabetic();      // undefined because not required, so valid
 isAlphabetic(null);  // undefined because not required, so valid
 isAlphabetic('');    // undefined because not required, so valid
 ```
+
+## Test Helpers
+
+Revalidate includes some test helpers to make testing your validation functions
+easier. You can import the helpers from `revalidate/assertions`. All helpers
+return booleans.
+
+- [`hasError`](#haserror)
+- [`hasErrorAt`](#haserrorat)
+- [`hasErrorOnlyAt`](#haserroronlyat)
+
+### `hasError`
+
+Use `hasError` to assert that a validation result has at least one error. Negate
+to assert there are no errors. The only argument is the validation result from
+your validate function.
+
+```js
+// ES2015
+import { hasError } from 'revalidate/assertions';
+
+// ES5
+var hasError = require('revalidate/assertions').hasError;
+
+// Single validators
+// =================
+const validateName = isRequired('Name');
+
+hasError(validateName(''));       // true
+hasError(validateName('Tucker')); // false
+
+// Composed validators
+// ===================
+const validateAge = composeValidators(
+  isRequired,
+  isNumeric
+)('Age');
+
+hasError(validateAge(''));    // true
+hasError(validateAge('abc')); // true
+hasError(validateAge('10'));  // false
+
+// Composed validators with multiple errors
+// ========================================
+const validateAge = composeValidators(
+  isRequired,
+  isNumeric,
+  hasLengthLessThan(3)
+)('Age');
+
+hasError(validateAge(''));            // true
+hasError(validateAge('abc'));         // true
+hasError(validateAge('100'));         // true
+hasError(validateAge('one hundred')); // true
+hasError(validateAge('10'));          // false
+
+// Combined validators
+// ===================
+const validateDog = combineValidators({
+  'name:' isRequired('Name'),
+
+  'age:' composeValidators(
+    isRequired,
+    isNumeric
+  )('Age'),
+
+  'favorite.meme': isRequired('Favorite Meme'),
+});
+
+// Missing name, returns true
+hasError(validateDog({
+  age: '10',
+  favorite: { meme: 'Doge' },
+}));
+
+// Error with age, returns true
+hasError(validateDog({
+  name: 'Tucker',
+  age: 'abc',
+  favorite: { meme: 'Doge' },
+}));
+
+// Missing name and age, returns true
+hasError(validateDog({
+  favorite: { meme: 'Doge' },
+}));
+
+// Missing nested field 'favorite.meme', returns true
+hasError(validateDog({
+  name: 'Tucker',
+  age: '10',
+}));
+
+// All fields valid, returns false
+hasError(validateDog({
+  name: 'Tucker',
+  age: '10',
+  favorite: { meme: 'Doge' },
+}));
+```
+
+### `hasErrorAt`
+
+Use `hasErrorAt` with combined validators to assert a specific field has an
+error. It takes two arguments, the validation result and the field key to check.
+(**Note:** `hasErrorAt` only works with validators created from
+`combineValidators`.)
+
+```js
+// ES2015
+import { hasErrorAt } from 'revalidate/assertions';
+
+// ES5
+var hasErrorAt = require('revalidate/assertions').hasErrorAt;
+
+// Missing name
+const result = validateDog({
+  age: '10',
+  favorite: { meme: 'Doge' },
+});
+
+hasErrorAt(result, 'name');           // true
+hasErrorAt(result, 'age');            // false
+hasErrorAt(result, 'favorite.meme');  // false
+
+// Error with age
+const result = validateDog({
+  name: 'Tucker',
+  age: 'abc',
+  favorite: { meme: 'Doge' },
+});
+
+hasErrorAt(result, 'name');           // false
+hasErrorAt(result, 'age');            // true
+hasErrorAt(result, 'favorite.meme');  // false
+
+// Missing name and age
+const result = validateDog({
+  favorite: { meme: 'Doge' },
+});
+
+hasErrorAt(result, 'name');           // true
+hasErrorAt(result, 'age');            // true
+hasErrorAt(result, 'favorite.meme');  // false
+
+// Missing nested field 'favorite.meme'
+const result = validateDog({
+  name: 'Tucker',
+  age: '10',
+});
+
+hasErrorAt(result, 'name');           // false
+hasErrorAt(result, 'age');            // false
+hasErrorAt(result, 'favorite.meme');  // true
+
+// All fields valid
+const result = validateDog({
+  name: 'Tucker',
+  age: '10',
+  favorite: { meme: 'Doge' },
+});
+
+hasErrorAt(result, 'name');           // false
+hasErrorAt(result, 'age');            // false
+hasErrorAt(result, 'favorite.meme');  // false
+```
+
+### `hasErrorOnlyAt`
+
+Use `hasErrorOnlyAt` with combined validators to assert a specific field is the
+**ONLY** error in the validation result. It takes two arguments, the validation
+result and the field key to check.  (**Note:** `hasErrorOnlyAt` only works with
+validators created from `combineValidators`.)
+
+```js
+// ES2015
+import { hasErrorOnlyAt } from 'revalidate/assertions';
+
+// ES5
+var hasErrorOnlyAt = require('revalidate/assertions').hasErrorOnlyAt;
+
+// Missing name
+const result = validateDog({
+  age: '10',
+  favorite: { meme: 'Doge' },
+});
+
+hasErrorOnlyAt(result, 'name');           // true
+hasErrorOnlyAt(result, 'age');            // false
+hasErrorOnlyAt(result, 'favorite.meme');  // false
+
+// Error with age
+const result = validateDog({
+  name: 'Tucker',
+  age: 'abc',
+  favorite: { meme: 'Doge' },
+});
+
+hasErrorOnlyAt(result, 'name');           // false
+hasErrorOnlyAt(result, 'age');            // true
+hasErrorOnlyAt(result, 'favorite.meme');  // false
+
+// Missing name and age
+// Notice here that all checks return false because
+// there are 2 errors
+const result = validateDog({
+  favorite: { meme: 'Doge' },
+});
+
+hasErrorOnlyAt(result, 'name');           // false
+hasErrorOnlyAt(result, 'age');            // false
+hasErrorOnlyAt(result, 'favorite.meme');  // false
+
+// Missing nested field 'favorite.meme'
+const result = validateDog({
+  name: 'Tucker',
+  age: '10',
+});
+
+hasErrorOnlyAt(result, 'name');           // false
+hasErrorOnlyAt(result, 'age');            // false
+hasErrorOnlyAt(result, 'favorite.meme');  // true
+
+// All fields valid
+const result = validateDog({
+  name: 'Tucker',
+  age: '10',
+  favorite: { meme: 'Doge' },
+});
+
+hasErrorOnlyAt(result, 'name');           // false
+hasErrorOnlyAt(result, 'age');            // false
+hasErrorOnlyAt(result, 'favorite.meme');  // false
+```
