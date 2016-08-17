@@ -1,4 +1,4 @@
-import omit from 'lodash.omit';
+import omit from 'lodash/omit';
 import createValidatorWithMultipleErrors from './internal/createValidatorWithMultipleErrors';
 import createValidatorWithSingleError from './internal/createValidatorWithSingleError';
 

@@ -1,4 +1,4 @@
-import findIndex from 'lodash.findindex';
+import findIndex from 'lodash/findIndex';
 import createValidator from '../createValidator';
 
 const defaultComparer = (value, optionValue) => value === optionValue;

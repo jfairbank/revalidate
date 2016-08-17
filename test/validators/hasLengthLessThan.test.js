@@ -1,5 +1,5 @@
 import test from 'ava';
-import repeat from 'lodash.repeat';
+import repeat from 'lodash/repeat';
 import unconfigured from '../../src/validators/hasLengthLessThan';
 
 const MAX = 3;

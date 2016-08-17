@@ -1,4 +1,4 @@
-import get from 'lodash.get';
+import get from 'lodash/get';
 import createValidator from '../createValidator';
 
 export default function matchesField(otherField, otherFieldLabel) {

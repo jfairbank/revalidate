@@ -54,19 +54,12 @@
     "eslint-config-airbnb-base": "^5.0.1",
     "eslint-import-resolver-node": "^0.2.0",
     "eslint-plugin-import": "^1.12.0",
-    "lodash.range": "^3.1.5",
-    "lodash.repeat": "^4.0.3",
     "nodemon": "^1.9.2"
   },
   "dependencies": {
     "babel-runtime": "^6.9.0",
     "invariant": "^2.2.1",
-    "lodash.clonedeep": "^4.5.0",
-    "lodash.findindex": "^4.4.0",
-    "lodash.get": "^4.3.0",
-    "lodash.isplainobject": "^4.0.4",
-    "lodash.omit": "^4.3.0",
-    "lodash.unset": "^4.5.2"
+    "lodash": "^4.15.0"
   },
   "babel": {
     "plugins": [

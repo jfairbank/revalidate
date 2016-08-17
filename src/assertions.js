@@ -1,6 +1,6 @@
-import get from 'lodash.get';
-import cloneDeep from 'lodash.clonedeep';
-import unset from 'lodash.unset';
+import get from 'lodash/get';
+import cloneDeep from 'lodash/cloneDeep';
+import unset from 'lodash/unset';
 
 export function hasError(result) {
   if (result == null) {

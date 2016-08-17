@@ -1,6 +1,6 @@
 import test from 'ava';
-import omit from 'lodash.omit';
-import isPlainObject from 'lodash.isplainobject';
+import omit from 'lodash/omit';
+import isPlainObject from 'lodash/isPlainObject';
 
 import {
   composeValidators,

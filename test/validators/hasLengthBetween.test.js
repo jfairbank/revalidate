@@ -1,6 +1,6 @@
 import test from 'ava';
-import range from 'lodash.range';
-import repeat from 'lodash.repeat';
+import range from 'lodash/range';
+import repeat from 'lodash/repeat';
 import unconfigured from '../../src/validators/hasLengthBetween';
 
 const MIN = 2;

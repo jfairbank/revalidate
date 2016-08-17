@@ -1,5 +1,5 @@
 import invariant from 'invariant';
-import isPlainObject from 'lodash.isplainobject';
+import isPlainObject from 'lodash/isPlainObject';
 import markAsValueValidator from './internal/markAsValueValidator';
 
 export default function createValidator(curriedDefinition, defaultMessageCreator) {

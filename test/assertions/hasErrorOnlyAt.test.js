@@ -1,5 +1,5 @@
 import test from 'ava';
-import isPlainObject from 'lodash.isplainobject';
+import isPlainObject from 'lodash/isPlainObject';
 
 import {
   hasError,
