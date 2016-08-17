@@ -12,6 +12,13 @@ validators that revalidate can generate are pretty agnostic about how they are
 used. They are just functions that take a value and return an error message if
 the value is invalid.
 
+## Table of Contents
+
+- [Install](#install)
+- [Usage](#usage)
+- [Common Validators](#common-validators)
+- [Test Helpers](#test-helpers)
+
 ## Install
 
     $ npm install revalidate
