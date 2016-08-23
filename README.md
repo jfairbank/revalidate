@@ -16,6 +16,7 @@ the value is invalid.
 ## Table of Contents
 
 - [Install](#install)
+- [Integrations](#integrations)
 - [Usage](#usage)
 - [Common Validators](#common-validators)
 - [Test Helpers](#test-helpers)
@@ -23,6 +24,13 @@ the value is invalid.
 ## Install
 
     $ npm install revalidate
+
+## :tada: Integrations :tada:
+
+- [react-revalidate](https://github.com/jfairbank/react-revalidate) - validate
+  React components props with revalidate validation functions.
+- [redux-revalidate](https://github.com/jfairbank/redux-revalidate) - validate
+  your Redux store state with revalidate validation functions.
 
 ## Usage
 
