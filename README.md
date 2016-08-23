@@ -16,7 +16,7 @@ the value is invalid.
 ## Table of Contents
 
 - [Install](#install)
-- [Integrations](#integrations)
+- [Integrations](#tada-integrations-tada)
 - [Usage](#usage)
 - [Common Validators](#common-validators)
 - [Test Helpers](#test-helpers)
