@@ -28,7 +28,7 @@ the value is invalid.
 ## :tada: Integrations :tada:
 
 - [react-revalidate](https://github.com/jfairbank/react-revalidate) - validate
-  React components props with revalidate validation functions.
+  React component props with revalidate validation functions.
 - [redux-revalidate](https://github.com/jfairbank/redux-revalidate) - validate
   your Redux store state with revalidate validation functions.
 
