@@ -8,7 +8,7 @@ Elegant and composable validations.
 
 Revalidate was originally created as a helper library for composing and reusing
 common validations to generate validate functions for
-[redux-form](https://github.com/erikras/redux-form). It became evident that the
+[Redux Form](https://github.com/erikras/redux-form). It became evident that the
 validators that revalidate can generate are pretty agnostic about how they are
 used. They are just functions that take a value and return an error message if
 the value is invalid.
@@ -27,10 +27,15 @@ the value is invalid.
 
 ## :tada: Integrations :tada:
 
-- [react-revalidate](https://github.com/jfairbank/react-revalidate) - validate
-  React component props with revalidate validation functions.
-- [redux-revalidate](https://github.com/jfairbank/redux-revalidate) - validate
-  your Redux store state with revalidate validation functions.
+- [react-revalidate](https://github.com/jfairbank/react-revalidate)<br>
+  Validate React component props with revalidate validation functions.
+
+- [redux-revalidate](https://github.com/jfairbank/redux-revalidate)<br>
+  Validate your Redux store state with revalidate validation functions.
+
+- [Redux Form](https://github.com/erikras/redux-form)<br>
+  Create validation functions for your form components out of the box. See the
+  [example below](#redux-form).
 
 ## Usage
 
@@ -412,17 +417,17 @@ validate({
 
 ---
 
-### redux-form
+### Redux Form
 
 As mentioned, even though revalidate is pretty agnostic about how you use it, it
-does work out of the box for redux-form. The `validate` function you might write
-for a redux-form example like
-[here](http://erikras.github.io/redux-form/#/examples/synchronous-validation?_k=mncrmp)
+does work out of the box for Redux Form. The `validate` function you might write
+for a Redux Form example like
+[here](http://redux-form.com/5.3.3/#/examples/synchronous-validation?_k=mncrmp)
 can also be automatically generated with `combineValidators`. The function it
 returns will work perfectly for the `validate` option for your form components
-for React and redux-form.
+for React and Redux Form.
 
-Here is that example from redux-form rewritten to generate a `validate` function
+Here is that example from Redux Form rewritten to generate a `validate` function
 with revalidate.
 
 ```js
