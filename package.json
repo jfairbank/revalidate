@@ -10,12 +10,11 @@
   ],
   "scripts": {
     "build": "babel src --out-dir lib",
-    "clean": "rm -rf lib",
-    "dev": "nodemon --exec 'clear; npm test' -w src -w test",
-    "lint": "eslint {src,test}",
+    "clean": "rimraf lib",
+    "lint": "eslint src/ test/",
     "prepublish": "npm run clean && npm run build",
     "test": "ava",
-    "test:watch": "ava -w"
+    "watch:test": "ava -w"
   },
   "repository": {
     "type": "git",
@@ -56,7 +55,7 @@
     "eslint-config-airbnb-base": "^8.0.0",
     "eslint-import-resolver-node": "^0.2.0",
     "eslint-plugin-import": "^1.12.0",
-    "nodemon": "^1.9.2"
+    "rimraf": "^2.5.4"
   },
   "dependencies": {
     "invariant": "^2.2.1",
