@@ -1,6 +1,11 @@
 import test from 'ava';
 import { startsWithA, endsWithC } from '../helpers/validators';
-import { composeValidators } from '../../src';
+
+import {
+  composeValidators,
+  hasLengthBetween,
+  isRequired,
+} from '../../src';
 
 const sharedValidator = composeValidators(
   startsWithA,
@@ -63,5 +68,42 @@ test('allows overriding field per validator', t => {
   t.is(
     validator('ABB'),
     'My C Field must end with C'
+  );
+});
+
+test('composed validators can be composed too', t => {
+  const lengthValidator = composeValidators(
+    sharedValidator,
+    hasLengthBetween(1, 2)
+  )('My Field Length');
+
+  const requiredValidator = composeValidators(
+    isRequired,
+    lengthValidator
+  )('My Field Required');
+
+  t.is(
+    requiredValidator(),
+    'My Field Required is required'
+  );
+
+  t.is(
+    requiredValidator('ABC'),
+    'My Field Length must be between 1 and 2 characters long'
+  );
+
+  t.is(
+    requiredValidator('BB'),
+    'My Field must start with A'
+  );
+
+  t.is(
+    requiredValidator('AB'),
+    'My Field must end with C'
+  );
+
+  t.is(
+    requiredValidator('AC'),
+    undefined
   );
 });

@@ -2,6 +2,7 @@ import omit from 'lodash/omit';
 import assign from 'object-assign';
 import createValidatorWithMultipleErrors from './internal/createValidatorWithMultipleErrors';
 import createValidatorWithSingleError from './internal/createValidatorWithSingleError';
+import markAsValueValidator from './internal/markAsValueValidator';
 
 export default function composeValidators(...validators) {
   return function configurableValidators(sharedConfig) {
@@ -14,15 +15,15 @@ export default function composeValidators(...validators) {
     }
 
     if (config.multiple === true) {
-      return createValidatorWithMultipleErrors(
+      return markAsValueValidator(createValidatorWithMultipleErrors(
         validators.slice(0),
         omit(config, 'multiple')
-      );
+      ));
     }
 
-    return createValidatorWithSingleError(
+    return markAsValueValidator(createValidatorWithSingleError(
       validators.slice(0),
       config
-    );
+    ));
   };
 }
