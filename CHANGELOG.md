@@ -1,3 +1,9 @@
+## v0.4.1
+
+### Bug Fixes
+
+- Fix not being able to compose other composed validators (Issue #23).
+
 ## v0.4.0
 
 ### Test Helpers
