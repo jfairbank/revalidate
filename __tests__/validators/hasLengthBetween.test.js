@@ -2,21 +2,25 @@ import range from 'lodash/range';
 import repeat from 'lodash/repeat';
 import unconfigured from '../../src/validators/hasLengthBetween';
 
+const FIELD = 'FOO';
 const MIN = 2;
 const MAX = 4;
-const message = 'Invalid';
-const hasLengthBetween = unconfigured(MIN, MAX)({ message });
+const hasLengthBetween = unconfigured(MIN, MAX)(FIELD);
+
+const expectedErrorMessage = (
+  `${FIELD} must be between ${MIN} and ${MAX} characters long`
+);
 
 it('allows lengths between min and max inclusively', () => {
   range(MIN, MAX + 1).forEach(n => {
-    expect(hasLengthBetween(repeat('a', n))).toEqual(undefined);
+    expect(hasLengthBetween(repeat('a', n))).toBe(undefined);
   });
 });
 
 it('does not allow lengths less than min', () => {
-  expect(hasLengthBetween(repeat('a', MIN - 1))).toBe(message);
+  expect(hasLengthBetween(repeat('a', MIN - 1))).toBe(expectedErrorMessage);
 });
 
 it('does not allow lengths greater than max', () => {
-  expect(hasLengthBetween(repeat('a', MAX + 1))).toBe(message);
+  expect(hasLengthBetween(repeat('a', MAX + 1))).toBe(expectedErrorMessage);
 });

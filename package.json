@@ -11,7 +11,7 @@
   "scripts": {
     "build": "babel src --out-dir lib",
     "clean": "rimraf lib",
-    "lint": "eslint src/ test/",
+    "lint": "eslint src __tests__",
     "prepublish": "npm run clean && npm run build",
     "test": "jest",
     "watch:test": "jest --watch"
@@ -141,5 +141,17 @@
         }
       ]
     }
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text-summary"
+    ],
+    "testRegex": "__tests__/.*\\.test\\.js$"
   }
 }

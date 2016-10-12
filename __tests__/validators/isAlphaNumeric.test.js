@@ -1,7 +1,8 @@
 import unconfigured from '../../src/validators/isAlphaNumeric';
 
-const message = 'Invalid';
-const isAlphaNumeric = unconfigured({ message });
+const FIELD = 'Foo';
+const isAlphaNumeric = unconfigured(FIELD);
+const expectedErrorMessage = `${FIELD} must be alphanumeric`;
 
 it('allows alphanumeric characters', () => {
   const validCharacters =
@@ -14,10 +15,8 @@ it('does not allow other common characters', () => {
   const chars = Array.from('!@#$%^&*()-_+=~`[]{}\\|:;"\',.<>?/ ');
 
   chars.forEach(c => {
-    expect(isAlphaNumeric(c)).toBe(message);
-
-    expect(isAlphaNumeric(`${c}a`)).toBe(message);
-
-    expect(isAlphaNumeric(`${c}1`)).toBe(message);
+    expect(isAlphaNumeric(c)).toBe(expectedErrorMessage);
+    expect(isAlphaNumeric(`${c}a`)).toBe(expectedErrorMessage);
+    expect(isAlphaNumeric(`${c}1`)).toBe(expectedErrorMessage);
   });
 });

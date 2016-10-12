@@ -2,11 +2,12 @@ import isRequiredIf from '../../src/validators/isRequiredIf';
 import isAlphabetic from '../../src/validators/isAlphabetic';
 import composeValidators from '../../src/composeValidators';
 
-const message = 'Invalid';
+const FIELD = 'Foo';
 const alphabeticMessage = 'Must be alphabetic';
 const allValues = { bar: 42 };
+const expectedErrorMessage = `${FIELD} is required`;
 
-const validator = isRequiredIf(values => values && values.bar)({ message });
+const validator = isRequiredIf(values => values && values.bar)(FIELD);
 
 const composedValidator = composeValidators(
   validator,
@@ -14,16 +15,16 @@ const composedValidator = composeValidators(
 )();
 
 it('requires if value is null', () => {
-  expect(validator(null, allValues)).toBe(message);
+  expect(validator(null, allValues)).toBe(expectedErrorMessage);
 });
 
 it('requires if value is undefined', () => {
-  expect(validator(undefined, allValues)).toBe(message);
+  expect(validator(undefined, allValues)).toBe(expectedErrorMessage);
 });
 
 it('requires if value is empty string', () => {
-  expect(validator('', allValues)).toBe(message);
-  expect(validator(' ', allValues)).toBe(message);
+  expect(validator('', allValues)).toBe(expectedErrorMessage);
+  expect(validator(' ', allValues)).toBe(expectedErrorMessage);
 });
 
 it('allows other values', () => {

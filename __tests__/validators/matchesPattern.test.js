@@ -1,11 +1,13 @@
 import { matchesPattern } from '../../src';
 
-const message = 'Error';
-const isAlphabetic = matchesPattern(/^[A-Za-z]+$/)({ message });
+const FIELD = 'Foo';
+const REGEX = /^[A-Za-z]+$/;
+const isAlphabetic = matchesPattern(REGEX)(FIELD);
+const expectedErrorMessage = `${FIELD} must match pattern ${REGEX}`;
 
 it('matches arbitrary patterns', () => {
   expect(isAlphabetic('abc')).toBe(undefined);
-  expect(isAlphabetic('123')).toBe(message);
+  expect(isAlphabetic('123')).toBe(expectedErrorMessage);
 });
 
 it('does not require value', () => {
