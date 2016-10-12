@@ -1,4 +1,3 @@
-import test from 'ava';
 import { composeValidators } from '../../src';
 import { startsWithA, endsWithC } from '../helpers/validators';
 
@@ -7,7 +6,7 @@ const messages = {
   endsWithC: 'Must end with C',
 };
 
-test('returns multiple errors as an array', t => {
+it('returns multiple errors as an array', () => {
   const validator = composeValidators(
     startsWithA,
     endsWithC
@@ -15,13 +14,13 @@ test('returns multiple errors as an array', t => {
 
   const result = validator('BBB');
 
-  t.deepEqual(result, [
+  expect(result).toEqual([
     'My Field must start with A',
     'My Field must end with C',
   ]);
 });
 
-test('returns multiple errors as an object', t => {
+it('returns multiple errors as an object', () => {
   const validator = composeValidators({
     A: startsWithA,
     C: endsWithC,
@@ -29,13 +28,13 @@ test('returns multiple errors as an object', t => {
 
   const result = validator('BBB');
 
-  t.deepEqual(result, {
+  expect(result).toEqual({
     A: 'My Field must start with A',
     C: 'My Field must end with C',
   });
 });
 
-test('returns an empty array if valid', t => {
+it('returns an empty array if valid', () => {
   const validator = composeValidators(
     startsWithA,
     endsWithC
@@ -46,11 +45,11 @@ test('returns an empty array if valid', t => {
   // Separately assert it's an array because `t.deepEqual([], {})` is true
   // right now in ava.
   // Reference: https://github.com/sotojuan/not-so-shallow/issues/4
-  t.true(Array.isArray(result));
-  t.deepEqual(result, []);
+  expect(Array.isArray(result)).toBe(true);
+  expect(result).toEqual([]);
 });
 
-test('returns an empty object if valid', t => {
+it('returns an empty object if valid', () => {
   const validator = composeValidators({
     A: startsWithA,
     C: endsWithC,
@@ -61,12 +60,12 @@ test('returns an empty object if valid', t => {
   // Separately assert it's not an array because `t.deepEqual([], {})` is true
   // right now in ava.
   // Reference: https://github.com/sotojuan/not-so-shallow/issues/4
-  t.false(Array.isArray(result));
-  t.is(typeof result, 'object');
-  t.deepEqual(result, {});
+  expect(Array.isArray(result)).toBe(false);
+  expect(typeof result).toBe('object');
+  expect(result).toEqual({});
 });
 
-test('allows customizing individual validators with multiple errors', t => {
+it('allows customizing individual validators with multiple errors', () => {
   const validator = composeValidators(
     startsWithA({ message: messages.startsWithA }),
     endsWithC({ message: messages.endsWithC })
@@ -74,7 +73,7 @@ test('allows customizing individual validators with multiple errors', t => {
 
   const result = validator('BBB');
 
-  t.deepEqual(result, [
+  expect(result).toEqual([
     messages.startsWithA,
     messages.endsWithC,
   ]);

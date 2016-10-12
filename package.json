@@ -13,8 +13,8 @@
     "clean": "rimraf lib",
     "lint": "eslint src/ test/",
     "prepublish": "npm run clean && npm run build",
-    "test": "ava",
-    "watch:test": "ava -w"
+    "test": "jest",
+    "watch:test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -33,7 +33,6 @@
   },
   "homepage": "https://github.com/jfairbank/revalidate#readme",
   "devDependencies": {
-    "ava": "^0.16.0",
     "babel-cli": "^6.9.0",
     "babel-core": "^6.9.0",
     "babel-eslint": "^7.0.0",
@@ -55,6 +54,7 @@
     "eslint-config-airbnb-base": "^8.0.0",
     "eslint-import-resolver-node": "^0.2.0",
     "eslint-plugin-import": "^1.12.0",
+    "jest": "^16.0.1",
     "rimraf": "^2.5.4"
   },
   "dependencies": {
@@ -101,6 +101,9 @@
   },
   "eslintConfig": {
     "parser": "babel-eslint",
+    "env": {
+      "jest": true
+    },
     "extends": [
       "airbnb-base",
       "plugin:import/errors",
@@ -138,12 +141,5 @@
         }
       ]
     }
-  },
-  "ava": {
-    "require": "babel-register",
-    "source": [
-      "**/*.js",
-      "!**/*.swp"
-    ]
   }
 }

@@ -1,49 +1,36 @@
-import test from 'ava';
 import unconfigured from '../../../src/validators/matchesField';
 
 const message = 'Passwords do not match';
 
-test('matches deep field', t => {
+it('matches deep field', () => {
   const matchesField = unconfigured('contact.password')({ message });
   const values = { contact: { password: 'secret' } };
 
-  t.deepEqual(
-    matchesField('secret', values),
-    undefined
-  );
+  expect(matchesField('secret', values)).toBe(undefined);
 });
 
-test('fails if does not match deep field', t => {
+it('fails if does not match deep field', () => {
   const matchesField = unconfigured('contact.password')({ message });
   const values = { contact: { password: 'secret' } };
 
-  t.deepEqual(
-    matchesField('foo', values),
-    message
-  );
+  expect(matchesField('foo', values)).toBe(message);
 });
 
-test('matches deep array value', t => {
+it('matches deep array value', () => {
   const matchesField = unconfigured('my.passwords[1]')({ message });
   const values = { my: { passwords: ['foo', 'secret'] } };
 
-  t.deepEqual(
-    matchesField('secret', values),
-    undefined
-  );
+  expect(matchesField('secret', values)).toBe(undefined);
 });
 
-test('fails if does not match deep array value', t => {
+it('fails if does not match deep array value', () => {
   const matchesField = unconfigured('my.passwords[1]')({ message });
   const values = { my: { passwords: ['foo', 'secret'] } };
 
-  t.deepEqual(
-    matchesField('bar', values),
-    message
-  );
+  expect(matchesField('bar', values)).toBe(message);
 });
 
-test('matches deep array field', t => {
+it('matches deep array field', () => {
   const matchesField = unconfigured('contacts[1].password')({ message });
 
   const values = {
@@ -53,13 +40,10 @@ test('matches deep array field', t => {
     ],
   };
 
-  t.deepEqual(
-    matchesField('secret', values),
-    undefined
-  );
+  expect(matchesField('secret', values)).toBe(undefined);
 });
 
-test('fails if does not match deep array field', t => {
+it('fails if does not match deep array field', () => {
   const matchesField = unconfigured('contacts[1].password')({ message });
 
   const values = {
@@ -69,8 +53,5 @@ test('fails if does not match deep array field', t => {
     ],
   };
 
-  t.deepEqual(
-    matchesField('bar', values),
-    message
-  );
+  expect(matchesField('bar', values)).toBe(message);
 });

@@ -1,0 +1,110 @@
+import {
+  combineValidators,
+  composeValidators,
+  isAlphabetic,
+  isNumeric,
+  isRequired,
+  isRequiredIf,
+  matchesField,
+} from '../../src';
+
+const validatePerson = combineValidators({
+  name: composeValidators(
+    isRequired,
+    isAlphabetic
+  )('Name'),
+
+  confirmName: matchesField('name')({ message: 'Confirm Your Name' }),
+  age: isNumeric('Age'),
+
+  job: isRequiredIf(
+    values => values && Number(values.age) >= 18
+  )('Job'),
+});
+
+it('returns an empty object for valid fields', () => {
+  const result = validatePerson({
+    name: 'Jeremy',
+    confirmName: 'Jeremy',
+    age: '29',
+    job: 'Developer',
+  });
+
+  expect(result).toEqual({});
+});
+
+it('returns non empty object with error message for invalid age', () => {
+  const errorMessages = validatePerson({
+    name: 'Jeremy',
+    confirmName: 'Jeremy',
+    age: 'abc',
+  });
+
+  expect(Object.keys(errorMessages).length).toBe(1);
+  expect(typeof errorMessages.age).toBe('string');
+  expect(errorMessages.age.length > 1).toBe(true);
+});
+
+it('returns non empty object with error message for missing name', () => {
+  const errorMessages = validatePerson({});
+
+  expect(Object.keys(errorMessages).length).toBe(1);
+  expect(typeof errorMessages.name).toBe('string');
+  expect(errorMessages.name.length > 1).toBe(true);
+});
+
+it('handles validating missing object', () => {
+  const errorMessages = validatePerson();
+
+  expect(Object.keys(errorMessages).length).toBe(1);
+  expect(typeof errorMessages.name).toBe('string');
+  expect(errorMessages.name.length > 1).toBe(true);
+});
+
+it('returns non empty object with error message for invalid name', () => {
+  const errorMessages = validatePerson({ name: '123' });
+
+  expect(Object.keys(errorMessages).length).toBe(2);
+  expect(typeof errorMessages.name).toBe('string');
+  expect(errorMessages.name.length > 1).toBe(true);
+});
+
+it('returns non empty object with error messages for invalid fields', () => {
+  const errorMessages = validatePerson({
+    name: '123',
+    confirmName: 'Jeremy',
+    age: 'abc',
+  });
+
+  expect(Object.keys(errorMessages).length).toBe(3);
+
+  expect(typeof errorMessages.name).toBe('string');
+  expect(typeof errorMessages.confirmName).toBe('string');
+  expect(typeof errorMessages.age).toBe('string');
+
+  expect(errorMessages.name.length > 1).toBe(true);
+  expect(errorMessages.confirmName.length > 1).toBe(true);
+  expect(errorMessages.age.length > 1).toBe(true);
+});
+
+it('returns non empty object with error message for job if it\'s required', () => {
+  const errorMessages = validatePerson({
+    name: 'Jeremy',
+    confirmName: 'Jeremy',
+    age: '18',
+  });
+
+  expect(Object.keys(errorMessages).length).toBe(1);
+  expect(typeof errorMessages.job).toBe('string');
+  expect(errorMessages.job.length > 1).toBe(true);
+});
+
+it('returns empty object if job is not required', () => {
+  const result = validatePerson({
+    name: 'Jeremy',
+    confirmName: 'Jeremy',
+    age: '17',
+  });
+
+  expect(result).toEqual({});
+});

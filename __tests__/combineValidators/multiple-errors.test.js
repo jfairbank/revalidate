@@ -1,4 +1,3 @@
-import test from 'ava';
 import { startsWithA, endsWithC } from '../helpers/validators';
 import { combineValidators, composeValidators } from '../../src';
 
@@ -14,7 +13,7 @@ const messages = {
   },
 };
 
-test('multiple array errors works for both fields', t => {
+it('multiple array errors works for both fields', () => {
   const validator = combineValidators({
     foo: composeValidators(
       startsWithA({ message: messages.foo.startsWithA }),
@@ -29,13 +28,13 @@ test('multiple array errors works for both fields', t => {
 
   const errorMessages = validator({ foo: 'BBB', bar: 'DDD' });
 
-  t.deepEqual(errorMessages, {
+  expect(errorMessages).toEqual({
     foo: [messages.foo.startsWithA, messages.foo.endsWithC],
     bar: [messages.bar.startsWithA, messages.bar.endsWithC],
   });
 });
 
-test('multiple object errors works for both fields', t => {
+it('multiple object errors works for both fields', () => {
   const validator = combineValidators({
     foo: composeValidators({
       A: startsWithA({ message: messages.foo.startsWithA }),
@@ -50,7 +49,7 @@ test('multiple object errors works for both fields', t => {
 
   const errorMessages = validator({ foo: 'BBB', bar: 'DDD' });
 
-  t.deepEqual(errorMessages, {
+  expect(errorMessages).toEqual({
     foo: {
       A: messages.foo.startsWithA,
       C: messages.foo.endsWithC,
@@ -63,7 +62,7 @@ test('multiple object errors works for both fields', t => {
   });
 });
 
-test('multiple errors works for one field', t => {
+it('multiple errors works for one field', () => {
   const validator = combineValidators({
     foo: composeValidators(
       startsWithA({ message: messages.foo.startsWithA }),
@@ -78,7 +77,7 @@ test('multiple errors works for one field', t => {
 
   const errorMessages = validator({ foo: 'BBB', bar: 'DDD' });
 
-  t.deepEqual(errorMessages, {
+  expect(errorMessages).toEqual({
     foo: messages.foo.startsWithA,
     bar: [messages.bar.startsWithA, messages.bar.endsWithC],
   });
