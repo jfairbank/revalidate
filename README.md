@@ -1,8 +1,9 @@
 # <img src="https://raw.githubusercontent.com/jfairbank/revalidate/master/logo/logo.png" width="350" alt="revalidate">
 
 [![Analytics](https://ga-beacon.appspot.com/UA-52148605-6/revalidate?pixel)](https://github.com/jfairbank/revalidate)
-[![Travis branch](https://img.shields.io/travis/jfairbank/revalidate/master.svg?style=flat-square)](https://travis-ci.org/jfairbank/revalidate)
 [![npm](https://img.shields.io/npm/v/revalidate.svg?style=flat-square)](https://www.npmjs.com/package/revalidate)
+[![Travis branch](https://img.shields.io/travis/jfairbank/revalidate/master.svg?style=flat-square)](https://travis-ci.org/jfairbank/revalidate)
+[![Codecov](https://img.shields.io/codecov/c/github/jfairbank/revalidate.svg?style=flat-square)](https://codecov.io/gh/jfairbank/revalidate)
 
 Elegant and composable validations.
 
