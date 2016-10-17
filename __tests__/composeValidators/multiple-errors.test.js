@@ -1,3 +1,4 @@
+// @flow
 import { composeValidators } from '../../src';
 import { startsWithA, endsWithC } from '../helpers/validators';
 
@@ -40,13 +41,7 @@ it('returns an empty array if valid', () => {
     endsWithC
   )({ field: 'My Field', multiple: true });
 
-  const result = validator('ABC');
-
-  // Separately assert it's an array because `t.deepEqual([], {})` is true
-  // right now in ava.
-  // Reference: https://github.com/sotojuan/not-so-shallow/issues/4
-  expect(Array.isArray(result)).toBe(true);
-  expect(result).toEqual([]);
+  expect(validator('ABC')).toEqual([]);
 });
 
 it('returns an empty object if valid', () => {
@@ -55,14 +50,7 @@ it('returns an empty object if valid', () => {
     C: endsWithC,
   })({ field: 'My Field', multiple: true });
 
-  const result = validator('ABC');
-
-  // Separately assert it's not an array because `t.deepEqual([], {})` is true
-  // right now in ava.
-  // Reference: https://github.com/sotojuan/not-so-shallow/issues/4
-  expect(Array.isArray(result)).toBe(false);
-  expect(typeof result).toBe('object');
-  expect(result).toEqual({});
+  expect(validator('ABC')).toEqual({});
 });
 
 it('allows customizing individual validators with multiple errors', () => {

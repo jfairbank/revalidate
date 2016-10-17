@@ -1,6 +1,11 @@
+// @flow
 import assign from 'object-assign';
 
-export default function fillObjectFromPath(object, path, finalValue) {
+export default function fillObjectFromPath(
+  object: Object,
+  path: Array<string>,
+  finalValue: any,
+): Object {
   if (path.length <= 0) {
     return finalValue;
   }

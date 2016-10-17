@@ -1,8 +1,9 @@
+// @flow
 import get from 'lodash/get';
 import cloneDeep from 'lodash/cloneDeep';
 import unset from 'lodash/unset';
 
-export function hasError(result) {
+export function hasError(result: any): boolean {
   if (result == null) {
     return false;
   }
@@ -18,15 +19,27 @@ export function hasError(result) {
   return true;
 }
 
-export function hasErrorAt(result, key) {
+export function hasErrorAt(result: any, key?: string): boolean {
   if (result == null || typeof result !== 'object') {
     return false;
+  }
+
+  if (key == null) {
+    throw new Error('Please provide a key to check for an error.');
   }
 
   return hasError(get(result, key));
 }
 
-export function hasErrorOnlyAt(result, key) {
+export function hasErrorOnlyAt(result: any, key?: string): boolean {
+  if (result == null || typeof result !== 'object') {
+    return false;
+  }
+
+  if (key == null) {
+    throw new Error('Please provide a key to check for an error.');
+  }
+
   const omitted = cloneDeep(result);
 
   unset(omitted, key);

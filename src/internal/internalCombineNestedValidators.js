@@ -1,6 +1,10 @@
+// @flow
 import internalCombineValidators from './internalCombineValidators';
 
-export default function internalCombineNestedValidators(baseShape, options) {
+export default function internalCombineNestedValidators(
+  baseShape: Object,
+  options: CombineValidatorsOptions,
+): Object {
   return Object.keys(baseShape).reduce((memo, key) => {
     if (typeof baseShape[key] === 'object') {
       memo[key] = internalCombineValidators(

@@ -1,3 +1,4 @@
+// @flow
 import unconfigured from '../../src/validators/isOneOf';
 
 const FIELD = 'Foo';

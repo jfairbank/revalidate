@@ -1,3 +1,4 @@
+// @flow
 import createValidator from '../src/createValidator';
 
 const validatorDefinition = message => value => {
@@ -11,20 +12,23 @@ const isNumber = createValidator(
   field => `${field} must be a number`
 );
 
+it('creating requires a string or function message creator', () => {
+  const errorMessage = 'Please provide a message string or message creator function';
+
+  expect(_ => createValidator(validatorDefinition)).toThrowError(errorMessage);
+  expect(_ => createValidator(validatorDefinition, 'foo')).not.toThrow();
+});
+
 it('requires a string or configuration object', () => {
-  expect(_ => isNumber()).toThrow();
+  const errorMessage = (
+    'Please provide a string or configuration object with a `field` or ' +
+    '`message` property'
+  );
+
+  expect(_ => isNumber()).toThrowError(errorMessage);
+  expect(_ => isNumber({})).toThrowError(errorMessage);
   expect(_ => isNumber('My Field')).not.toThrow();
   expect(_ => isNumber({ field: 'My Field' })).not.toThrow();
-});
-
-it('requires the configuration object include field or message', () => {
-  expect(_ => isNumber({})).toThrow();
-  expect(_ => isNumber({ field: 'My Field' })).not.toThrow();
-  expect(_ => isNumber({ message: 'My Message' })).not.toThrow();
-});
-
-it('creating requires a message creator', () => {
-  expect(_ => createValidator(validatorDefinition)).toThrow();
 });
 
 it('it can use a plain string message', () => {
@@ -43,7 +47,6 @@ it('returns the message with the field for an invalid value', () => {
   const message = 'My Field must be a number';
 
   expect(isNumber('My Field')('foo')).toBe(message);
-
   expect(isNumber('My Field', 'foo')).toBe(message);
 });
 
@@ -51,13 +54,11 @@ it('returns the message with the field as config option for an invalid value', (
   const message = 'My Other Field must be a number';
 
   expect(isNumber({ field: 'My Other Field' })('foo')).toBe(message);
-
   expect(isNumber({ field: 'My Other Field' }, 'foo')).toBe(message);
 });
 
 it('returns undefined for a valid value', () => {
   expect(isNumber('My Field')(42)).toEqual(undefined);
-
   expect(isNumber('My Field', 42)).toEqual(undefined);
 });
 
@@ -65,10 +66,19 @@ it('uses the overriding message for an invalid value', () => {
   const message = 'Invalid Value';
 
   expect(isNumber({ message })('foo')).toBe(message);
-
   expect(isNumber({ message }, 'foo')).toBe(message);
 });
 
+it('uses the defaultMessageCreator if it is a string and config only has field', () => {
+  const defaultMessageCreator = 'hello';
+
+  const validator = createValidator(
+    message => value => !value && message,
+    defaultMessageCreator
+  )({ field: 'Foo' });
+
+  expect(validator()).toBe(defaultMessageCreator);
+});
 
 const matchingValidatorDefinition = message => (value, allValues) => {
   if (!allValues || value !== allValues.matchedValue) {
@@ -82,9 +92,25 @@ const doesMatch = createValidator(
 );
 
 it('can create multi-value validators', () => {
-  expect(doesMatch('My Field')('My Value', { matchedValue: 'My Value' })).toEqual(undefined);
+  expect(
+    doesMatch('My Field')(
+      'My Value',
+      { matchedValue: 'My Value' }
+    )
+  ).toBe(undefined);
 
-  expect(doesMatch('My Field')('My Value')).toEqual('My Field must match the \'matchedValue\'');
+  expect(
+    doesMatch('My Field')('My Value')
+  ).toBe(
+    'My Field must match the \'matchedValue\''
+  );
 
-  expect(doesMatch('My Field')('My Value', { matchedValue: 'Not My Value' })).toEqual('My Field must match the \'matchedValue\'');
+  expect(
+    doesMatch('My Field')(
+      'My Value',
+      { matchedValue: 'Not My Value' }
+    )
+  ).toBe(
+    'My Field must match the \'matchedValue\''
+  );
 });

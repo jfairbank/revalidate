@@ -1,3 +1,4 @@
+// @flow
 import { Map } from 'immutable';
 import { combineValidators } from '../../src/immutable';
 import { validatePersonDefinition } from './_helpers';

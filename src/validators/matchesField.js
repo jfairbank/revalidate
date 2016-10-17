@@ -1,7 +1,11 @@
+// @flow
 import get from 'lodash/get';
 import createValidator from '../createValidator';
 
-export default function matchesField(otherField, otherFieldLabel) {
+export default function matchesField(
+  otherField: string,
+  otherFieldLabel: string,
+): ConfigurableValidator {
   return createValidator(
     message => (value, allValues) => {
       const otherValue = get(allValues, otherField);

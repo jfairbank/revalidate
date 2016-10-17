@@ -1,5 +1,6 @@
+// @flow
 const sym = typeof Symbol === 'function'
   ? Symbol
-  : id => `@@revalidate/${id}`;
+  : (id: string) => `@@revalidate/${id}`;
 
 export default sym;

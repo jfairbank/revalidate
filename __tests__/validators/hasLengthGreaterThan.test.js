@@ -1,3 +1,4 @@
+// @flow
 import repeat from 'lodash/repeat';
 import unconfigured from '../../src/validators/hasLengthGreaterThan';
 

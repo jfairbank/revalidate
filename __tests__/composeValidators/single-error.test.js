@@ -1,3 +1,4 @@
+// @flow
 import { startsWithA, endsWithC } from '../helpers/validators';
 
 import {
@@ -61,12 +62,19 @@ it('composed validators can be composed too', () => {
   )('My Field Required');
 
   expect(requiredValidator()).toBe('My Field Required is required');
-
   expect(requiredValidator('ABC')).toBe('My Field Length must be between 1 and 2 characters long');
-
   expect(requiredValidator('BB')).toBe('My Field must start with A');
-
   expect(requiredValidator('AB')).toBe('My Field must end with C');
-
   expect(requiredValidator('AC')).toBe(undefined);
+});
+
+it('throws if attempting to use an object without multiple errors', () => {
+  expect(_ => {
+    composeValidators({
+      required: isRequired,
+    })();
+  }).toThrowError(
+    'Please only pass in functions when composing ' +
+    'validators to produce a single error message.'
+  );
 });

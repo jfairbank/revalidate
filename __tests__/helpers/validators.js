@@ -1,3 +1,4 @@
+// @flow
 import { createValidator } from '../../src';
 
 export const startsWithA = createValidator(

@@ -1,3 +1,4 @@
+// @flow
 import internalMatchesPattern from '../internal/validators/internalMatchesPattern';
 
 export default internalMatchesPattern(

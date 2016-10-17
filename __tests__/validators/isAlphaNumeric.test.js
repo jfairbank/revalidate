@@ -1,3 +1,4 @@
+// @flow
 import unconfigured from '../../src/validators/isAlphaNumeric';
 
 const FIELD = 'Foo';
@@ -12,7 +13,7 @@ it('allows alphanumeric characters', () => {
 });
 
 it('does not allow other common characters', () => {
-  const chars = Array.from('!@#$%^&*()-_+=~`[]{}\\|:;"\',.<>?/ ');
+  const chars = '!@#$%^&*()-_+=~`[]{}\\|:;"\',.<>?/ '.split('');
 
   chars.forEach(c => {
     expect(isAlphaNumeric(c)).toBe(expectedErrorMessage);

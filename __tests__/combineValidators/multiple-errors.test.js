@@ -1,3 +1,4 @@
+// @flow
 import { startsWithA, endsWithC } from '../helpers/validators';
 import { combineValidators, composeValidators } from '../../src';
 

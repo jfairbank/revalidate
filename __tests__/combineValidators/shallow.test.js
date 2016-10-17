@@ -1,3 +1,4 @@
+// @flow
 import { combineValidators } from '../../src';
 import { validatePersonDefinition } from './_helpers';
 

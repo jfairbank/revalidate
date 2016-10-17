@@ -1,10 +1,15 @@
+// @flow
 import parseFieldName from './parseFieldName';
 
-function defaultSerializeValues(values) {
+function defaultSerializeValues<T>(values: T): T {
   return values;
 }
 
-export default function internalCombineValidators(validators, atRoot, options = {}) {
+export default function internalCombineValidators(
+  validators: Object,
+  atRoot: boolean,
+  options: CombineValidatorsOptions = {},
+): ConfiguredCombinedValidator {
   const serializeValues = atRoot && typeof options.serializeValues === 'function'
     ? options.serializeValues
     : defaultSerializeValues;

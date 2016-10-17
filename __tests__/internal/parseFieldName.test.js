@@ -1,3 +1,4 @@
+// @flow
 import { parseFieldName } from '../../src/internal';
 
 it('parses a field name', () => {

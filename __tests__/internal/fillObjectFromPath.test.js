@@ -1,3 +1,4 @@
+// @flow
 import { fillObjectFromPath } from '../../src/internal';
 
 it('fills a deep object', () => {

@@ -1,3 +1,4 @@
+// @flow
 import unconfigured from '../../src/validators/isAlphabetic';
 
 const FIELD = 'FOO';
@@ -12,7 +13,7 @@ it('allows alphabetic characters', () => {
 });
 
 it('does not allow digits', () => {
-  const digits = Array.from('0123456789');
+  const digits = '0123456789'.split('');
 
   digits.forEach(digit => {
     expect(isAlphabetic(digit)).toBe(expectedErrorMessage);
@@ -21,7 +22,7 @@ it('does not allow digits', () => {
 });
 
 it('does not allow other common characters', () => {
-  const chars = Array.from('!@#$%^&*()-_+=~`[]{}\\|:;"\',.<>?/ ');
+  const chars = '!@#$%^&*()-_+=~`[]{}\\|:;"\',.<>?/ '.split('');
 
   chars.forEach(c => {
     expect(isAlphabetic(c)).toBe(expectedErrorMessage);

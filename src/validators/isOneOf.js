@@ -1,13 +1,17 @@
+// @flow
 import findIndex from 'lodash/findIndex';
 import createValidator from '../createValidator';
 
-const defaultComparer = (value, optionValue) => value === optionValue;
+const defaultComparer = (value: any, optionValue: any) => value === optionValue;
 
-export default function isOneOf(values, comparer = defaultComparer) {
+export default function isOneOf<T>(
+  values: Array<T>,
+  comparer: Comparer = defaultComparer,
+): ConfigurableValidator {
   const valuesClone = values.slice(0);
 
   return createValidator(
-    message => value => {
+    message => (value: T) => {
       if (value === undefined) {
         return;
       }

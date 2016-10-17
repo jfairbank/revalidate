@@ -1,3 +1,4 @@
+// @flow
 import unconfigured from '../../src/validators/isNumeric';
 
 const FIELD = 'FOO';
@@ -11,8 +12,8 @@ it('allows numeric digits', () => {
 });
 
 it('does not allow letters', () => {
-  const letters = Array.from(
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+  const letters = (
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('')
   );
 
   letters.forEach(letter => {
@@ -22,7 +23,7 @@ it('does not allow letters', () => {
 });
 
 it('does not allow other characters', () => {
-  const chars = Array.from('!@#$%^&*()-_+=~`[]{}\\|:;"\',.<>?/ ');
+  const chars = '!@#$%^&*()-_+=~`[]{}\\|:;"\',.<>?/ '.split('');
 
   chars.forEach(c => {
     expect(isNumeric(c)).toBe(expectedErrorMessage);

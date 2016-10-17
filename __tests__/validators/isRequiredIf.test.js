@@ -1,3 +1,4 @@
+// @flow
 import isRequiredIf from '../../src/validators/isRequiredIf';
 import isAlphabetic from '../../src/validators/isAlphabetic';
 import composeValidators from '../../src/composeValidators';
@@ -7,7 +8,7 @@ const alphabeticMessage = 'Must be alphabetic';
 const allValues = { bar: 42 };
 const expectedErrorMessage = `${FIELD} is required`;
 
-const validator = isRequiredIf(values => values && values.bar)(FIELD);
+const validator = isRequiredIf(values => !!values && !!values.bar)(FIELD);
 
 const composedValidator = composeValidators(
   validator,

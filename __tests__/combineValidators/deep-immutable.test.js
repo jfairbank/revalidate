@@ -1,3 +1,4 @@
+// @flow
 import { fromJS } from 'immutable';
 import omit from 'lodash/omit';
 import isPlainObject from 'lodash/isPlainObject';

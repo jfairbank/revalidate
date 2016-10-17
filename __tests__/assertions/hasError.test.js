@@ -1,3 +1,4 @@
+// @flow
 import { hasError } from '../../src/assertions';
 
 import {
@@ -7,7 +8,7 @@ import {
   multipleObjectComposedValidator,
   singleRequiredValidator,
   validCombinedData,
-} from './_helper';
+} from './_helpers';
 
 it('single validator when invalid returns true', () => {
   expect(hasError(singleRequiredValidator(''))).toBe(true);

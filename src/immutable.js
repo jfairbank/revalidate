@@ -1,9 +1,10 @@
+// @flow
 import originalCombineValidators from './combineValidators';
 
-const OPTIONS = {
-  serializeValues: values => values.toJS(),
+const OPTIONS: CombineValidatorsOptions = {
+  serializeValues: (values: _Iterable<*, *, *, *, *>) => values.toJS(),
 };
 
-export function combineValidators(validators) {
+export function combineValidators(validators: Object): ConfiguredCombinedValidator {
   return originalCombineValidators(validators, OPTIONS);
 }

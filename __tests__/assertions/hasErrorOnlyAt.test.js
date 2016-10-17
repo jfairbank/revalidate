@@ -1,3 +1,4 @@
+// @flow
 import isPlainObject from 'lodash/isPlainObject';
 
 import {
@@ -8,12 +9,9 @@ import {
 
 import {
   combinedValidator,
-  composedValidator,
-  multipleArrayComposedValidator,
-  multipleObjectComposedValidator,
   singleRequiredValidator,
   validCombinedData,
-} from './_helper';
+} from './_helpers';
 
 it('true for shallow key when invalid and rest valid', () => {
   const result = combinedValidator({
@@ -191,18 +189,15 @@ it('does not check single validators', () => {
   expect(hasErrorOnlyAt(singleRequiredValidator('a'))).toBe(false);
 });
 
-it('does not check composed validators', () => {
-  expect(hasErrorOnlyAt(composedValidator(''))).toBe(false);
-  expect(hasErrorOnlyAt(composedValidator('1'))).toBe(false);
-  expect(hasErrorOnlyAt(composedValidator('a'))).toBe(false);
-});
+it('throws if no key is provided', () => {
+  const result = combinedValidator({
+    ...validCombinedData,
+    favoriteMeme: '',
+  });
 
-it('does not check composed validators with multiple errors', () => {
-  expect(hasErrorOnlyAt(multipleArrayComposedValidator(''))).toBe(false);
-  expect(hasErrorOnlyAt(multipleArrayComposedValidator('1'))).toBe(false);
-  expect(hasErrorOnlyAt(multipleArrayComposedValidator('a'))).toBe(false);
-
-  expect(hasErrorOnlyAt(multipleObjectComposedValidator(''))).toBe(false);
-  expect(hasErrorOnlyAt(multipleObjectComposedValidator('1'))).toBe(false);
-  expect(hasErrorOnlyAt(multipleObjectComposedValidator('a'))).toBe(false);
+  expect(_ => {
+    hasErrorOnlyAt(result);
+  }).toThrowError(
+    'Please provide a key to check for an error.'
+  );
 });

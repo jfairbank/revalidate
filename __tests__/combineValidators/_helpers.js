@@ -1,3 +1,4 @@
+// @flow
 import {
   composeValidators,
   isAlphabetic,

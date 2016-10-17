@@ -1,45 +1,53 @@
-import invariant from 'invariant';
-import isPlainObject from 'lodash/isPlainObject';
+// @flow
 import markAsValueValidator from './internal/markAsValueValidator';
 
-export default function createValidator(curriedDefinition, defaultMessageCreator) {
-  const messageCreatorIsString = typeof defaultMessageCreator === 'string';
+function getMessage(
+  config: ?string | ?Config,
+  defaultMessageCreator: MessageCreator,
+): string {
+  if (typeof config === 'object' && config != null) {
+    if (typeof config.message === 'string') {
+      return config.message;
+    }
 
-  invariant(
-    messageCreatorIsString || typeof defaultMessageCreator === 'function',
-    'Please provide a message string or message creator function'
+    if (typeof defaultMessageCreator === 'string') {
+      return defaultMessageCreator;
+    }
+
+    if (typeof config.field === 'string') {
+      return defaultMessageCreator(config.field);
+    }
+  }
+
+  if (typeof defaultMessageCreator === 'string') {
+    return defaultMessageCreator;
+  }
+
+  if (typeof config === 'string') {
+    return defaultMessageCreator(config);
+  }
+
+  throw new Error(
+    'Please provide a string or configuration object with a `field` or ' +
+    '`message` property'
   );
+}
+
+export default function createValidator(
+  curriedDefinition: ValidatorImpl,
+  defaultMessageCreator?: MessageCreator,
+): ConfigurableValidator {
+  if (
+    defaultMessageCreator == null ||
+    (typeof defaultMessageCreator !== 'string' && typeof defaultMessageCreator !== 'function')
+  ) {
+    throw new Error('Please provide a message string or message creator function');
+  }
+
+  const finalMessageCreator = defaultMessageCreator;
 
   return function validator(config, value, allValues) {
-    const configIsObject = isPlainObject(config);
-
-    if (!messageCreatorIsString) {
-      invariant(
-        typeof config === 'string' || configIsObject,
-        'Please provide a string or configuration object with a `field` or ' +
-        '`message` property'
-      );
-
-      if (configIsObject) {
-        invariant(
-          'field' in config || 'message' in config,
-          'Please provide a `field` or `message` property'
-        );
-      }
-    }
-
-    let message;
-
-    if (configIsObject && 'message' in config) {
-      message = config.message;
-    } else if (messageCreatorIsString) {
-      message = defaultMessageCreator;
-    } else if (configIsObject) {
-      message = defaultMessageCreator(config.field);
-    } else {
-      message = defaultMessageCreator(config);
-    }
-
+    const message = getMessage(config, finalMessageCreator);
     const valueValidator = curriedDefinition(message);
 
     if (arguments.length <= 1) {

@@ -1,6 +1,9 @@
+// @flow
 import createValidator from '../createValidator';
 
-export default function hasLengthLessThan(max) {
+export default function hasLengthLessThan(
+  max: number,
+): ConfigurableValidator {
   return createValidator(
     message => value => {
       if (value && value.length >= max) {

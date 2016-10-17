@@ -1,3 +1,4 @@
+// @flow
 import omit from 'lodash/omit';
 import isPlainObject from 'lodash/isPlainObject';
 import { combineValidators } from '../../src';
@@ -22,7 +23,7 @@ function extractValues(object) {
   }), {});
 }
 
-function valuesWrapper(values) {
+function valuesWrapper(values: any) {
   if (Array.isArray(values)) {
     return values.map(valuesWrapper);
   }

@@ -1,3 +1,4 @@
+// @flow
 /* eslint-disable global-require */
 it('uses a namespaced string if Symbol is not available', () => {
   const descriptor = Object.getOwnPropertyDescriptor(global, 'Symbol');

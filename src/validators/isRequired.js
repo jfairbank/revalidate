@@ -1,3 +1,4 @@
+// @flow
 import createValidator from '../createValidator';
 import valueMissing from '../internal/valueMissing';
 

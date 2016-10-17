@@ -1,49 +1,59 @@
+// @flow
 import isValueValidator from './isValueValidator';
 
-function buildErrorsArray(validators, validate) {
-  return validators.reduce((errors, validator) => {
-    const errorMessage = validate(validator);
-
-    if (errorMessage) {
-      errors.push(errorMessage);
-    }
-
-    return errors;
-  }, []);
-}
-
-function buildErrorsObject(validators, validate) {
-  return Object.keys(validators).reduce((errors, key) => {
-    const validator = validators[key];
-    const errorMessage = validate(validator);
-
-    if (errorMessage) {
-      errors[key] = errorMessage;
-    }
-
-    return errors;
-  }, {});
-}
-
-export default function createValidatorWithMultipleErrors(validators, sharedConfig) {
-  let buildErrors;
-  let finalValidators;
-
-  if (typeof validators[0] === 'object') {
-    buildErrors = buildErrorsObject;
-    finalValidators = validators[0];
-  } else {
-    buildErrors = buildErrorsArray;
-    finalValidators = validators;
+function validateWithValidator(
+  value: ?any,
+  allValues: ?Object,
+  sharedConfig: Config,
+  validator: Validator,
+): ?string {
+  if (isValueValidator(validator)) {
+    return validator(value, allValues);
   }
 
-  return function composedValidator(value, allValues) {
-    return buildErrors(finalValidators, (validator) => {
-      if (isValueValidator(validator)) {
-        return validator(value, allValues);
+  return validator(sharedConfig, value, allValues);
+}
+
+export default function createValidatorWithMultipleErrors(
+  firstValidator: Validator | Object,
+  validators: Array<Validator>,
+  sharedConfig: Config,
+): ConfiguredValidator {
+  if (typeof firstValidator === 'object') {
+    return function composedValidator(value, allValues): Object {
+      return Object.keys(firstValidator).reduce((errors, key) => {
+        const validator = firstValidator[key];
+
+        const errorMessage = validateWithValidator(
+          value,
+          allValues,
+          sharedConfig,
+          validator,
+        );
+
+        if (errorMessage) {
+          errors[key] = errorMessage;
+        }
+
+        return errors;
+      }, {});
+    };
+  }
+
+  return function composedValidator(value, allValues): Array<any> {
+    return [firstValidator, ...validators].reduce((errors, validator) => {
+      const errorMessage = validateWithValidator(
+        value,
+        allValues,
+        sharedConfig,
+        validator,
+      );
+
+      if (errorMessage) {
+        errors.push(errorMessage);
       }
 
-      return validator(sharedConfig, value, allValues);
-    });
+      return errors;
+    }, []);
   };
 }
