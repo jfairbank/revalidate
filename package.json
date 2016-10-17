@@ -52,7 +52,7 @@
     "babel-register": "^6.11.6",
     "babel-runtime": "^6.11.6",
     "eslint": "^3.2.2",
-    "eslint-config-airbnb-base": "^8.0.0",
+    "eslint-config-airbnb-base": "^9.0.0",
     "eslint-import-resolver-node": "^0.2.0",
     "eslint-plugin-import": "^1.12.0",
     "jest": "^16.0.1",
