@@ -2,7 +2,7 @@ import assign from 'object-assign';
 import fillObjectFromPath from './fillObjectFromPath';
 import internalCombineNestedValidators from './internalCombineNestedValidators';
 
-export default function ensureNestedValidators(validators) {
+export default function ensureNestedValidators(validators, options) {
   const baseShape = Object.keys(validators).reduce(
     (root, path) => assign(
       {},
@@ -12,5 +12,5 @@ export default function ensureNestedValidators(validators) {
     {}
   );
 
-  return internalCombineNestedValidators(baseShape);
+  return internalCombineNestedValidators(baseShape, options);
 }

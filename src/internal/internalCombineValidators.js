@@ -1,12 +1,31 @@
 import parseFieldName from './parseFieldName';
 
-export default function internalCombineValidators(validators, atRoot = false) {
-  return function valuesValidator(values = {}, allValues = {}) {
+function defaultSerializeValues(values) {
+  return values;
+}
+
+export default function internalCombineValidators(validators, atRoot, options = {}) {
+  const serializeValues = atRoot && typeof options.serializeValues === 'function'
+    ? options.serializeValues
+    : defaultSerializeValues;
+
+  function finalSerializeValues(values) {
+    if (values == null) {
+      return {};
+    }
+
+    return serializeValues(values) || {};
+  }
+
+  return function valuesValidator(values, allValues) {
+    const serializedValues = finalSerializeValues(values);
+    const serializedAllValues = finalSerializeValues(allValues);
+
     return Object.keys(validators).reduce((errors, fieldName) => {
       const parsedField = parseFieldName(fieldName);
       const validator = validators[parsedField.fullName];
-      const value = values[parsedField.baseName];
-      const finalAllValues = atRoot ? values : allValues;
+      const value = serializedValues[parsedField.baseName];
+      const finalAllValues = atRoot ? serializedValues : serializedAllValues;
 
       const errorMessage = parsedField.isArray
         ? (value || []).map(fieldValue => validator(fieldValue, finalAllValues))

@@ -6,7 +6,8 @@
   "files": [
     "src",
     "lib",
-    "assertions.js"
+    "assertions.js",
+    "immutable.js"
   ],
   "scripts": {
     "build": "babel src --out-dir lib",
@@ -56,6 +57,7 @@
     "eslint-config-airbnb-base": "^9.0.0",
     "eslint-import-resolver-node": "^0.2.0",
     "eslint-plugin-import": "^2.0.1",
+    "immutable": "^3.8.1",
     "jest": "^16.0.1",
     "rimraf": "^2.5.4"
   },
@@ -136,6 +138,7 @@
         "consistent"
       ],
       "prefer-rest-params": 0,
+      "import/prefer-default-export": 0,
       "import/no-extraneous-dependencies": [
         "error",
         {

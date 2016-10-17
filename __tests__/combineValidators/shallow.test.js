@@ -1,31 +1,12 @@
-import {
-  combineValidators,
-  composeValidators,
-  isAlphabetic,
-  isNumeric,
-  isRequired,
-  isRequiredIf,
-  matchesField,
-} from '../../src';
+import { combineValidators } from '../../src';
+import { validatePersonDefinition } from './_helpers';
 
-const validatePerson = combineValidators({
-  name: composeValidators(
-    isRequired,
-    isAlphabetic
-  )('Name'),
-
-  confirmName: matchesField('name')({ message: 'Confirm Your Name' }),
-  age: isNumeric('Age'),
-
-  job: isRequiredIf(
-    values => values && Number(values.age) >= 18
-  )('Job'),
-});
+const validatePerson = combineValidators(validatePersonDefinition);
 
 it('returns an empty object for valid fields', () => {
   const result = validatePerson({
-    name: 'Jeremy',
-    confirmName: 'Jeremy',
+    name: 'Joe',
+    confirmName: 'Joe',
     age: '29',
     job: 'Developer',
   });
@@ -35,8 +16,8 @@ it('returns an empty object for valid fields', () => {
 
 it('returns non empty object with error message for invalid age', () => {
   const errorMessages = validatePerson({
-    name: 'Jeremy',
-    confirmName: 'Jeremy',
+    name: 'Joe',
+    confirmName: 'Joe',
     age: 'abc',
   });
 
@@ -72,7 +53,7 @@ it('returns non empty object with error message for invalid name', () => {
 it('returns non empty object with error messages for invalid fields', () => {
   const errorMessages = validatePerson({
     name: '123',
-    confirmName: 'Jeremy',
+    confirmName: 'Joe',
     age: 'abc',
   });
 
@@ -89,8 +70,8 @@ it('returns non empty object with error messages for invalid fields', () => {
 
 it('returns non empty object with error message for job if it\'s required', () => {
   const errorMessages = validatePerson({
-    name: 'Jeremy',
-    confirmName: 'Jeremy',
+    name: 'Joe',
+    confirmName: 'Joe',
     age: '18',
   });
 
@@ -101,8 +82,8 @@ it('returns non empty object with error message for job if it\'s required', () =
 
 it('returns empty object if job is not required', () => {
   const result = validatePerson({
-    name: 'Jeremy',
-    confirmName: 'Jeremy',
+    name: 'Joe',
+    confirmName: 'Joe',
     age: '17',
   });
 

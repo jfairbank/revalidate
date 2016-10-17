@@ -1,43 +1,15 @@
 import omit from 'lodash/omit';
 import isPlainObject from 'lodash/isPlainObject';
+import { combineValidators } from '../../src';
+import { deepValidateDefinition } from './_helpers';
 
-import {
-  composeValidators,
-  combineValidators,
-  isRequired,
-  isAlphabetic,
-  isNumeric,
-  isOneOf,
-  matchesField,
-} from '../../src';
-
-const validate = combineValidators({
-  'shallow': isAlphabetic('Shallow Prop'),
-
-  'contact.name': composeValidators(
-    isRequired,
-    isAlphabetic
-  )('Contact Name'),
-
-  'contact.age': isNumeric('Contact Age'),
-
-  'cars[].make': composeValidators(
-    isRequired,
-    isOneOf(['Honda', 'Toyota', 'Ford'])
-  )('Car Make'),
-
-  'deeply.nested[].list.cats[].name': isRequired('Cat Name'),
-
-  'phones[]': isNumeric('Phone'),
-
-  'otherContact.name': matchesField('contact.name')('Other Name'),
-});
+const deepValidate = combineValidators(deepValidateDefinition);
 
 const validValues = {
   shallow: 'hello',
 
   contact: {
-    name: 'Jeremy',
+    name: 'Joe',
     age: '29',
   },
 
@@ -59,7 +31,7 @@ const validValues = {
 
   phones: ['123'],
 
-  otherContact: { name: 'Jeremy' },
+  otherContact: { name: 'Joe' },
 };
 
 const validResult = {
@@ -79,11 +51,11 @@ const validResult = {
 };
 
 it('returns empty objects for valid fields', () => {
-  expect(validate(validValues)).toEqual(validResult);
+  expect(deepValidate(validValues)).toEqual(validResult);
 });
 
 it('returns error value for shallow prop if invalid', () => {
-  const allErrors = validate({ ...validValues, shallow: '123' });
+  const allErrors = deepValidate({ ...validValues, shallow: '123' });
 
   expect(typeof allErrors.shallow).toBe('string');
   expect(allErrors.shallow.length > 1).toBe(true);
@@ -92,11 +64,11 @@ it('returns error value for shallow prop if invalid', () => {
 });
 
 it('returns non empty object with error message for invalid contact age', () => {
-  const allErrors = validate({
+  const allErrors = deepValidate({
     ...validValues,
 
     contact: {
-      name: 'Jeremy',
+      name: 'Joe',
       age: 'abc',
     },
   });
@@ -111,7 +83,7 @@ it('returns non empty object with error message for invalid contact age', () => 
 });
 
 it('returns non empty object with error message for missing contact name', () => {
-  const allErrors = validate({
+  const allErrors = deepValidate({
     ...validValues,
     contact: {},
     otherContact: {},
@@ -127,7 +99,7 @@ it('returns non empty object with error message for missing contact name', () =>
 });
 
 it('returns non empty object with error message for invalid contact name', () => {
-  const allErrors = validate({
+  const allErrors = deepValidate({
     ...validValues,
     contact: { name: '123' },
     otherContact: { name: '123' },
@@ -143,7 +115,7 @@ it('returns non empty object with error message for invalid contact name', () =>
 });
 
 it('returns non empty object with error messages for invalid contact fields', () => {
-  const allErrors = validate({
+  const allErrors = deepValidate({
     ...validValues,
 
     contact: {
@@ -170,7 +142,7 @@ it('returns non empty object with error messages for invalid contact fields', ()
 });
 
 it('returns non empty objects for missing/invalid car makes', () => {
-  const allErrors = validate({
+  const allErrors = deepValidate({
     ...validValues,
 
     cars: [
@@ -192,7 +164,7 @@ it('returns non empty objects for missing/invalid car makes', () => {
 });
 
 it('returns non empty objects for missing cat names', () => {
-  const allErrors = validate({
+  const allErrors = deepValidate({
     ...validValues,
 
     deeply: {
@@ -222,7 +194,7 @@ it('returns non empty objects for missing cat names', () => {
 });
 
 it('validates array of values', () => {
-  const allErrors = validate({
+  const allErrors = deepValidate({
     ...validValues,
     phones: ['123', 'abc'],
   });
@@ -236,9 +208,9 @@ it('validates array of values', () => {
 });
 
 it('validates otherContact name not matching contact name', () => {
-  const allErrors = validate({
+  const allErrors = deepValidate({
     ...validValues,
-    contact: { name: 'Jeremy' },
+    contact: { name: 'Joe' },
     otherContact: { name: 'John' },
   });
 
@@ -252,7 +224,7 @@ it('validates otherContact name not matching contact name', () => {
 });
 
 it('handles validating empty object', () => {
-  const allErrors = validate({});
+  const allErrors = deepValidate({});
 
   const {
     contact: contactErrors,
@@ -273,7 +245,7 @@ it('handles validating empty object', () => {
 });
 
 it('handles validating missing object', () => {
-  const allErrors = validate();
+  const allErrors = deepValidate();
 
   const {
     contact: contactErrors,

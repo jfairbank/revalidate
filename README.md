@@ -19,6 +19,13 @@ the value is invalid.
 - [Install](#install)
 - [Integrations](#tada-integrations-tada)
 - [Usage](#usage)
+  - [`createValidator`](#createvalidator)
+  - [`composeValidators`](#composevalidators)
+  - [`combineValidators`](#combinevalidators)
+  - [Nested Fields](#nested-fields)
+  - [Redux Form](#redux-form)
+  - [Immutable.js](#immutable-js)
+  - [Data Sources](#data-sources)
 - [Common Validators](#common-validators)
 - [Test Helpers](#test-helpers)
 
@@ -28,15 +35,19 @@ the value is invalid.
 
 ## :tada: Integrations :tada:
 
-- [react-revalidate](https://github.com/jfairbank/react-revalidate)<br>
+- [react-revalidate](https://github.com/jfairbank/react-revalidate)  
   Validate React component props with revalidate validation functions.
 
-- [redux-revalidate](https://github.com/jfairbank/redux-revalidate)<br>
+- [redux-revalidate](https://github.com/jfairbank/redux-revalidate)  
   Validate your Redux store state with revalidate validation functions.
 
-- [Redux Form](https://github.com/erikras/redux-form)<br>
+- [Redux Form](https://github.com/erikras/redux-form)  
   Create validation functions for your form components out of the box. See the
   [example below](#redux-form).
+
+- [Immutable.js](http://facebook.github.io/immutable-js)  
+  Built-in support for Immutable.js via a separate module import. See the
+  [example below](#immutable-js).
 
 ## Usage
 
@@ -542,6 +553,102 @@ export default reduxForm({
   fields,
   validate
 })(SynchronousValidationForm);
+```
+
+---
+
+### Immutable.js
+
+Revalidate supports Immutable.js as a data source for your form values. To
+integrate revalidate with Immutable.js, simply import `combineValidators` from
+`revalidate/immutable`.
+
+```js
+// ES2015
+import {
+  createValidator,
+  composeValidators,
+  isRequired,
+  isAlphabetic,
+  isNumeric
+} from 'revalidate';
+
+import { combineValidators } from 'revalidate/immutable';
+import { Map } from 'immutable';
+
+// Or ES5
+var r = require('revalidate');
+var combineValidators = require('revalidate/immutable').combineValidators;
+var createValidator = r.createValidator;
+var composeValidators = r.composeValidators;
+var isRequired = r.isRequired;
+var isAlphabetic = r.isAlphabetic;
+var isNumeric = r.isNumeric;
+
+const dogValidator = combineValidators({
+  name: composeValidators(
+    isRequired,
+    isAlphabetic
+  )('Name'),
+
+  age: isNumeric('Age')
+});
+
+dogValidator(Map()); // { name: 'Name is required' }
+
+dogValidator(Map({ name: '123', age: 'abc' }));
+// { name: 'Name must be alphabetic', age: 'Age must be numeric' }
+
+dogValidator(Map({ name: 'Tucker', age: '10' })); // {}
+```
+
+---
+
+### Data Sources
+
+In fact, revalidate supports any arbitrary data source as long as you provide
+the optional `serializeValues` option to the regular `combineValidators`
+function.
+
+```js
+// ES2015
+import {
+  createValidator,
+  combineValidators,
+  composeValidators,
+  isRequired,
+  isAlphabetic,
+  isNumeric
+} from 'revalidate';
+
+// Or ES5
+var r = require('revalidate');
+var createValidator = r.createValidator;
+var combineValidators = r.combineValidators;
+var composeValidators = r.composeValidators;
+var isRequired = r.isRequired;
+var isAlphabetic = r.isAlphabetic;
+var isNumeric = r.isNumeric;
+
+const dogValidator = combineValidators({
+  name: composeValidators(
+    isRequired,
+    isAlphabetic
+  )('Name'),
+
+  age: isNumeric('Age')
+}, {
+  // Values are wrapped with a function.
+  // NOTE: our simple wrapper would only work for shallow field values.
+  serializeValues: values => values(),
+});
+
+dogValidator(() => ({})); // { name: 'Name is required' }
+
+dogValidator(() => ({ name: '123', age: 'abc' }));
+// { name: 'Name must be alphabetic', age: 'Age must be numeric' }
+
+dogValidator(() => ({ name: 'Tucker', age: '10' })); // {}
 ```
 
 ## Common Validators
