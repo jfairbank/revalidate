@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "build": "babel src --out-dir lib",
+    "check": "npm run lint && npm test",
     "clean": "rimraf lib",
     "lint": "eslint src __tests__",
     "prepublish": "npm run clean && npm run build",
