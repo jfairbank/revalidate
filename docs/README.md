@@ -58,10 +58,32 @@ Install with yarn or npm.
 
 `npm install --save revalidate`
 
-## Getting Started
+## Table of Contents
 
-#### [Docs](http://revalidate.jeremyfairbank.com)
-
-Revalidate has a host of options along with helper functions for building
-validations and some common validation functions right out of the box. To learn
-more, check out the [docs](http://revalidate.jeremyfairbank.com).
+- [Introduction](/README.md)
+- [Getting Started](/getting-started.md)
+- [Integrations](/integrations.md)
+- [Usage](/usage/README.md)
+  - [`createValidator`](/usage/createValidator.md)
+  - [`composeValidators`](/usage/composeValidators.md)
+  - [`combineValidators`](/usage/combineValidators.md)
+  - [Nested Fields](/usage/nested-fields.md)
+  - [Redux Form](/usage/redux-form.md)
+  - [Immutable.js](/usage/immutable-js.md)
+  - [Data Sources](/usage/data-sources.md)
+- [Common Validators](/common-validators/README.md)
+  - [`isRequired`](/common-validators/isRequired.md)
+  - [`isRequiredIf`](/common-validators/isRequiredIf.md)
+  - [`isAlphabetic`](/common-validators/isAlphabetic.md)
+  - [`isAlphaNumeric`](/common-validators/isAlphaNumeric.md)
+  - [`isNumeric`](/common-validators/isNumeric.md)
+  - [`hasLengthBetween`](/common-validators/hasLengthBetween.md)
+  - [`hasLengthGreaterThan`](/common-validators/hasLengthGreaterThan.md)
+  - [`hasLengthLessThan`](/common-validators/hasLengthLessThan.md)
+  - [`isOneOf`](/common-validators/isOneOf.md)
+  - [`matchesPattern`](/common-validators/matchesPattern.md)
+  - [`matchesField`](/common-validators/matchesField.md)
+- [Test Helpers](/test-helpers/README.md)
+  - [`hasError`](/test-helpers/hasError.md)
+  - [`hasErrorAt`](/test-helpers/hasErrorAt.md)
+  - [`hasErrorOnlyAt`](/test-helpers/hasErrorOnlyAt.md)

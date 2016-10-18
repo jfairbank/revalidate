@@ -17,7 +17,12 @@
     "prepublish": "npm run clean && npm run build",
     "test": "jest",
     "typecheck": "flow",
-    "watch:test": "jest --watch"
+    "watch:test": "jest --watch",
+    "docs:clean": "rimraf _book",
+    "docs:prepare": "gitbook install",
+    "docs:build": "npm run docs:prepare && gitbook build",
+    "docs:watch": "npm run docs:prepare && gitbook serve",
+    "docs:publish": "npm run docs:clean && npm run docs:build && cp CNAME _book && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:jfairbank/revalidate gh-pages --force"
   },
   "repository": {
     "type": "git",
@@ -61,6 +66,8 @@
     "eslint-plugin-flowtype": "^2.20.0",
     "eslint-plugin-import": "^2.0.1",
     "flow-bin": "^0.33.0",
+    "gitbook-cli": "^2.3.0",
+    "gitbook-plugin-advanced-emoji": "^0.2.1",
     "immutable": "^3.8.1",
     "jest": "^16.0.1",
     "rimraf": "^2.5.4"
