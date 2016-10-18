@@ -34,7 +34,7 @@ export default function composeValidators(
     }
 
     return markAsValueValidator(createValidatorWithSingleError(
-      [firstValidator, ...validators],
+      [firstValidator].concat(validators),
       config
     ));
   };

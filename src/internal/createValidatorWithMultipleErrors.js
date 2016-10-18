@@ -41,7 +41,7 @@ export default function createValidatorWithMultipleErrors(
   }
 
   return function composedValidator(value, allValues): Array<any> {
-    return [firstValidator, ...validators].reduce((errors, validator) => {
+    return [firstValidator].concat(validators).reduce((errors, validator) => {
       const errorMessage = validateWithValidator(
         value,
         allValues,
