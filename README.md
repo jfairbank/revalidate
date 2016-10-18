@@ -54,9 +54,13 @@ dogValidator({ name: 'Tucker', age: '10' }); // {}
 
 Install with yarn or npm.
 
-`yarn add revalidate`
+```
+yarn add revalidate
+```
 
-`npm install --save revalidate`
+```
+npm install --save revalidate
+```
 
 ## Getting Started
 
@@ -64,4 +68,4 @@ Install with yarn or npm.
 
 Revalidate has a host of options along with helper functions for building
 validations and some common validation functions right out of the box. To learn
-more, check out the [docs](http://revalidate.jeremyfairbank.com).
+more, check out the docs at [revalidate.jeremyfairbank.com](http://revalidate.jeremyfairbank.com).
