@@ -1,3 +1,114 @@
+## v1.0.0
+
+### :tada: First major release - NO breaking changes
+
+Revalidate has been out for several months, and the API has stayed pretty solid.
+With the addition of Immutable.js and arbitrary data source support along with
+docs and Flow typechecking, I feel like revalidate is ready to be bumped to v1.
+
+A couple internal helpful error messages were removed for being redundant or
+unnecessary, but there weren't any real breaking changes in this release.
+Therefore, you should be to upgrade with no problem.
+
+### NEW - Immutable.js support
+
+Revalidate now supports Immutable.js data structures for holding form values.
+Simply import `combineValidators` from `revalidate/immutable` instead.
+
+```js
+// ES2015
+import {
+  createValidator,
+  composeValidators,
+  isRequired,
+  isAlphabetic,
+  isNumeric
+} from 'revalidate';
+
+import { combineValidators } from 'revalidate/immutable';
+import { Map } from 'immutable';
+
+// Or ES5
+var r = require('revalidate');
+var combineValidators = require('revalidate/immutable').combineValidators;
+var createValidator = r.createValidator;
+var composeValidators = r.composeValidators;
+var isRequired = r.isRequired;
+var isAlphabetic = r.isAlphabetic;
+var isNumeric = r.isNumeric;
+
+const dogValidator = combineValidators({
+  name: composeValidators(
+    isRequired,
+    isAlphabetic
+  )('Name'),
+
+  age: isNumeric('Age')
+});
+
+dogValidator(Map()); // { name: 'Name is required' }
+
+dogValidator(Map({ name: '123', age: 'abc' }));
+// { name: 'Name must be alphabetic', age: 'Age must be numeric' }
+
+dogValidator(Map({ name: 'Tucker', age: '10' })); // {}
+```
+
+### NEW - Arbitrary data sources
+
+In fact, Immutable.js support is built upon a general method for using any data
+source for form values. To use other data sources, simply supply a
+`serializeValues` option to `combineValidators`. The example below wraps form
+values with a thunk.
+
+```js
+// ES2015
+import {
+  createValidator,
+  combineValidators,
+  composeValidators,
+  isRequired,
+  isAlphabetic,
+  isNumeric
+} from 'revalidate';
+
+// Or ES5
+var r = require('revalidate');
+var createValidator = r.createValidator;
+var combineValidators = r.combineValidators;
+var composeValidators = r.composeValidators;
+var isRequired = r.isRequired;
+var isAlphabetic = r.isAlphabetic;
+var isNumeric = r.isNumeric;
+
+const dogValidator = combineValidators({
+  name: composeValidators(
+    isRequired,
+    isAlphabetic
+  )('Name'),
+
+  age: isNumeric('Age')
+}, {
+  // Values are wrapped with a function.
+  // NOTE: our simple wrapper would only work for shallow field values.
+  serializeValues: values => values(),
+});
+
+dogValidator(() => ({})); // { name: 'Name is required' }
+
+dogValidator(() => ({ name: '123', age: 'abc' }));
+// { name: 'Name must be alphabetic', age: 'Age must be numeric' }
+
+dogValidator(() => ({ name: 'Tucker', age: '10' })); // {}
+```
+
+### Miscellaneous
+
+- Add Flow typing
+- Internal cleanup
+- Migrate tests to Jest
+- 100% code coverage!
+
 ## v0.4.1
 
 ### Bug Fixes
