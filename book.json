@@ -2,6 +2,12 @@
   "gitbook": "3.2.2",
   "root": "./docs",
   "plugins": [
-    "advanced-emoji"
-  ]
+    "advanced-emoji",
+    "github"
+  ],
+  "pluginsConfig": {
+    "github": {
+      "url": "https://github.com/jfairbank/revalidate"
+    }
+  }
 }

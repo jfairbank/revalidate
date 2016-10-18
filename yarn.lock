@@ -1002,10 +1002,6 @@ editor@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/editor/-/editor-1.0.0.tgz#60c7f87bd62bcc6a894fa8ccd6afb7823a24f742"
 
-emojify.js@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/emojify.js/-/emojify.js-1.1.0.tgz#079fff223307c9007f570785e8e4935d5c398beb"
-
 "errno@>=0.1.1 <0.2.0-0":
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/errno/-/errno-0.1.4.tgz#b896e23a9e5e8ba33871fc996abd3635fc9a1c7d"
@@ -1493,12 +1489,6 @@ gitbook-cli:
     semver "5.1.0"
     tmp "0.0.28"
     user-home "2.0.0"
-
-gitbook-plugin-advanced-emoji:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/gitbook-plugin-advanced-emoji/-/gitbook-plugin-advanced-emoji-0.2.1.tgz#b2f8907746d36a9d75e0edaa050841944ac49d75"
-  dependencies:
-    emojify.js "^1.1.0"
 
 github-url-from-git@~1.4.0:
   version "1.4.0"

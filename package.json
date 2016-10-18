@@ -67,7 +67,6 @@
     "eslint-plugin-import": "^2.0.1",
     "flow-bin": "^0.33.0",
     "gitbook-cli": "^2.3.0",
-    "gitbook-plugin-advanced-emoji": "^0.2.1",
     "immutable": "^3.8.1",
     "jest": "^16.0.1",
     "rimraf": "^2.5.4"
