@@ -9,5 +9,5 @@ export default createValidator(
     }
   },
 
-  field => `${field} is required`
+  field => `${field} is required`,
 );

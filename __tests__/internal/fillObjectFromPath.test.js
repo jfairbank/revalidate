@@ -3,7 +3,7 @@ import { fillObjectFromPath } from '../../src/internal';
 
 it('fills a deep object', () => {
   expect(
-    fillObjectFromPath({}, ['foo', 'bar', 'baz'], 42)
+    fillObjectFromPath({}, ['foo', 'bar', 'baz'], 42),
   ).toEqual({
     foo: {
       bar: {
@@ -18,8 +18,8 @@ it('adds other values', () => {
     fillObjectFromPath(
       { foo: { bar: { baz: 42 } } },
       ['foo', 'bar', 'quux'],
-      20
-    )
+      20,
+    ),
   ).toEqual({
     foo: {
       bar: {
@@ -32,8 +32,8 @@ it('adds other values', () => {
 
 it('fills a shallow object', () => {
   expect(
-    fillObjectFromPath({}, ['foo'], 42)
+    fillObjectFromPath({}, ['foo'], 42),
   ).toEqual(
-    { foo: 42 }
+    { foo: 42 },
   );
 });

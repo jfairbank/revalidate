@@ -29,7 +29,7 @@ function getMessage(
 
   throw new Error(
     'Please provide a string or configuration object with a `field` or ' +
-    '`message` property'
+    '`message` property',
   );
 }
 

@@ -22,20 +22,20 @@ export default function composeValidators(
       return markAsValueValidator(createValidatorWithMultipleErrors(
         firstValidator,
         validators.slice(0),
-        omit(config, 'multiple')
+        omit(config, 'multiple'),
       ));
     }
 
     if (typeof firstValidator === 'object') {
       throw new Error(
         'Please only pass in functions when composing ' +
-        'validators to produce a single error message.'
+        'validators to produce a single error message.',
       );
     }
 
     return markAsValueValidator(createValidatorWithSingleError(
       [firstValidator].concat(validators),
-      config
+      config,
     ));
   };
 }

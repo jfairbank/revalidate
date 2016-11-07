@@ -18,12 +18,12 @@ it('multiple array errors works for both fields', () => {
   const validator = combineValidators({
     foo: composeValidators(
       startsWithA({ message: messages.foo.startsWithA }),
-      endsWithC({ message: messages.foo.endsWithC })
+      endsWithC({ message: messages.foo.endsWithC }),
     )({ multiple: true }),
 
     bar: composeValidators(
       startsWithA({ message: messages.bar.startsWithA }),
-      endsWithC({ message: messages.bar.endsWithC })
+      endsWithC({ message: messages.bar.endsWithC }),
     )({ multiple: true }),
   });
 
@@ -67,12 +67,12 @@ it('multiple errors works for one field', () => {
   const validator = combineValidators({
     foo: composeValidators(
       startsWithA({ message: messages.foo.startsWithA }),
-      endsWithC({ message: messages.foo.endsWithC })
+      endsWithC({ message: messages.foo.endsWithC }),
     )(),
 
     bar: composeValidators(
       startsWithA({ message: messages.bar.startsWithA }),
-      endsWithC({ message: messages.bar.endsWithC })
+      endsWithC({ message: messages.bar.endsWithC }),
     )({ multiple: true }),
   });
 

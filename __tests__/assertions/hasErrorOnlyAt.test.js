@@ -198,6 +198,6 @@ it('throws if no key is provided', () => {
   expect(_ => {
     hasErrorOnlyAt(result);
   }).toThrowError(
-    'Please provide a key to check for an error.'
+    'Please provide a key to check for an error.',
   );
 });

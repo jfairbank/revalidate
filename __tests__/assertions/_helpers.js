@@ -13,7 +13,7 @@ export const singleRequiredValidator = isRequired('Field');
 
 export const unconfiguredArrayComposedValidator = composeValidators(
   isRequired,
-  isAlphabetic
+  isAlphabetic,
 );
 
 export const unconfiguredObjectComposedValidator = composeValidators({
@@ -38,12 +38,12 @@ export const combinedValidator = combineValidators({
 
   'contact.age': composeValidators(
     isRequired,
-    isNumeric
+    isNumeric,
   )('Age'),
 
   'phraseArray': composeValidators(
     startsWithA,
-    endsWithC
+    endsWithC,
   )({ field: 'Phrase Array', multiple: true }),
 
   'phraseObject': composeValidators({

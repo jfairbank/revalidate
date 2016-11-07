@@ -29,7 +29,7 @@ it('forces case sensitivity by default when comparing', () => {
 it('allows a custom comparer function', () => {
   const customIsOneOf = unconfigured(
     validValues,
-    (a, b) => a.toLowerCase() === b.toLowerCase()
+    (a, b) => a.toLowerCase() === b.toLowerCase(),
   )(FIELD);
 
   validValues.forEach(value => {

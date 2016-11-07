@@ -12,7 +12,7 @@ const validator = isRequiredIf(values => !!values && !!values.bar)(FIELD);
 
 const composedValidator = composeValidators(
   validator,
-  isAlphabetic({ message: alphabeticMessage })
+  isAlphabetic({ message: alphabeticMessage }),
 )();
 
 it('requires if value is null', () => {

@@ -9,7 +9,7 @@ import {
 
 const sharedValidator = composeValidators(
   startsWithA,
-  endsWithC
+  endsWithC,
 )('My Field');
 
 it('stops on the first failure', () => {
@@ -30,7 +30,7 @@ it('allows overriding messages per validator', () => {
 
   const validator = composeValidators(
     startsWithA({ message: messageForA }),
-    endsWithC({ message: messageForC })
+    endsWithC({ message: messageForC }),
   )('My Field');
 
   expect(validator('BBB')).toBe(messageForA);
@@ -42,7 +42,7 @@ it('allows overriding messages per validator', () => {
 it('allows overriding field per validator', () => {
   const validator = composeValidators(
     startsWithA('My A Field'),
-    endsWithC('My C Field')
+    endsWithC('My C Field'),
   )('My Field');
 
   expect(validator('BBB')).toBe('My A Field must start with A');
@@ -53,12 +53,12 @@ it('allows overriding field per validator', () => {
 it('composed validators can be composed too', () => {
   const lengthValidator = composeValidators(
     sharedValidator,
-    hasLengthBetween(1, 2)
+    hasLengthBetween(1, 2),
   )('My Field Length');
 
   const requiredValidator = composeValidators(
     isRequired,
-    lengthValidator
+    lengthValidator,
   )('My Field Required');
 
   expect(requiredValidator()).toBe('My Field Required is required');
@@ -75,6 +75,6 @@ it('throws if attempting to use an object without multiple errors', () => {
     })();
   }).toThrowError(
     'Please only pass in functions when composing ' +
-    'validators to produce a single error message.'
+    'validators to produce a single error message.',
   );
 });

@@ -11,6 +11,6 @@ export default function hasLengthGreaterThan(
       }
     },
 
-    field => `${field} must be longer than ${min} characters`
+    field => `${field} must be longer than ${min} characters`,
   );
 }

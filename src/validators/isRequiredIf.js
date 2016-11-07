@@ -12,6 +12,6 @@ export default function isRequiredIf(
       }
     },
 
-    field => `${field} is required`
+    field => `${field} is required`,
   );
 }
