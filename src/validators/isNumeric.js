@@ -3,5 +3,5 @@ import internalMatchesPattern from '../internal/validators/internalMatchesPatter
 
 export default internalMatchesPattern(
   /^\d+$/,
-  field => `${field} must be numeric`
+  field => `${field} must be numeric`,
 );

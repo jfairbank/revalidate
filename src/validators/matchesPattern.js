@@ -8,6 +8,6 @@ export default function matchesPattern(
 
   return internalMatchesPattern(
     regex,
-    field => `${field} must match pattern ${regexString}`
+    field => `${field} must match pattern ${regexString}`,
   );
 }

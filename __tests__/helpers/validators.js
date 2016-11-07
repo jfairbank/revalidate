@@ -8,7 +8,7 @@ export const startsWithA = createValidator(
     }
   },
 
-  field => `${field} must start with A`
+  field => `${field} must start with A`,
 );
 
 export const endsWithC = createValidator(
@@ -18,5 +18,5 @@ export const endsWithC = createValidator(
     }
   },
 
-  field => `${field} must end with C`
+  field => `${field} must end with C`,
 );

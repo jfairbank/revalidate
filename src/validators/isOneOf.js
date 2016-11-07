@@ -18,7 +18,7 @@ export default function isOneOf<T>(
 
       const valueIndex = findIndex(
         valuesClone,
-        optionValue => comparer(value, optionValue)
+        optionValue => comparer(value, optionValue),
       );
 
       if (valueIndex === -1) {
@@ -26,6 +26,6 @@ export default function isOneOf<T>(
       }
     },
 
-    field => `${field} must be one of ${JSON.stringify(valuesClone)}`
+    field => `${field} must be one of ${JSON.stringify(valuesClone)}`,
   );
 }

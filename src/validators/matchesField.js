@@ -15,6 +15,6 @@ export default function matchesField(
       }
     },
 
-    field => `${field} must match ${otherFieldLabel}`
+    field => `${field} must match ${otherFieldLabel}`,
   );
 }

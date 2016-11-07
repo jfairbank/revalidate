@@ -12,6 +12,6 @@ export default function internalMatchesPattern(
       }
     },
 
-    messageCreator
+    messageCreator,
   );
 }

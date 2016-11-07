@@ -9,7 +9,7 @@ const validatorDefinition = message => value => {
 
 const isNumber = createValidator(
   validatorDefinition,
-  field => `${field} must be a number`
+  field => `${field} must be a number`,
 );
 
 it('creating requires a string or function message creator', () => {
@@ -74,7 +74,7 @@ it('uses the defaultMessageCreator if it is a string and config only has field',
 
   const validator = createValidator(
     message => value => !value && message,
-    defaultMessageCreator
+    defaultMessageCreator,
   )({ field: 'Foo' });
 
   expect(validator()).toBe(defaultMessageCreator);
@@ -88,29 +88,29 @@ const matchingValidatorDefinition = message => (value, allValues) => {
 
 const doesMatch = createValidator(
   matchingValidatorDefinition,
-  field => `${field} must match the 'matchedValue'`
+  field => `${field} must match the 'matchedValue'`,
 );
 
 it('can create multi-value validators', () => {
   expect(
     doesMatch('My Field')(
       'My Value',
-      { matchedValue: 'My Value' }
-    )
+      { matchedValue: 'My Value' },
+    ),
   ).toBe(undefined);
 
   expect(
-    doesMatch('My Field')('My Value')
+    doesMatch('My Field')('My Value'),
   ).toBe(
-    'My Field must match the \'matchedValue\''
+    'My Field must match the \'matchedValue\'',
   );
 
   expect(
     doesMatch('My Field')(
       'My Value',
-      { matchedValue: 'Not My Value' }
-    )
+      { matchedValue: 'Not My Value' },
+    ),
   ).toBe(
-    'My Field must match the \'matchedValue\''
+    'My Field must match the \'matchedValue\'',
   );
 });

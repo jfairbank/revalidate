@@ -12,6 +12,6 @@ export default function hasLengthBetween(
       }
     },
 
-    field => `${field} must be between ${min} and ${max} characters long`
+    field => `${field} must be between ${min} and ${max} characters long`,
   );
 }

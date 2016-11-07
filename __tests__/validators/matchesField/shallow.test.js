@@ -9,9 +9,9 @@ const expectedErrorMessage = `${FIELD} must match ${OTHER_FIELD_LABEL}`;
 
 it('allows matching values', () => {
   expect(
-    matchesField('secret', { [OTHER_FIELD_NAME]: 'secret' })
+    matchesField('secret', { [OTHER_FIELD_NAME]: 'secret' }),
   ).toBe(
-    undefined
+    undefined,
   );
 });
 
@@ -21,16 +21,16 @@ it('fails if allValues are not provided', () => {
 
 it('does not allow non-matching values', () => {
   expect(
-    matchesField('not secret', { [OTHER_FIELD_NAME]: 'secret' })
+    matchesField('not secret', { [OTHER_FIELD_NAME]: 'secret' }),
   ).toBe(
-    expectedErrorMessage
+    expectedErrorMessage,
   );
 });
 
 it('forces case sensitivity by default when comparing', () => {
   expect(
-    matchesField('SECRET', { [OTHER_FIELD_NAME]: 'secret' })
+    matchesField('SECRET', { [OTHER_FIELD_NAME]: 'secret' }),
   ).toBe(
-    expectedErrorMessage
+    expectedErrorMessage,
   );
 });

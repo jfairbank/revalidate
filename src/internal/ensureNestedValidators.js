@@ -11,9 +11,9 @@ export default function ensureNestedValidators(
     (root, path) => assign(
       {},
       root,
-      fillObjectFromPath(root, path.split('.'), validators[path])
+      fillObjectFromPath(root, path.split('.'), validators[path]),
     ),
-    {}
+    {},
   );
 
   return internalCombineNestedValidators(baseShape, options);

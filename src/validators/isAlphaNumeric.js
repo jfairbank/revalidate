@@ -3,5 +3,5 @@ import internalMatchesPattern from '../internal/validators/internalMatchesPatter
 
 export default internalMatchesPattern(
   /^[0-9A-Za-z]+$/,
-  field => `${field} must be alphanumeric`
+  field => `${field} must be alphanumeric`,
 );

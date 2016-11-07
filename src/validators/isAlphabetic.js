@@ -3,5 +3,5 @@ import internalMatchesPattern from '../internal/validators/internalMatchesPatter
 
 export default internalMatchesPattern(
   /^[A-Za-z]+$/,
-  field => `${field} must be alphabetic`
+  field => `${field} must be alphabetic`,
 );
