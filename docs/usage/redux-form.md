@@ -1,12 +1,11 @@
 # Redux Form
 
-As mentioned, even though revalidate is pretty agnostic about how you use it, it
-does work out of the box for Redux Form. The `validate` function you might write
-for a Redux Form example like
-[here](http://redux-form.com/6.1.1/examples/syncValidation) can also be
-automatically generated with `combineValidators`. The function it returns will
-work perfectly for the `validate` option for your form components for React and
-Redux Form.
+Even though revalidate is agnostic about how you use it, it does work out of the
+box for Redux Form. The `validate` function you might write for a Redux Form
+example like [here](http://redux-form.com/6.1.1/examples/syncValidation) can
+also be automatically generated with `combineValidators`. The function it
+returns will work perfectly for the `validate` option for your form components
+for React and Redux Form.
 
 Here is that example from Redux Form rewritten to generate a `validate` function
 with revalidate for both Redux Form v6 and v5.
@@ -100,7 +99,9 @@ const SyncValidationForm = (props) => {
       <Field name="age" type="number" component={renderField} label="Age"/>
       <div>
         <button type="submit" disabled={submitting}>Submit</button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+        <button type="button" disabled={pristine || submitting} onClick={reset}>
+          Clear Values
+        </button>
       </div>
     </form>
   )
