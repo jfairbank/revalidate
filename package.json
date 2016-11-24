@@ -65,7 +65,7 @@
     "eslint-import-resolver-node": "^0.2.0",
     "eslint-plugin-flowtype": "^2.20.0",
     "eslint-plugin-import": "^2.1.0",
-    "flow-bin": "^0.35.0",
+    "flow-bin": "^0.36.0",
     "gitbook-cli": "^2.3.0",
     "immutable": "^3.8.1",
     "jest": "^17.0.0",
