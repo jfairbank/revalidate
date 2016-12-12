@@ -61,7 +61,7 @@
     "babel-register": "^6.11.6",
     "babel-runtime": "^6.11.6",
     "eslint": "^3.9.1",
-    "eslint-config-airbnb-base": "^10.0.1",
+    "eslint-config-airbnb-base": "^11.0.0",
     "eslint-import-resolver-node": "^0.2.0",
     "eslint-plugin-flowtype": "^2.20.0",
     "eslint-plugin-import": "^2.1.0",
