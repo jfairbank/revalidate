@@ -1,3 +1,48 @@
+## v1.1.0
+
+### More customization with `createValidator`
+
+* Credit: [@Zagitta](https://github.com/Zagitta).
+
+Sometimes you may want to customize what your custom validator function takes as
+a field label and what it returns for an error. Revalidate has always allowed
+you to return something besides a string error message when validation fails.
+For example, you can also return an object. This is especially useful for
+internationalization with a library like
+[react-intl](https://github.com/yahoo/react-intl). In addition to returning an
+object, you can now also pass in an object for your field label. To do this
+you'll need to pass in an object to your curried validation function with a
+`field` property. The `field` property can then be an object (or another data
+type). What you define `field` to be will be what is passed into your message
+creator function. Here is a contrived example:
+
+```js
+const isRequired = createValidator(
+  error => value => {
+    if (value == null || value === '') {
+      return error;
+    }
+  },
+
+  // Instead of a string, config is the i18n config we
+  // pass in to the curried validation function.
+  config => config
+);
+
+const requiredName = isRequired({
+  id: 'name',
+  defaultMessage: 'Name is required',
+});
+
+requiredName('Jeremy');
+// undefined
+
+requiredName();
+// { id: 'name', defaultMessage: 'Name is required' }
+```
+
+---
+
 ## v1.0.0
 
 ### :tada: First major release - NO breaking changes
