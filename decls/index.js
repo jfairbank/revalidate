@@ -6,7 +6,7 @@ declare type CombineValidatorsOptions = {
 };
 
 declare type Config = {
-  field?: string,
+  field?: (string | {}),
   message?: string,
 };
 
@@ -20,7 +20,7 @@ declare type ParsedField = {
   fullName: string,
 };
 
-declare type MessageCreator = string | (field: string) => string;
+declare type MessageCreator = string | (field: (string | {})) => string | {};
 declare type ValidatorImpl = (message: string) => (value: any, allValues?: ?Object) => any;
 declare type Comparer = (a: any, b: any) => boolean;
 
