@@ -36,8 +36,16 @@ it('allows field to be an object', () => {
     validatorDefinition,
     msg => `${msg.id} => ${msg.defaultMessage}`,
   );
-  const field = { id: 'validation.isNumber', defaultMessage: '' };
-  expect(_ => customIsNumber({ field })).not.toThrow();
+
+  const field = {
+    id: 'validation.isNumber',
+    defaultMessage: 'default',
+  };
+
+  const actual = customIsNumber({ field })('');
+  const expected = `${field.id} => ${field.defaultMessage}`;
+
+  expect(actual).toBe(expected);
 });
 
 it('it can use a plain string message', () => {

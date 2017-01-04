@@ -20,8 +20,8 @@ declare type ParsedField = {
   fullName: string,
 };
 
-declare type MessageCreator = string | (field: any) => mixed;
-declare type ValidatorImpl = (message: mixed) => (value: any, allValues?: ?Object) => any;
+declare type MessageCreator = string | (field: any) => any;
+declare type ValidatorImpl = (message: any) => (value: any, allValues?: ?Object) => any;
 declare type Comparer = (a: any, b: any) => boolean;
 
 declare type ConfiguredValidator = (value?: any, allValues?: ?Object) => any;
