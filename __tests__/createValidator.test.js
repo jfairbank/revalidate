@@ -31,6 +31,15 @@ it('requires a string or configuration object', () => {
   expect(_ => isNumber({ field: 'My Field' })).not.toThrow();
 });
 
+it('allows field to be an object', () => {
+  const customIsNumber = createValidator(
+    validatorDefinition,
+    msg => `${msg.id} => ${msg.defaultMessage}`
+  );
+  const field = { id: 'validation.isNumber', defaultMessage: ''};
+  expect(_ => customIsNumber({ field })).not.toThrow();
+})
+
 it('it can use a plain string message', () => {
   const message = 'Must be number';
   const validator = createValidator(validatorDefinition, message);
