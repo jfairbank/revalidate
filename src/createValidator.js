@@ -4,7 +4,7 @@ import markAsValueValidator from './internal/markAsValueValidator';
 function getMessage(
   config: ?string | ?Config,
   defaultMessageCreator: MessageCreator,
-): string {
+): mixed {
   if (typeof config === 'object' && config != null) {
     if (typeof config.message === 'string') {
       return config.message;
