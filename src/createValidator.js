@@ -14,7 +14,7 @@ function getMessage(
       return defaultMessageCreator;
     }
 
-    const fieldType = typeof config.field; 
+    const fieldType = typeof config.field;
     if (fieldType === 'string' || fieldType === 'object') {
       return defaultMessageCreator(config.field);
     }
