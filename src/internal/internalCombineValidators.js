@@ -14,6 +14,8 @@ export default function internalCombineValidators(
     ? options.serializeValues
     : defaultSerializeValues;
 
+  const nullWhenValid = atRoot && options.nullWhenValid === true;
+
   function finalSerializeValues(values) {
     if (values == null) {
       return {};
@@ -26,7 +28,7 @@ export default function internalCombineValidators(
     const serializedValues = finalSerializeValues(values);
     const serializedAllValues = finalSerializeValues(allValues);
 
-    return Object.keys(validators).reduce((errors, fieldName) => {
+    const finalErrors = Object.keys(validators).reduce((errors, fieldName) => {
       const parsedField = parseFieldName(fieldName);
       const validator = validators[parsedField.fullName];
       const value = serializedValues[parsedField.baseName];
@@ -42,5 +44,11 @@ export default function internalCombineValidators(
 
       return errors;
     }, {});
+
+    if (nullWhenValid && Object.keys(finalErrors).length === 0) {
+      return null;
+    }
+
+    return finalErrors;
   };
 }

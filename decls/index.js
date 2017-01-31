@@ -3,6 +3,7 @@
 
 declare type CombineValidatorsOptions = {
   serializeValues?: (values: any) => Object,
+  nullWhenValid?: boolean,
 };
 
 declare type Config = {
