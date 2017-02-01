@@ -4,6 +4,7 @@ import markAsValueValidator from './internal/markAsValueValidator';
 function getMessage(
   config: ?string | ?Config,
   defaultMessageCreator: MessageCreator,
+  ...args: Array<any>
 ): mixed {
   if (typeof config === 'object' && config != null) {
     if (typeof config.message === 'string') {
@@ -15,7 +16,7 @@ function getMessage(
     }
 
     if (config.field != null) {
-      return defaultMessageCreator(config.field);
+      return defaultMessageCreator(config.field, ...args);
     }
   }
 
@@ -24,7 +25,7 @@ function getMessage(
   }
 
   if (typeof config === 'string') {
-    return defaultMessageCreator(config);
+    return defaultMessageCreator(config, ...args);
   }
 
   throw new Error(
@@ -36,7 +37,9 @@ function getMessage(
 export default function createValidator(
   curriedDefinition: ValidatorImpl,
   defaultMessageCreator?: MessageCreator,
+  ...args: Array<any>
 ): ConfigurableValidator {
+  // Duplicated with createValidatorFactory for flow
   if (
     defaultMessageCreator == null ||
     (typeof defaultMessageCreator !== 'string' && typeof defaultMessageCreator !== 'function')
@@ -47,8 +50,8 @@ export default function createValidator(
   const finalMessageCreator = defaultMessageCreator;
 
   return function validator(config, value, allValues) {
-    const message = getMessage(config, finalMessageCreator);
-    const valueValidator = curriedDefinition(message);
+    const message = getMessage(config, finalMessageCreator, ...args);
+    const valueValidator = curriedDefinition(message, ...args);
 
     if (arguments.length <= 1) {
       return markAsValueValidator(valueValidator);

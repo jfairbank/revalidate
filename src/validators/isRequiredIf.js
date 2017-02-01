@@ -1,17 +1,13 @@
 // @flow
-import createValidator from '../createValidator';
+import createValidatorFactory from '../createValidatorFactory';
 import valueMissing from '../internal/valueMissing';
 
-export default function isRequiredIf(
-  condition: (allValues: ?Object) => boolean,
-): ConfigurableValidator {
-  return createValidator(
-    (message) => (value, allValues) => {
-      if (condition(allValues) && valueMissing(value)) {
-        return message;
-      }
-    },
+export default createValidatorFactory(
+  (message, condition: (any) => boolean) => (value, allValues) => {
+    if (condition(allValues) && valueMissing(value)) {
+      return message;
+    }
+  },
 
-    field => `${field} is required`,
-  );
-}
+  field => `${field} is required`,
+);

@@ -1,13 +1,8 @@
 // @flow
-import internalMatchesPattern from '../internal/validators/internalMatchesPattern';
+import createValidatorFactory from '../createValidatorFactory';
+import { validateMatchesPattern } from '../internal/validators/internalMatchesPattern';
 
-export default function matchesPattern(
-  regex: RegExp,
-): ConfigurableValidator {
-  const regexString = regex.toString();
-
-  return internalMatchesPattern(
-    regex,
-    field => `${field} must match pattern ${regexString}`,
-  );
-}
+export default createValidatorFactory(
+  (message, regex: RegExp) => (value) => validateMatchesPattern(regex, message, value),
+  (field, regex: RegExp) => `${field} must match pattern ${regex.toString()}`,
+);

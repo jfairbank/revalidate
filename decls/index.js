@@ -21,8 +21,14 @@ declare type ParsedField = {
   fullName: string,
 };
 
-declare type MessageCreator = string | (field: any) => any;
-declare type ValidatorImpl = (message: any) => (value: any, allValues?: ?Object) => any;
+declare type ValidatorFactoryConfig = {
+  definition: ValidatorImpl,
+  messageCreator?: MessageCreator,
+  numArgs?: number,
+};
+
+declare type MessageCreator = string | (field: any, ...args: Array<any>) => any;
+declare type ValidatorImpl = (message: any, ...args: Array<any>) => (value: any, allValues?: ?Object) => any;
 declare type Comparer = (a: any, b: any) => boolean;
 
 declare type ConfiguredValidator = (value?: any, allValues?: ?Object) => any;
@@ -33,6 +39,14 @@ declare type CurryableValidator = (config?: string | Config) => ConfiguredValida
 declare type ComposedCurryableValidator = (config?: string | ComposeConfig) => ConfiguredValidator;
 
 declare type ConfigurableValidator = UnconfiguredValidator & CurryableValidator;
+declare type ValidatorFactory = (...args: Array<any>) => ConfigurableValidator;
+
+declare function createValidatorFactory(
+  curriedDefinition: ValidatorImpl,
+  defaultMessageCreator?: MessageCreator,
+): ValidatorFactory;
+
+declare function createValidatorFactory(config: ValidatorFactoryConfig): ValidatorFactory;
 
 declare type Validator
   = ConfiguredValidator

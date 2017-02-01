@@ -1,16 +1,12 @@
 // @flow
-import createValidator from '../createValidator';
+import createValidatorFactory from '../createValidatorFactory';
 
-export default function hasLengthGreaterThan(
-  min: number,
-): ConfigurableValidator {
-  return createValidator(
-    message => value => {
-      if (value && value.length <= min) {
-        return message;
-      }
-    },
+export default createValidatorFactory(
+  (message, min: number) => value => {
+    if (value && value.length <= min) {
+      return message;
+    }
+  },
 
-    field => `${field} must be longer than ${min} characters`,
-  );
-}
+  (field, min: number) => `${field} must be longer than ${min} characters`,
+);
