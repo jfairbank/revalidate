@@ -124,3 +124,24 @@ it('uses the defaultMessageCreator if it is a string and config only has field',
 
   expect(validator()).toBe(defaultMessageCreator);
 });
+
+it('unconfigured is cloneable', () => {
+  const clonedUnconfigured = beginsWith.clone((field, c) => (
+    `${field} error ${c}`
+  ));
+
+  const cloned = clonedUnconfigured('A')('Foo');
+  const expected = 'Foo error A';
+
+  expect(cloned('foo')).toBe(expected);
+});
+
+it('configured is cloneable', () => {
+  const cloned = beginsWith('A').clone((field, c) => (
+    `${field} error ${c}`
+  ))('Foo');
+
+  const expected = 'Foo error A';
+
+  expect(cloned('foo')).toBe(expected);
+});

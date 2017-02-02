@@ -36,3 +36,24 @@ it('allows a custom comparer function', () => {
     expect(customIsOneOf(value.toUpperCase())).toBe(undefined);
   });
 });
+
+it('unconfigured is cloneable', () => {
+  const clonedUnconfigured = unconfigured.clone((field, values) => (
+    `${field} error ${JSON.stringify(values)}`
+  ));
+
+  const cloned = clonedUnconfigured(validValues)(FIELD);
+  const expected = `${FIELD} error ${JSON.stringify(validValues)}`;
+
+  expect(cloned('baz')).toBe(expected);
+});
+
+it('configured is cloneable', () => {
+  const cloned = unconfigured(validValues).clone((field, values) => (
+    `${field} error ${JSON.stringify(values)}`
+  ))(FIELD);
+
+  const expected = `${FIELD} error ${JSON.stringify(validValues)}`;
+
+  expect(cloned('baz')).toBe(expected);
+});

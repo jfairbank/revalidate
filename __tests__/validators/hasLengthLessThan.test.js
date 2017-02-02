@@ -18,3 +18,24 @@ it('does not allow lengths equal to max', () => {
 it('does not allow lengths greater than max', () => {
   expect(hasLengthLessThan(repeat('a', MAX + 1))).toBe(expectedErrorMessage);
 });
+
+it('unconfigured is cloneable', () => {
+  const clonedUnconfigured = unconfigured.clone((field, max) => (
+    `${field} error ${max}`
+  ));
+
+  const cloned = clonedUnconfigured(MAX)(FIELD);
+  const expected = `${FIELD} error ${MAX}`;
+
+  expect(cloned(repeat('a', MAX))).toBe(expected);
+});
+
+it('configured is cloneable', () => {
+  const cloned = unconfigured(MAX).clone((field, max) => (
+    `${field} error ${max}`
+  ))(FIELD);
+
+  const expected = `${FIELD} error ${MAX}`;
+
+  expect(cloned(repeat('a', MAX))).toBe(expected);
+});

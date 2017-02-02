@@ -8,7 +8,9 @@ const alphabeticMessage = 'Must be alphabetic';
 const allValues = { bar: 42 };
 const expectedErrorMessage = `${FIELD} is required`;
 
-const validator = isRequiredIf(values => !!values && !!values.bar)(FIELD);
+const predicate = values => !!values && !!values.bar;
+
+const validator = isRequiredIf(predicate)(FIELD);
 
 const composedValidator = composeValidators(
   validator,
@@ -49,4 +51,19 @@ it('other validations run if it\'s required', () => {
 
 it('other validations still run even if it\'s not required', () => {
   expect(composedValidator('123')).toBe(alphabeticMessage);
+});
+
+it('unconfigured is cloneable', () => {
+  const clonedUnconfigured = isRequiredIf.clone(field => `${field} error`);
+  const cloned = clonedUnconfigured(predicate)(FIELD);
+  const expected = `${FIELD} error`;
+
+  expect(cloned(null, allValues)).toBe(expected);
+});
+
+it('configured is cloneable', () => {
+  const cloned = isRequiredIf(predicate).clone(field => `${field} error`)(FIELD);
+  const expected = `${FIELD} error`;
+
+  expect(cloned(null, allValues)).toBe(expected);
 });

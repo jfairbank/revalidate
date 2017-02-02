@@ -18,3 +18,24 @@ it('does not allow lengths equal to min', () => {
 it('does not allow lengths less than min', () => {
   expect(hasLengthGreaterThan(repeat('a', MIN - 1))).toBe(expectedErrorMessage);
 });
+
+it('unconfigured is cloneable', () => {
+  const clonedUnconfigured = unconfigured.clone((field, min) => (
+    `${field} error ${min}`
+  ));
+
+  const cloned = clonedUnconfigured(MIN)(FIELD);
+  const expected = `${FIELD} error ${MIN}`;
+
+  expect(cloned(repeat('a', MIN))).toBe(expected);
+});
+
+it('configured is cloneable', () => {
+  const cloned = unconfigured(MIN).clone((field, min) => (
+    `${field} error ${min}`
+  ))(FIELD);
+
+  const expected = `${FIELD} error ${MIN}`;
+
+  expect(cloned(repeat('a', MIN))).toBe(expected);
+});

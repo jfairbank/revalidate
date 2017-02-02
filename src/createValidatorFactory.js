@@ -1,5 +1,4 @@
 // @flow
-import curry from 'lodash/curry';
 import createValidator from './createValidator';
 
 export default function createValidatorFactory(
@@ -9,6 +8,28 @@ export default function createValidatorFactory(
   let finalCurriedDefinition;
   let finalMessageCreator;
   let numArgs;
+
+  function helper(
+    messageCreator?: MessageCreator,
+    arity: number,
+    ...initialArgs: Array<any>
+  ): ValidatorFactory | ConfigurableValidator {
+    function clone(newDefaultMessageCreator?: MessageCreator): ValidatorFactory {
+      return helper(newDefaultMessageCreator, arity, ...initialArgs);
+    }
+
+    function curried(...args: Array<any>): ValidatorFactory | ConfigurableValidator {
+      if (args.length >= arity) {
+        return createValidator(finalCurriedDefinition, messageCreator, ...initialArgs, ...args);
+      }
+
+      return helper(messageCreator, arity - args.length, ...args);
+    }
+
+    curried.clone = clone;
+
+    return (curried: ValidatorFactory);
+  }
 
   if (typeof curriedDefinition === 'function') {
     finalCurriedDefinition = curriedDefinition;
@@ -31,7 +52,5 @@ export default function createValidatorFactory(
     numArgs = finalCurriedDefinition.length - 1;
   }
 
-  return curry((...args) => (
-    createValidator(finalCurriedDefinition, finalMessageCreator, ...args)
-  ), numArgs);
+  return helper(finalMessageCreator, numArgs);
 }

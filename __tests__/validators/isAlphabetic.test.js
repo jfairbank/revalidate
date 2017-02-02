@@ -29,3 +29,10 @@ it('does not allow other common characters', () => {
     expect(isAlphabetic(`${c}a`)).toBe(expectedErrorMessage);
   });
 });
+
+it('is cloneable', () => {
+  const cloned = unconfigured.clone(field => `${field} error`)(FIELD);
+  const expected = `${FIELD} error`;
+
+  expect(cloned('1')).toBe(expected);
+});

@@ -25,3 +25,10 @@ it('allows other values', () => {
     expect(isRequired(value)).toBe(undefined);
   });
 });
+
+it('is cloneable', () => {
+  const cloned = unconfigured.clone(field => `${field} error`)(FIELD);
+  const expected = `${FIELD} error`;
+
+  expect(cloned(null)).toBe(expected);
+});
