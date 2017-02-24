@@ -64,11 +64,11 @@ npm install --save revalidate
 
 ## Getting Started
 
-#### [Docs](http://jfairbank.github.io/revalidate)
+#### [Docs](http://revalidate.jeremyfairbank.com)
 
 Revalidate has a host of options along with helper functions for building
 validations and some common validation functions right out of the box. To learn
-more, check out the docs at [jfairbank.github.io/revalidate](http://jfairbank.github.io/revalidate).
+more, check out the docs at [revalidate.jeremyfairbank.com](http://revalidate.jeremyfairbank.com).
 
 ## Redux Form
 
