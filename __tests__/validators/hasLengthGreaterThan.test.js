@@ -3,39 +3,39 @@ import repeat from 'lodash/repeat';
 import unconfigured from '../../src/validators/hasLengthGreaterThan';
 
 const FIELD = 'Foo';
-const MIN = 2;
-const hasLengthGreaterThan = unconfigured(MIN)(FIELD);
-const expectedErrorMessage = `${FIELD} must be longer than ${MIN} characters`;
+const LIMIT = 2;
+const hasLengthGreaterThan = unconfigured(LIMIT)(FIELD);
+const expectedErrorMessage = `${FIELD} must be longer than ${LIMIT} characters`;
 
-it('allows lengths greater than min', () => {
-  expect(hasLengthGreaterThan(repeat('a', MIN + 1))).toBe(undefined);
+it('allows lengths greater than the given value', () => {
+  expect(hasLengthGreaterThan(repeat('a', LIMIT + 1))).toBe(undefined);
 });
 
-it('does not allow lengths equal to min', () => {
-  expect(hasLengthGreaterThan(repeat('a', MIN))).toBe(expectedErrorMessage);
+it('does not allow lengths equal to the given value', () => {
+  expect(hasLengthGreaterThan(repeat('a', LIMIT))).toBe(expectedErrorMessage);
 });
 
-it('does not allow lengths less than min', () => {
-  expect(hasLengthGreaterThan(repeat('a', MIN - 1))).toBe(expectedErrorMessage);
+it('does not allow lengths less than the given value', () => {
+  expect(hasLengthGreaterThan(repeat('a', LIMIT - 1))).toBe(expectedErrorMessage);
 });
 
 it('unconfigured is cloneable', () => {
-  const clonedUnconfigured = unconfigured.clone((field, min) => (
-    `${field} error ${min}`
+  const clonedUnconfigured = unconfigured.clone((field, limit) => (
+    `${field} error ${limit}`
   ));
 
-  const cloned = clonedUnconfigured(MIN)(FIELD);
-  const expected = `${FIELD} error ${MIN}`;
+  const cloned = clonedUnconfigured(LIMIT)(FIELD);
+  const expected = `${FIELD} error ${LIMIT}`;
 
-  expect(cloned(repeat('a', MIN))).toBe(expected);
+  expect(cloned(repeat('a', LIMIT))).toBe(expected);
 });
 
 it('configured is cloneable', () => {
-  const cloned = unconfigured(MIN).clone((field, min) => (
-    `${field} error ${min}`
+  const cloned = unconfigured(LIMIT).clone((field, limit) => (
+    `${field} error ${limit}`
   ))(FIELD);
 
-  const expected = `${FIELD} error ${MIN}`;
+  const expected = `${FIELD} error ${LIMIT}`;
 
-  expect(cloned(repeat('a', MIN))).toBe(expected);
+  expect(cloned(repeat('a', LIMIT))).toBe(expected);
 });
