@@ -8,5 +8,5 @@ export default createValidatorFactory(
     }
   },
 
-  (field, max: number) => `${field} cannot be longer than ${max} characters`,
+  (field, max: number) => `${field} cannot be longer than ${max - 1} characters`,
 );
