@@ -8,5 +8,5 @@ length.
 import { hasLengthLessThan } from 'revalidate';
 
 hasLengthLessThan(4)('My Field')('hello');
-// 'My Field cannot be longer than 4 characters'
+// 'My Field cannot be longer than 3 characters'
 ```
