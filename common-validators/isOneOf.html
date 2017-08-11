@@ -1,0 +1,623 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>isOneOf · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="matchesPattern.html" />
+    
+    
+    <link rel="prev" href="hasLengthLessThan.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Table of Contents</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../getting-started.html">
+            
+                <a href="../getting-started.html">
+            
+                    
+                    Getting Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../integrations.html">
+            
+                <a href="../integrations.html">
+            
+                    
+                    Integrations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../usage/">
+            
+                <a href="../usage/">
+            
+                    
+                    Usage
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../usage/createValidator.html">
+            
+                <a href="../usage/createValidator.html">
+            
+                    
+                    createValidator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../usage/composeValidators.html">
+            
+                <a href="../usage/composeValidators.html">
+            
+                    
+                    composeValidators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../usage/combineValidators.html">
+            
+                <a href="../usage/combineValidators.html">
+            
+                    
+                    combineValidators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../usage/nested-fields.html">
+            
+                <a href="../usage/nested-fields.html">
+            
+                    
+                    Nested Fields
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../usage/redux-form.html">
+            
+                <a href="../usage/redux-form.html">
+            
+                    
+                    Redux Form
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../usage/immutable-js.html">
+            
+                <a href="../usage/immutable-js.html">
+            
+                    
+                    Immutable.js
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../usage/data-sources.html">
+            
+                <a href="../usage/data-sources.html">
+            
+                    
+                    Data Sources
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Common Validators
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="isRequired.html">
+            
+                <a href="isRequired.html">
+            
+                    
+                    isRequired
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="isRequiredIf.html">
+            
+                <a href="isRequiredIf.html">
+            
+                    
+                    isRequiredIf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="isAlphabetic.html">
+            
+                <a href="isAlphabetic.html">
+            
+                    
+                    isAlphabetic
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="isAlphaNumeric.html">
+            
+                <a href="isAlphaNumeric.html">
+            
+                    
+                    isAlphaNumeric
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="isNumeric.html">
+            
+                <a href="isNumeric.html">
+            
+                    
+                    isNumeric
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="hasLengthBetween.html">
+            
+                <a href="hasLengthBetween.html">
+            
+                    
+                    hasLengthBetween
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="hasLengthGreaterThan.html">
+            
+                <a href="hasLengthGreaterThan.html">
+            
+                    
+                    hasLengthGreaterThan
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="hasLengthLessThan.html">
+            
+                <a href="hasLengthLessThan.html">
+            
+                    
+                    hasLengthLessThan
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.9" data-path="isOneOf.html">
+            
+                <a href="isOneOf.html">
+            
+                    
+                    isOneOf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="matchesPattern.html">
+            
+                <a href="matchesPattern.html">
+            
+                    
+                    matchesPattern
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11" data-path="matchesField.html">
+            
+                <a href="matchesField.html">
+            
+                    
+                    matchesField
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../test-helpers/">
+            
+                <a href="../test-helpers/">
+            
+                    
+                    Test Helpers
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../test-helpers/hasError.html">
+            
+                <a href="../test-helpers/hasError.html">
+            
+                    
+                    hasError
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../test-helpers/hasErrorAt.html">
+            
+                <a href="../test-helpers/hasErrorAt.html">
+            
+                    
+                    hasErrorAt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../test-helpers/hasErrorOnlyAt.html">
+            
+                <a href="../test-helpers/hasErrorOnlyAt.html">
+            
+                    
+                    hasErrorOnlyAt
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >isOneOf</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="isoneof"><code>isOneOf</code></h1>
+<p><code>isOneOf</code> tests that the value is contained in a predefined array of values. It
+wraps a call to <code>createValidator</code>, so you must first call it with the array of
+allowed values.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> { isOneOf } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;revalidate&apos;</span>;
+
+isOneOf([<span class="hljs-string">&apos;foo&apos;</span>, <span class="hljs-string">&apos;bar&apos;</span>])(<span class="hljs-string">&apos;My Field&apos;</span>)(<span class="hljs-string">&apos;baz&apos;</span>);
+<span class="hljs-comment">// &apos;My Field must be one of [&quot;foo&quot;,&quot;bar&quot;]&apos;</span>
+
+isOneOf([<span class="hljs-string">&apos;foo&apos;</span>, <span class="hljs-string">&apos;bar&apos;</span>])(<span class="hljs-string">&apos;My Field&apos;</span>)(<span class="hljs-string">&apos;FOO&apos;</span>);
+<span class="hljs-comment">// &apos;My Field must be one of [&quot;foo&quot;,&quot;bar&quot;]&apos;</span>
+</code></pre>
+<p>By default it does a sameness equality (i.e. <code>===</code>) <strong>with</strong> case sensitivity
+for determining if a value is valid. You can supply an optional second argument
+function to define how values should be compared. The comparer function takes
+the field value as the first argument and each valid value as the second
+argument. You could use this to make values case insensitive. Returning a truthy
+value in a comparison means that the field value is valid.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> validator = isOneOf(
+  [<span class="hljs-string">&apos;foo&apos;</span>, <span class="hljs-string">&apos;bar&apos;</span>],
+
+  (value, validValue) =&gt; (
+    value &amp;&amp; value.toLowerCase() === validValue.toLowerCase()
+  )
+);
+
+validator(<span class="hljs-string">&apos;My Field&apos;</span>)(<span class="hljs-string">&apos;FOO&apos;</span>); <span class="hljs-comment">// undefined, so valid</span>
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="hasLengthLessThan.html" class="navigation navigation-prev " aria-label="Previous page: hasLengthLessThan">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="matchesPattern.html" class="navigation navigation-next " aria-label="Next page: matchesPattern">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"isOneOf","level":"1.5.9","depth":2,"next":{"title":"matchesPattern","level":"1.5.10","depth":2,"path":"common-validators/matchesPattern.md","ref":"common-validators/matchesPattern.md","articles":[]},"previous":{"title":"hasLengthLessThan","level":"1.5.8","depth":2,"path":"common-validators/hasLengthLessThan.md","ref":"common-validators/hasLengthLessThan.md","articles":[]},"dir":"ltr"},"config":{"plugins":["advanced-emoji","github"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/jfairbank/revalidate"},"advanced-emoji":{"embedEmojis":false},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"3.2.2"},"file":{"path":"common-validators/isOneOf.md","mtime":"2016-10-18T01:38:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-08-11T18:03:10.989Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

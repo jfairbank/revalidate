@@ -1,0 +1,720 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>createValidator · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="composeValidators.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Table of Contents</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../getting-started.html">
+            
+                <a href="../getting-started.html">
+            
+                    
+                    Getting Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../integrations.html">
+            
+                <a href="../integrations.html">
+            
+                    
+                    Integrations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Usage
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.1" data-path="createValidator.html">
+            
+                <a href="createValidator.html">
+            
+                    
+                    createValidator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="composeValidators.html">
+            
+                <a href="composeValidators.html">
+            
+                    
+                    composeValidators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="combineValidators.html">
+            
+                <a href="combineValidators.html">
+            
+                    
+                    combineValidators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="nested-fields.html">
+            
+                <a href="nested-fields.html">
+            
+                    
+                    Nested Fields
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="redux-form.html">
+            
+                <a href="redux-form.html">
+            
+                    
+                    Redux Form
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="immutable-js.html">
+            
+                <a href="immutable-js.html">
+            
+                    
+                    Immutable.js
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="data-sources.html">
+            
+                <a href="data-sources.html">
+            
+                    
+                    Data Sources
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../common-validators/">
+            
+                <a href="../common-validators/">
+            
+                    
+                    Common Validators
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../common-validators/isRequired.html">
+            
+                <a href="../common-validators/isRequired.html">
+            
+                    
+                    isRequired
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../common-validators/isRequiredIf.html">
+            
+                <a href="../common-validators/isRequiredIf.html">
+            
+                    
+                    isRequiredIf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../common-validators/isAlphabetic.html">
+            
+                <a href="../common-validators/isAlphabetic.html">
+            
+                    
+                    isAlphabetic
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../common-validators/isAlphaNumeric.html">
+            
+                <a href="../common-validators/isAlphaNumeric.html">
+            
+                    
+                    isAlphaNumeric
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../common-validators/isNumeric.html">
+            
+                <a href="../common-validators/isNumeric.html">
+            
+                    
+                    isNumeric
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../common-validators/hasLengthBetween.html">
+            
+                <a href="../common-validators/hasLengthBetween.html">
+            
+                    
+                    hasLengthBetween
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../common-validators/hasLengthGreaterThan.html">
+            
+                <a href="../common-validators/hasLengthGreaterThan.html">
+            
+                    
+                    hasLengthGreaterThan
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../common-validators/hasLengthLessThan.html">
+            
+                <a href="../common-validators/hasLengthLessThan.html">
+            
+                    
+                    hasLengthLessThan
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../common-validators/isOneOf.html">
+            
+                <a href="../common-validators/isOneOf.html">
+            
+                    
+                    isOneOf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="../common-validators/matchesPattern.html">
+            
+                <a href="../common-validators/matchesPattern.html">
+            
+                    
+                    matchesPattern
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11" data-path="../common-validators/matchesField.html">
+            
+                <a href="../common-validators/matchesField.html">
+            
+                    
+                    matchesField
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../test-helpers/">
+            
+                <a href="../test-helpers/">
+            
+                    
+                    Test Helpers
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../test-helpers/hasError.html">
+            
+                <a href="../test-helpers/hasError.html">
+            
+                    
+                    hasError
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../test-helpers/hasErrorAt.html">
+            
+                <a href="../test-helpers/hasErrorAt.html">
+            
+                    
+                    hasErrorAt
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../test-helpers/hasErrorOnlyAt.html">
+            
+                <a href="../test-helpers/hasErrorOnlyAt.html">
+            
+                    
+                    hasErrorOnlyAt
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >createValidator</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="createvalidator"><code>createValidator</code></h1>
+<p>The simplest function is <code>createValidator</code> which creates a value validation
+function. <code>createValidator</code> takes two arguments. The first argument is a curried
+function that takes an error message and the value. The curried function must
+return the message if the value is invalid. If the field value is valid, it&apos;s
+recommended that you return nothing, so a return value of <code>undefined</code> implies
+the field value was valid.</p>
+<p>The second argument is a function that takes a field label and must return the
+error message. Optionally, you can just pass in a string as the second argument
+if you don&apos;t want to depend on the field label. The error message is typically a
+string, but you can return other truthy values like an error object if that
+makes more sense for your use case.</p>
+<p>The returned validation function is also a curried function. The first argument
+is a field label string or a configuration object where you can specify the field
+or a custom error message. The second argument is the value. You can pass in
+both arguments at the same time too. We&apos;ll see why currying the function can be
+useful when we want to compose validators.</p>
+<p>Here is an implementation of an <code>isRequired</code> validator with <code>createValidator</code>:</p>
+<pre><code class="lang-js"><span class="hljs-comment">// ES2015 - import and define validator</span>
+<span class="hljs-keyword">import</span> { createValidator } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;revalidate&apos;</span>;
+
+<span class="hljs-keyword">const</span> isRequired = createValidator(
+  message =&gt; value =&gt; {
+    <span class="hljs-keyword">if</span> (value == <span class="hljs-literal">null</span> || value === <span class="hljs-string">&apos;&apos;</span>) {
+      <span class="hljs-keyword">return</span> message;
+    }
+  },
+
+  field =&gt; <span class="hljs-string">`<span class="hljs-subst">${field}</span> is required`</span>
+);
+
+<span class="hljs-comment">// Or ES5 - require and define validator</span>
+<span class="hljs-keyword">var</span> createValidator = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;revalidate&apos;</span>).createValidator;
+
+<span class="hljs-keyword">var</span> isRequired = createValidator(
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>{
+      <span class="hljs-keyword">if</span> (value == <span class="hljs-literal">null</span> || value === <span class="hljs-string">&apos;&apos;</span>) {
+        <span class="hljs-keyword">return</span> message;
+      }
+    };
+  },
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">field</span>) </span>{
+    field + <span class="hljs-string">&apos; is required&apos;</span>
+  }
+);
+
+<span class="hljs-comment">// Using validator</span>
+isRequired(<span class="hljs-string">&apos;My Field&apos;</span>)();     <span class="hljs-comment">// &apos;My Field is required&apos;</span>
+isRequired(<span class="hljs-string">&apos;My Field&apos;</span>)(<span class="hljs-string">&apos;&apos;</span>);   <span class="hljs-comment">// &apos;My Field is required&apos;</span>
+isRequired(<span class="hljs-string">&apos;My Field&apos;</span>)(<span class="hljs-string">&apos;42&apos;</span>); <span class="hljs-comment">// undefined, therefore assume valid</span>
+
+<span class="hljs-comment">// With a custom message</span>
+isRequired({ message: <span class="hljs-string">&apos;Error&apos;</span> })(); <span class="hljs-comment">// &apos;Error&apos;</span>
+</code></pre>
+<p>Validation functions can optionally accept a second parameter including all of
+the current values. This allows comparing one value to another as part of
+validation. For example:</p>
+<pre><code class="lang-js"><span class="hljs-comment">// ES2015</span>
+<span class="hljs-keyword">import</span> { createValidator } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;revalidate&apos;</span>;
+
+<span class="hljs-comment">// Or ES5</span>
+<span class="hljs-keyword">var</span> createValidator = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;revalidate&apos;</span>).createValidator;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">matchesField</span>(<span class="hljs-params">otherField, otherFieldLabel</span>) </span>{
+  <span class="hljs-keyword">return</span> createValidator(
+    message =&gt; (value, allValues) =&gt; {
+      <span class="hljs-keyword">if</span> (!allValues || value !== allValues[otherField]) {
+        <span class="hljs-keyword">return</span> message;
+      }
+    },
+
+    field =&gt; <span class="hljs-string">`<span class="hljs-subst">${field}</span> must match <span class="hljs-subst">${otherFieldLabel}</span>`</span>
+  );
+}
+
+matchesField(<span class="hljs-string">&apos;password&apos;</span>)(<span class="hljs-string">&apos;My Field&apos;</span>)();
+<span class="hljs-comment">// &apos;My Field does not match&apos;</span>
+
+matchesField(<span class="hljs-string">&apos;password&apos;</span>)(<span class="hljs-string">&apos;My Field&apos;</span>)(<span class="hljs-string">&apos;yes&apos;</span>, { password: <span class="hljs-string">&apos;no&apos;</span> });
+<span class="hljs-comment">// &apos;My Field does not match&apos;</span>
+
+matchesField(<span class="hljs-string">&apos;password&apos;</span>)(<span class="hljs-string">&apos;My Field&apos;</span>)(<span class="hljs-string">&apos;yes&apos;</span>, { password: <span class="hljs-string">&apos;yes&apos;</span> });
+<span class="hljs-comment">// undefined, therefore assume valid</span>
+
+<span class="hljs-comment">// With a custom message</span>
+matchesValue(<span class="hljs-string">&apos;password&apos;</span>)({
+  message: <span class="hljs-string">&apos;Passwords must match&apos;</span>,
+})(<span class="hljs-string">&apos;yes&apos;</span>, { password: <span class="hljs-string">&apos;no&apos;</span> }); <span class="hljs-comment">// &apos;Passwords must match&apos;</span>
+</code></pre>
+<h2 id="custom-use-cases">Custom Use Cases</h2>
+<p>Sometimes you may want to customize what your validator function takes as a
+field label and what it returns for an error. As previously mentioned, you don&apos;t
+have to return a string error message when the validation fails. You can also
+return an object. This is especially useful for internationalization with a
+library like <a href="https://github.com/yahoo/react-intl" target="_blank">react-intl</a>. In addition to
+returning an object, you can also pass in an object for your field label. To do
+this you&apos;ll need to pass in an object to your curried validation function with a
+<code>field</code> property. The <code>field</code> property can then be an object (or another data
+type). What you define <code>field</code> to be will be what is passed into your message
+creator function. Here is a contrived example:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> isRequired = createValidator(
+  error =&gt; value =&gt; {
+    <span class="hljs-keyword">if</span> (value == <span class="hljs-literal">null</span> || value === <span class="hljs-string">&apos;&apos;</span>) {
+      <span class="hljs-keyword">return</span> error;
+    }
+  },
+
+  <span class="hljs-comment">// Instead of a string, config is the i18n config we</span>
+  <span class="hljs-comment">// pass in to the curried validation function.</span>
+  config =&gt; config
+);
+
+<span class="hljs-keyword">const</span> requiredName = isRequired({
+  id: <span class="hljs-string">&apos;name&apos;</span>,
+  defaultMessage: <span class="hljs-string">&apos;Name is required&apos;</span>,
+});
+
+requiredName(<span class="hljs-string">&apos;Jeremy&apos;</span>);
+<span class="hljs-comment">// undefined</span>
+
+requiredName();
+<span class="hljs-comment">// { id: &apos;name&apos;, defaultMessage: &apos;Name is required&apos; }</span>
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Usage">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="composeValidators.html" class="navigation navigation-next " aria-label="Next page: composeValidators">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"createValidator","level":"1.4.1","depth":2,"next":{"title":"composeValidators","level":"1.4.2","depth":2,"path":"usage/composeValidators.md","ref":"usage/composeValidators.md","articles":[]},"previous":{"title":"Usage","level":"1.4","depth":1,"path":"usage/README.md","ref":"usage/README.md","articles":[{"title":"createValidator","level":"1.4.1","depth":2,"path":"usage/createValidator.md","ref":"usage/createValidator.md","articles":[]},{"title":"composeValidators","level":"1.4.2","depth":2,"path":"usage/composeValidators.md","ref":"usage/composeValidators.md","articles":[]},{"title":"combineValidators","level":"1.4.3","depth":2,"path":"usage/combineValidators.md","ref":"usage/combineValidators.md","articles":[]},{"title":"Nested Fields","level":"1.4.4","depth":2,"path":"usage/nested-fields.md","ref":"usage/nested-fields.md","articles":[]},{"title":"Redux Form","level":"1.4.5","depth":2,"path":"usage/redux-form.md","ref":"usage/redux-form.md","articles":[]},{"title":"Immutable.js","level":"1.4.6","depth":2,"path":"usage/immutable-js.md","ref":"usage/immutable-js.md","articles":[]},{"title":"Data Sources","level":"1.4.7","depth":2,"path":"usage/data-sources.md","ref":"usage/data-sources.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["advanced-emoji","github"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/jfairbank/revalidate"},"advanced-emoji":{"embedEmojis":false},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"3.2.2"},"file":{"path":"usage/createValidator.md","mtime":"2017-02-02T03:09:27.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-08-11T18:03:10.989Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
