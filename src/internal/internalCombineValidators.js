@@ -24,19 +24,19 @@ export default function internalCombineValidators(
     return serializeValues(values) || {};
   }
 
-  return function valuesValidator(values, allValues) {
+  return function valuesValidator(values, props) {
     const serializedValues = finalSerializeValues(values);
-    const serializedAllValues = finalSerializeValues(allValues);
+    const serializedProps = finalSerializeValues(props);
 
     const finalErrors = Object.keys(validators).reduce((errors, fieldName) => {
       const parsedField = parseFieldName(fieldName);
       const validator = validators[parsedField.fullName];
       const value = serializedValues[parsedField.baseName];
-      const finalAllValues = atRoot ? serializedValues : serializedAllValues;
+      const finalAllValues = atRoot ? serializedValues : serializedProps;
 
       const errorMessage = parsedField.isArray
-        ? (value || []).map(fieldValue => validator(fieldValue, finalAllValues))
-        : validator(value, finalAllValues);
+        ? (value || []).map(fieldValue => validator(fieldValue, finalAllValues, serializedProps))
+        : validator(value, finalAllValues, serializedProps);
 
       if (errorMessage) {
         errors[parsedField.baseName] = errorMessage;
