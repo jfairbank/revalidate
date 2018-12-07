@@ -53,7 +53,7 @@ export default function createValidator(
     return createValidator(curriedDefinition, newDefaultMessageCreator, ...args);
   }
 
-  function validator(config, value, allValues) {
+  function validator(config, value, allValues, idx) {
     const message = getMessage(config, finalMessageCreator, ...args);
     const valueValidator = curriedDefinition(message, ...args);
 
@@ -61,7 +61,7 @@ export default function createValidator(
       return markAsValueValidator(valueValidator);
     }
 
-    return valueValidator(value, allValues);
+    return valueValidator(value, allValues, idx);
   }
 
   validator.clone = clone;
