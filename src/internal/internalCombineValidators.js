@@ -35,7 +35,7 @@ export default function internalCombineValidators(
       const finalAllValues = atRoot ? serializedValues : serializedAllValues;
 
       const errorMessage = parsedField.isArray
-        ? (value || []).map((fieldValue, idx) => validator(fieldValue, finalAllValues, idx))
+        ? (value || []).map((fieldValue, index) => validator(fieldValue, finalAllValues, index))
         : validator(value, finalAllValues, idx);
 
       if (errorMessage) {
